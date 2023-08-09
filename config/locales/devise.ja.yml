@@ -1,0 +1,16 @@
+ja:
+  devise:
+    failure:
+      invalid: メールアドレスまたはパスワードが正しくありません。
+    sessions:
+      signed_in: ログインに成功しました。
+      signed_out: ログアウトしました。
+    registrations:
+      user:
+        signed_up: "アカウント登録が完了しました。"
+      signed_up: "アカウント登録が完了しました。"
+  errors:
+    messages:
+      not_saved:
+        one: '1件のエラーが発生したため %{resource} は保存されませんでした。'
+        other: '%{count} 件のエラーが発生したため %{resource} は保存されませんでした。'

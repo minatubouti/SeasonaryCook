@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   
 # ユーザ側ルーティング
     devise_for :users,skip: [:passwords], controllers: {
-      registrations: "public/registrations",
+      registrations: 'public/registrations',
       sessions: 'public/sessions'
     }
  
