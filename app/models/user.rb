@@ -18,7 +18,7 @@ class User < ApplicationRecord
   # パスワード6字以上
   validates :password, length: { minimum: 6 }, if: :password_required?
   # name空でない15字以下
-  validates :username, presence: true, length: { maximum: 15 }
+  validates :name, presence: true, length: { maximum: 15 }
          
     # ゲストメールアドレスを定数として定義
    GUEST_USER_EMAIL = "guest@example.com"

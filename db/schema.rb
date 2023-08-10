@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_08_032636) do
+ActiveRecord::Schema.define(version: 2023_08_10_141247) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -95,11 +95,16 @@ ActiveRecord::Schema.define(version: 2023_08_08_032636) do
     t.text "description"
     t.string "main_vegetable", null: false
     t.string "season", null: false
-    t.text "instructions", null: false
     t.boolean "is_public"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "recipe_steps", force: :cascade do |t|
+    t.text "instructions"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "relationships", force: :cascade do |t|

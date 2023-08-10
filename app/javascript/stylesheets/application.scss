@@ -1,11 +1,5 @@
 @use '~bootstrap/scss/bootstrap';
-
-// フッターを下側に固定する
-.footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
+@import "post";
 
 body {
   padding-top: 70px;
@@ -19,4 +13,5 @@ body {
 .nav-item a {
   color: #E6FFE9 !important; 
 }
+
 

@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   has_many :likes
   has_many :comments
   has_many :bookmarks
+  has_many :recipe_steps
   has_many :ingredients, dependent: :destroy
   accepts_nested_attributes_for :ingredients
   

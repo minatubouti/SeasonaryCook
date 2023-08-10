@@ -6,7 +6,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.text :description
       t.string :main_vegetable, null: false
       t.string :season, null: false
-      t.text :instructions, null: false
+     
       t.boolean :is_public
       t.timestamps
   end 
