@@ -1,2 +1,33 @@
-<h1>Public::Posts#new</h1>
-<p>Find me in app/views/public/posts/new.html.erb</p>
+ <%= form_with model: @post, url: posts_path do |f| %>
+  <%= f.label :title, "料理名" %>
+  <%= f.text_field :title %>
+  
+  <%= f.label :image %>
+  <%= f.file_field :image %>
+
+  <%= f.label :description, "料理ポイント" %>
+  <%= f.text_area :description %>
+
+  <%= f.label :main_vegetable, "メイン野菜" %>
+  <%= f.text_field :main_vegetable %>
+
+  <%= f.label :season, "季節" %>
+  <%= f.select :season, Post::SEASONS %>
+
+  <%= f.label :instructions, "作り方" %>
+  <%= f.text_area :instructions %>
+
+  <%= f.label :is_public, "公開するか" %>
+  <%= f.check_box :is_public %>
+
+  <%= f.fields_for :ingredients do |ingredient| %>
+    <%= ingredient.label :name, "食材名" %>
+    <%= ingredient.text_field :name %>
+
+    <%= ingredient.label :amount, "数量" %>
+    <%= ingredient.text_field :amount %>
+  <% end %>
+
+  <%= f.submit "投稿する" %>
+<% end %>
+

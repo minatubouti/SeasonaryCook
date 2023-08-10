@@ -1,2 +1,19 @@
-<h1>Public::Posts#show</h1>
-<p>Find me in app/views/public/posts/show.html.erb</p>
+<div class="container">
+  <div>
+    <%= image_tag @post.get_image, alt: @post.title, class: "img-fluid" if @post.get_image.attached? %>
+  </div>
+  <p><strong>投稿日時:</strong> <%= @post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+  <p><strong>季節:</strong> <%= @post.season %></p>
+  <h1><%= @post.title %></h1>
+  <p><strong>メイン野菜:</strong> <%= @post.main_vegetable %></p>
+  <p><strong>説明:</strong> <%= @post.description %></p>
+  <!--食材名と分量はingredientテーブルで保存してある-->
+  <% @post.ingredients.each do |ingredient| %>
+    <p><strong>食材名:</strong> <%= ingredient.name %><strong>分量:</strong><%= ingredient.amount %></p>
+  <% end %>
+
+  <p><strong>手順:</strong> <%= @post.instructions %></p>
+  
+  <%= link_to '投稿一覧に戻る', posts_path, class: 'btn btn-secondary' %>
+</div>
+
