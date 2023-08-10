@@ -25,7 +25,7 @@
 - 他のユーザーとレシピや料理についてのアイデアを交換したい時
 - 旬の食材を作っている農家が、その食材をどのように利用できるかを知りたい時、または紹介したい時
 ## 設計書
-後ほど作成予定
+ER図　https://drive.google.com/file/d/1jwcQ9YMyjfxELW2VcfNgaWuJ62QvDFnU/view?usp=sharing
 ​
 ## 開発環境
 - OS：Linux(CentOS)
