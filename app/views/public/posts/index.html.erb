@@ -2,14 +2,22 @@
   <h1>投稿一覧</h1>
   <div class="row">
     <% @posts.each do |post| %>
-      <div class="col-md-4 mb-4">
-        <div class="card">
+      <div class="col-md-3 mb-4">
+        <div class="card h-100">
+          <!-- 料理画像へのリンク -->
           <%= link_to post_path(post) do %>
-            <%= image_tag post.get_image, alt: post.title, class: "card-img-top" if post.get_image.attached? %>
+            <%= image_tag post.get_image, alt: post.title, class: "card-img-top", style: "height: 120px; object-fit: cover;" if post.get_image.attached? %>
           <% end %>
           <div class="card-body">
             <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
             <p class="card-text"><%= truncate(post.description, length: 75) %></p>
+              <!-- プロフィール画像へのリンク -->
+              <% if post.user&.icon_image&.attached? %>
+                <%= link_to user_path(post.user) do %>
+                  <p><%= image_tag post.user.icon_image, class: 'img-fluid profile-icon' %>
+                  <%= post.user.name %></p>
+                <% end %>
+              <% end %>
           </div>
         </div>
       </div>

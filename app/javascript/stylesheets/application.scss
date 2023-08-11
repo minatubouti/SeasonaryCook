@@ -1,5 +1,6 @@
 @use '~bootstrap/scss/bootstrap';
 @import "post";
+@import "user";
 
 body {
   padding-top: 70px;
@@ -13,5 +14,4 @@ body {
 .nav-item a {
   color: #E6FFE9 !important; 
 }
-
 

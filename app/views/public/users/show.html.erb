@@ -1,2 +1,22 @@
-<h1>Public::Users#show</h1>
-<p>Find me in app/views/public/users/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h3><%= image_tag @user.icon_image, class: 'img-fluid profile-icon' if @user.icon_image.attached? %>
+      <%= @user.name %></h3>
+      <p><%= @user.profile %></p>
+      <%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-primary' %> 
+    </div>
+    <div class="col-md-8">
+      <h3>投稿レシピ</h3>
+      <% @posts.each do |recipe| %>
+        <div class="recipe-card">
+          <!-- 画像と名前へのリンクを追加 -->
+          <%= link_to post_path(recipe) do %>
+            <%= image_tag recipe.image, class: 'img-fluid' if recipe.image.attached? %>
+          <% end %>
+          <h4><%= recipe.title %></h4>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
