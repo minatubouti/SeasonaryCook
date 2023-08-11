@@ -15,6 +15,7 @@ class Public::PostsController < ApplicationController
   end
   
   def index
+    @posts = Post.recent.page(params[:page])# 新しい順に投稿を取得
   end
 
   def show
@@ -22,9 +23,16 @@ class Public::PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:id])
   end
   
   def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      redirect_to post_path(@post), notice: '投稿が更新されました'
+    else
+      render :edit
+    end
   end
   
   def destroy
