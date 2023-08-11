@@ -9,13 +9,13 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+// 作り方フォーム追加
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelector('#add-instruction').addEventListener('click', () => {
+  document.querySelector('#add-recipe_step').addEventListener('click', () => {
     let content = document.getElementById('recipe_step-fields-template').innerHTML;
     let uniqueId = new Date().getTime();
-    content = content.replace(/_instructions_attributes_Time.now.to_i_/g, "_instructions_attributes_" + uniqueId + "_")
-                     .replace(/instructions_attributes_Time.now.to_i_/g, "instructions_attributes_" + uniqueId + "_");
-    document.getElementById('instructions').insertAdjacentHTML('beforeend', content);
+    content = content.replace(/new_recipe_step/g, uniqueId);
+    document.getElementById('recipe_steps').insertAdjacentHTML('beforeend', content);
   });
 });
 

@@ -102,9 +102,11 @@ ActiveRecord::Schema.define(version: 2023_08_10_141247) do
   end
 
   create_table "recipe_steps", force: :cascade do |t|
+    t.integer "post_id"
     t.text "instructions"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_recipe_steps_on_post_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -141,6 +143,7 @@ ActiveRecord::Schema.define(version: 2023_08_10_141247) do
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "users"
+  add_foreign_key "recipe_steps", "posts"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "relationships", "users", column: "follower_id"
 end

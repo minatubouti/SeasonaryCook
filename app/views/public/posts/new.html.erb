@@ -24,6 +24,7 @@
       <%= f.label :main_vegetable, "メイン野菜" %>
       <%= f.text_field :main_vegetable, class: 'form-control' %>
     </div>
+    
     <!--材料、分量フォーム追加できる-->
     <%= f.fields_for :ingredients do |ingredient_field| %>
       <%= render 'ingredient_fields', f: ingredient_field %>
@@ -33,18 +34,22 @@
       <button type="button" id="add-ingredient" class="btn btn-primary">材料を追加</button>
     </div>
     
-    <!--作り方フォーム-->
-    <%= f.fields_for :instructions do |instruction_field| %>
-     <%= render 'recipe_step_fields', f: instruction_field %>
-    <div id="recipe_step-fields-template" style="display: none;">
-     <%= render 'recipe_step_fields', f: instruction_field %>
-    </div>
-    <% end %>
-      <div id="instructions"></div>
-    <div>
-      <button type="button" id="add-instruction" class="btn btn-primary">作り方を追加</button>
-    </div>
-    
+  　 <%# 作り方フォームのテンプレート %>
+      <div id="recipe_step-fields-template" style="display: none;">
+        <%= f.fields_for :recipe_steps, RecipeStep.new, child_index: "new_recipe_step" do |recipe_step_field| %>
+          <%= render 'recipe_step_fields', f: recipe_step_field %>
+        <% end %>
+      </div>
+      
+      <%# 実際の作り方フォーム %>
+      <%= f.fields_for :recipe_steps do |recipe_step_field| %>
+        <%= render 'recipe_step_fields', f: recipe_step_field %>
+      <% end %>
+      <div id="recipe_steps"></div>
+      <div>
+        <button type="button" id="add-recipe_step" class="btn btn-primary">作り方を追加</button>
+      </div>
+
     <div class="form-group">
       <%= f.label :is_public, "公開するか" %>
       <div class="form-check">

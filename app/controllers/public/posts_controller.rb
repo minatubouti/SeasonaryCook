@@ -2,6 +2,7 @@ class Public::PostsController < ApplicationController
   def new
    @post = Post.new
    @post.ingredients.build # 画面で使うための空の食材オブジェクト
+   @post.recipe_steps.build # 画面で使うための空のレシピステップオブジェクト
   end
   
   def create
@@ -31,7 +32,11 @@ class Public::PostsController < ApplicationController
   
   private
    
-  def post_params
-   params.require(:post).permit(:title, :description, :main_vegetable, :season, :instructions, :is_public, :image, ingredients_attributes: [:name, :amount])
-  end
+   def post_params
+    params.require(:post).permit(
+      :title, :description, :main_vegetable, :season, :is_public, :image,
+      ingredients_attributes: [:id, :name, :amount],
+      recipe_steps_attributes: [:id, :instructions] 
+    )
+   end
 end

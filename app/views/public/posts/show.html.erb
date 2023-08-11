@@ -1,19 +1,40 @@
 <div class="container">
-  <div>
-    <%= image_tag @post.get_image, alt: @post.title, class: "img-fluid" if @post.get_image.attached? %>
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card mb-4">
+        <div class="card-body">
+          <%= image_tag @post.get_image, alt: @post.title, class: "img-fluid mb-3" if @post.get_image.attached? %>
+          <p><strong>投稿日時:</strong> <%= @post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+          <p><strong>季節:</strong> <%= @post.season %></p>
+          <h1><%= @post.title %></h1>
+          <p><strong>メイン野菜:</strong> <%= @post.main_vegetable %></p>
+          <p><strong>説明:</strong> <%= @post.description %></p>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          食材
+        </div>
+        <div class="card-body">
+          <% @post.ingredients.each do |ingredient| %>
+            <p><strong>食材名:</strong> <%= ingredient.name %><strong> 分量:</strong> <%= ingredient.amount %></p>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          手順
+        </div>
+        <div class="card-body">
+          <% @post.recipe_steps.each do |recipe_step| %>
+            <p><strong>手順:</strong> <%= recipe_step.instructions %></p>
+          <% end %>
+        </div>
+      </div>
+
+      <%= link_to '投稿一覧に戻る', posts_path, class: 'btn btn-secondary' %>
+    </div>
   </div>
-  <p><strong>投稿日時:</strong> <%= @post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
-  <p><strong>季節:</strong> <%= @post.season %></p>
-  <h1><%= @post.title %></h1>
-  <p><strong>メイン野菜:</strong> <%= @post.main_vegetable %></p>
-  <p><strong>説明:</strong> <%= @post.description %></p>
-  <!--食材名と分量はingredientテーブルで保存してある-->
-  <% @post.ingredients.each do |ingredient| %>
-    <p><strong>食材名:</strong> <%= ingredient.name %><strong>分量:</strong><%= ingredient.amount %></p>
-  <% end %>
-
-  <p><strong>手順:</strong> <%= @post.instructions %></p>
-  
-  <%= link_to '投稿一覧に戻る', posts_path, class: 'btn btn-secondary' %>
 </div>
-
