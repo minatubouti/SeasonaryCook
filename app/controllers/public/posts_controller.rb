@@ -1,4 +1,6 @@
 class Public::PostsController < ApplicationController
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  
   def new
    @post = Post.new
    @post.ingredients.build # 画面で使うための空の食材オブジェクト
@@ -36,6 +38,9 @@ class Public::PostsController < ApplicationController
   end
   
   def destroy
+    @post = post.find(params[:id])
+    @post.destroy
+    redirect_to posts_path, notice: "投稿を削除しました"
   end
   
   private
@@ -46,5 +51,14 @@ class Public::PostsController < ApplicationController
       ingredients_attributes: [:id, :name, :amount],
       recipe_steps_attributes: [:id, :instructions] 
     )
+   end
+   
+  # 自身の投稿か確認
+   def ensure_correct_user
+     @post = Post.find(params[:id])
+    unless @post.user == current_user
+      flash[:alert] = '権限がありません'
+      redirect_to posts_path
+    end
    end
 end
