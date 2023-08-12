@@ -17,8 +17,13 @@ class Public::PostsController < ApplicationController
   end
   
   def index
-    @posts = Post.includes(:user, :likes).recent.page(params[:page])# `includes(:user,likes)`で関連するユーザー,いいねも一緒に取得
+    if params[:search].present?
+      @posts = Post.where('title LIKE ? OR main_vegetable LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%").page(params[:page])
+    else
+      @posts = Post.includes(:user, :likes).recent.page(params[:page]) # `includes(:user,likes)`で関連するユーザー,いいねも一緒に取得
+    end
   end
+
 
   def show
     @post = Post.find(params[:id])

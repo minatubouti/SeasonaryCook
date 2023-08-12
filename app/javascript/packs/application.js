@@ -14,6 +14,8 @@ import "bootstrap";
 import "../stylesheets/application";
 import '../posts';
 
+
+
 Rails.start()
 // Turbolinks.start()
 ActiveStorage.start()

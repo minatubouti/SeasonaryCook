@@ -42,7 +42,12 @@
           <% end %>
         </div>
       </div>
-
+      <!--コメント機能-->
+      <div id="comments">
+        <%= render 'public/comments/form', post: @post %>
+        <%= render 'public/comments/comment', comments: @post.comments %>
+      </div>
+           
       <%= link_to '投稿一覧に戻る', posts_path, class: 'btn btn-secondary' %>
     <% if @post.user == current_user %>
       <%= link_to '編集', edit_post_path(@post), class: 'btn btn-primary' %>
