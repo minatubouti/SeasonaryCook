@@ -1,6 +1,6 @@
 require "test_helper"
 
-class Public::BookmarkesControllerTest < ActionDispatch::IntegrationTest
+class Public::BookmarksControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

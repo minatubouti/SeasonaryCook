@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   has_many :liked_users, through: :likes, source: :user
   has_many :comments
   has_many :bookmarks
+  has_many :bookmarked_users, through: :bookmarks, source: :user
   has_many :recipe_steps, dependent: :destroy
   accepts_nested_attributes_for :recipe_steps, reject_if: :all_blank, allow_destroy: true
   has_many :ingredients, dependent: :destroy
@@ -33,8 +34,12 @@ class Post < ApplicationRecord
     image
   end
   
-  # 特定のユーザーが投稿に「いいね」をしているかどうかをチェックため
+  # 特定のユーザーが投稿に「いいね」をしているかどうかをチェック
   def likes_by?(user)
     likes.exists?(user_id: user.id)
+  end
+  #同じくブックマークしているかをチェック
+  def bookmarked_by?(user)
+    bookmarks.exists?(user_id: user.id)
   end
 end
