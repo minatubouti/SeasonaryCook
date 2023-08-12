@@ -17,7 +17,7 @@ class Public::PostsController < ApplicationController
   end
   
   def index
-    @posts = Post.includes(:user).all.recent.page(params[:page])# `includes(:user)`で関連するユーザーも一緒に取得
+    @posts = Post.includes(:user, :likes).recent.page(params[:page])# `includes(:user,likes)`で関連するユーザー,いいねも一緒に取得
   end
 
   def show

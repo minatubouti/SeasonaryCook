@@ -3,18 +3,24 @@
     <div class="col-md-4">
       <h3><%= image_tag @user.icon_image, class: 'img-fluid profile-icon' if @user.icon_image.attached? %>
       <%= @user.name %></h3>
+      <p><i class="fas fa-heart" style="color: red;"></i><%= @total_likes %></p>
       <p><%= @user.profile %></p>
-      <%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-primary' %> 
+      
+      <% if current_user == @user %>
+        <%= link_to 'いいね一覧表示', likes_user_path(current_user) %>
+        <%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-primary' %> 
+      <% end %>
     </div>
+    
     <div class="col-md-8">
       <h3>投稿レシピ</h3>
       <% @posts.each do |recipe| %>
         <div class="recipe-card">
-          <!-- 画像と名前へのリンクを追加 -->
+          <!-- アイコンと名前へのリンクを追加 -->
           <%= link_to post_path(recipe) do %>
             <%= image_tag recipe.image, class: 'img-fluid' if recipe.image.attached? %>
           <% end %>
-          <h4><%= recipe.title %></h4>
+          <h5><%= recipe.title %></h5>
         </div>
       <% end %>
     </div>

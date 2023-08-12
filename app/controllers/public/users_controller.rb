@@ -2,6 +2,7 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = @user.posts
+    @total_likes = @user.posts.joins(:likes).count # このユーザーの投稿に対するいいねの合計数を取得
   end
 
   def edit
@@ -15,6 +16,11 @@ class Public::UsersController < ApplicationController
     else
       render :edit
     end
+  end
+  
+  def likes
+    @user = User.find(params[:id])
+    @liked_posts = @user.likes.includes(post: :user).map(&:post)# 現在のユーザーがいいねした投稿を取得
   end
   
   def withdraw

@@ -25,14 +25,17 @@ Rails.application.routes.draw do
     resource :relationships, only:[:create, :destroy]
      get 'follows' => 'relationships#follower'
      get 'followers' => 'relationships#followed'
-     member do
-    get :check_out
-    patch :withdraw
+    member do
+      get 'likes'
+    end
+    member do
+      get :check_out
+      patch :withdraw
     end
   end
    resources :posts do
     resources :comments, only: [:create, :destroy]
-    resources :likes, only: [:index, :create, :destroy]
+    resources :likes, only: [:create, :destroy]
     resources :bookmarks, only: [:create, :destroy]
    end
   end

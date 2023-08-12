@@ -1,0 +1,10 @@
+<div class="container mt-4">
+  <h1><%= @user.name %>さんがいいねした投稿</h1>
+  <div class="row">
+    <% @liked_posts.each do |post| %>
+      <!--投稿アイテム-->
+      <%= render partial: 'public/posts/post_item', locals: { post: post } %>
+    <% end %>
+  </div>
+</div>
+    
