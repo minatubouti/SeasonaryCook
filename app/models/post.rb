@@ -1,7 +1,8 @@
 class Post < ApplicationRecord
   has_one_attached :image
   belongs_to :user
-  has_many :likes
+  has_many :likes, dependent: :destroy
+  has_many :liked_users, through: :likes, source: :user
   has_many :comments
   has_many :bookmarks
   has_many :recipe_steps, dependent: :destroy
@@ -30,5 +31,10 @@ class Post < ApplicationRecord
       image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     image
+  end
+  
+  # 特定のユーザーが投稿に「いいね」をしているかどうかをチェックため
+  def likes_by?(user)
+    likes.exists?(user_id: user.id)
   end
 end

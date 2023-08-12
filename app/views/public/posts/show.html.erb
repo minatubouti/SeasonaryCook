@@ -9,6 +9,9 @@
           <h1><%= @post.title %></h1>
           <p><strong>メイン野菜:</strong> <%= @post.main_vegetable %></p>
           <p><strong>説明:</strong> <%= @post.description %></p>
+          <!--いいね機能呼びだし-->
+          <p id="like_buttons_<%= @post.id %>">
+          <%= render partial: 'public/likes/like', locals: { post: @post } %></p>
         </div>
       </div>
 
