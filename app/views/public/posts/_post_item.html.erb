@@ -1,12 +1,12 @@
-    <div class="col-md-3 mb-4">
-        <div class="card h-100">
-          <!-- 料理画像のリンク -->
-          <%= link_to post_path(post) do %>
+  <div class="col-md-3 mb-4">
+    <div class="card h-100">
+        <!-- 料理画像のリンク -->
+         <%= link_to post_path(post) do %>
             <%= image_tag post.get_image, alt: post.title, class: "card-img-top", style: "height: 120px; object-fit: cover;" if post.get_image.attached? %>
-          <% end %>
+         <% end %>
           <div class="card-body">
             <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
-            <p class="card-text"><%= truncate(post.description, length: 75) %></p>
+            <p class="card-text"><%= truncate(post.description, length: 25) %></p>
               <!-- プロフィール画像のリンク -->
               <% if post.user&.icon_image&.attached? %>
                 <%= link_to user_path(post.user) do %>
@@ -14,7 +14,12 @@
                   <%= post.user.name %></p>
                 <% end %>
               <% end %>
-               <p><%= post.likes.count %><i class="fas fa-heart" style="color: red;"></i></p>
+               <p>
+                <span><%= post.likes.count %> <i class="fas fa-heart" style="color: red; margin-left: 5px;"></i></span>
+                <span style="margin-left: 15px;"><%= post.bookmarks.count %> 
+                  <i class="fa-solid fa-bookmark" style="color: #6495ED; margin-left: 5px;"></i>
+                </span>
+               </p>
           </div>
-        </div>
-      </div>
+     </div>
+  </div>

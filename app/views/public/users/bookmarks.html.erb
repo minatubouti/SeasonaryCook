@@ -1,0 +1,9 @@
+<div class="container">
+  <h1><%= @user.name %>のブックマークした投稿</h1>
+  <div class="row">
+    <% @bookmarks.each do |post| %>
+     <!--投稿アイテム-->
+      <%= render partial: 'public/posts/post_item', locals: { post: post } %>
+    <% end %>
+  </div>
+</div>

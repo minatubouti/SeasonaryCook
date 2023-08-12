@@ -21,10 +21,10 @@ Rails.application.routes.draw do
     root :to => "homes#top"
     get '/about' => 'homes#about'
     resources :users, only: [:show, :edit, :update] do
-     get 'bookmarks' => 'bookmarks#index'
     resource :relationships, only:[:create, :destroy]
      get 'follows' => 'relationships#follower'
      get 'followers' => 'relationships#followed'
+     get 'bookmarks', on: :member
     member do
       get 'likes'
     end

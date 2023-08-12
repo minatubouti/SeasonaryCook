@@ -1,5 +1,5 @@
 class Public::BookmarksController < ApplicationController
-   def create
+  def create
     @bookmark = current_user.bookmarks.create(post_id: params[:post_id])
     @post = @bookmark.post
     respond_to do |format|

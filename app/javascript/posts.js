@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // 画像リアルタイム表示
-$(document).on('turbolinks:load', function() {
+$(document).ready( function() {
   $('#imageField').on('change', function(e) {
     var file = e.target.files[0];
     var reader = new FileReader();
