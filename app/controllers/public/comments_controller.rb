@@ -1,5 +1,5 @@
 class Public::CommentsController < ApplicationController
-  before_action :reject_guest_user, only: [:create]
+  
   
   def create
     @post = Post.find(params[:post_id])

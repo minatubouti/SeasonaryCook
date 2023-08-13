@@ -63,7 +63,7 @@
     </div>
     <%= f.submit "更新する", class: 'btn btn-success' %>
   </div>
-    <% end %>
+ <% end %>
 
 <!--材料、分量フォームの隠し要素テンプレート-->
 <% ingredient_form_builder = ActionView::Helpers::FormBuilder.new(:post, @post, self, {}) %>
@@ -80,3 +80,6 @@
     <%= render 'recipe_step_fields', f: recipe_step_field %>
   <% end %>
 <% end %>
+
+<!--javascript-->
+<%= render partial: 'public/posts/post_form_js' %>

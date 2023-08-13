@@ -1,4 +1,7 @@
-// 材料、数量フォーム追加
+
+<!--javascript使用-->
+<script>
+  // 材料、数量フォーム追加
 document.addEventListener("DOMContentLoaded", function() {
   document.getElementById("add-ingredient").addEventListener("click", function() {
     var content = document.getElementById("ingredient-fields-template").innerHTML;
@@ -33,3 +36,5 @@ $(document).ready( function() {
     reader.readAsDataURL(file);
   });
 });
+
+</script>
