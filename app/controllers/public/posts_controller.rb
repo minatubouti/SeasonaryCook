@@ -1,5 +1,7 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_user! # ログインチェック
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  before_action :reject_guest, only: [:new, :create, :edit, :update] #ゲストユーザか確認
   
   def new
    @post = Post.new
@@ -17,13 +19,12 @@ class Public::PostsController < ApplicationController
   end
   
   def index
+    @posts = Post.where(is_public: true).includes(:user, :likes).recent.page(params[:page])
+  
     if params[:search].present?
-      @posts = Post.where('title LIKE ? OR main_vegetable LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%").page(params[:page])
-    else
-      @posts = Post.includes(:user, :likes).recent.page(params[:page]) # `includes(:user,likes)`で関連するユーザー,いいねも一緒に取得
+      @posts = @posts.where('title LIKE ? OR main_vegetable LIKE ? OR season LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
     end
   end
-
 
   def show
     @post = Post.find(params[:id])
@@ -58,12 +59,19 @@ class Public::PostsController < ApplicationController
     )
    end
    
-  # 自身の投稿か確認
+  # 自身の投稿かチェック
    def ensure_correct_user
      @post = Post.find(params[:id])
     unless @post.user == current_user
       flash[:alert] = '権限がありません'
       redirect_to posts_path
     end
+   end
+   
+  # ゲストユーザか判別
+   def reject_guest
+      if current_user&.guest?
+        redirect_to root_path, alert: "ゲストユーザーは投稿できません。"
+      end
    end
 end

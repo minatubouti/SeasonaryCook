@@ -1,4 +1,6 @@
 class Public::BookmarksController < ApplicationController
+  before_action :reject_guest_user, only: [:create, :destroy]
+  
   def create
     @bookmark = current_user.bookmarks.create(post_id: params[:post_id])
     @post = @bookmark.post

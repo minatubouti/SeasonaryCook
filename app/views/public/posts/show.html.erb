@@ -11,11 +11,13 @@
           <p><strong>説明:</strong> <%= @post.description %></p>
           <!--いいね機能・ブックマーク機能-->
           <div class="d-flex">
-            <p id="like_buttons_<%= @post.id %>">
-              <%= render partial: 'public/likes/like', locals: { post: @post } %>
-            </p>
-            <p id="bookmark_button" class="ml-4">
-              <%= render partial: 'public/bookmarks/bookmark', locals: { post: @post } %>
+            <% unless current_user.guest? %>
+              <p id="like_buttons_<%= @post.id %>">
+                <%= render partial: 'public/likes/like', locals: { post: @post } %>
+              </p>
+              <p id="bookmark_button" class="ml-4">
+                <%= render partial: 'public/bookmarks/bookmark', locals: { post: @post } %>
+            <% end %>
             </p>
           </div>
         </div>
@@ -43,10 +45,12 @@
         </div>
       </div>
       <!--コメント機能-->
-      <div id="comments">
-        <%= render 'public/comments/form', post: @post %>
-        <%= render 'public/comments/comment', comments: @post.comments %>
-      </div>
+        <div id="comments">
+       <% unless current_user.guest? %>
+          <%= render 'public/comments/form', post: @post %>
+       <% end %>
+          <%= render 'public/comments/comment', comments: @post.comments %>
+        </div>
            
       <%= link_to '投稿一覧に戻る', posts_path, class: 'btn btn-secondary' %>
     <% if @post.user == current_user %>

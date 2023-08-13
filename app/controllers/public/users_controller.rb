@@ -1,4 +1,8 @@
 class Public::UsersController < ApplicationController
+  before_action :authenticate_user! # ログインチェック
+  before_action :correct_user, only: [:edit, :update]
+  before_action :reject_guest, only: [:edit, :update] #ゲストユーザか確認
+  
   def show
     @user = User.find(params[:id])
     @posts = @user.posts
@@ -34,5 +38,20 @@ class Public::UsersController < ApplicationController
   
     def user_params
      params.require(:user).permit(:icon_image, :name, :profile)
+    end
+    
+    # 自分のプロフィールチェック
+    def correct_user
+      @user = User.find(params[:id])
+      unless @user == current_user
+        flash[:alert] = "権限がありません。"
+        redirect_to(root_url)
+      end
+    end
+    
+    def reject_guest
+      if current_user&.guest?
+        redirect_to root_path, alert: "ゲストユーザーはプロフィールの編集はできません。"
+      end
     end
 end
