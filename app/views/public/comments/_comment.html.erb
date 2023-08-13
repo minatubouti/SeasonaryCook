@@ -1,4 +1,17 @@
 <!--コメント一覧部分-->
 <% comments.each do |comment| %>
-  <p><%= comment.content %></p>
+  <div class="card mb-2">
+    <div class="card-body">
+     <h5 class="card-title">
+        <% if comment.user&.icon_image&.attached? %>
+            <%= link_to user_path(comment.user) do %>
+              <p><%= image_tag comment.user.icon_image, class: 'img-fluid profile-icon' %>
+            <% end %>
+         <% end %>
+      <%= comment.user.name %>さんのコメント
+     </h5>
+      <p class="card-text"><%= comment.content %></p>
+      <p class="card-text"><small class="text-muted"><%= time_ago_in_words(comment.created_at) %>前</small></p>
+    </div>
+  </div>
 <% end %>

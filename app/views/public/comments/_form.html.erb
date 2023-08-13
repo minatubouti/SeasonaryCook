@@ -1,5 +1,8 @@
 <!--コメントフォーム部分-->
 <%= form_with(model: [post, Comment.new], local: false) do |form| %>
-  <%= form.text_area :content, placeholder: "コメントを入力" %>
-  <%= form.submit "コメント" %>
+  <div class="form-group">
+    <%= form.label :content, "コメントしよう!（3~100文字)" %>
+    <%= form.text_area :content, placeholder: "コメントを入力", class: "form-control" %>
+  </div>
+  <%= form.submit "コメント", class: "btn btn-primary" %>
 <% end %>

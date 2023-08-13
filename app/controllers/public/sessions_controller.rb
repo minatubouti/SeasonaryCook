@@ -17,7 +17,19 @@ class Public::SessionsController < Devise::SessionsController
   def after_sign_out_path_for(resource)
     root_path
   end
+  
+  # 退会済のアカウントがログインできないようにする
+   before_action :withdraw, only: [:create]
 
+    protected
+
+   def withdraw
+        @user = User.find_by(email: params[:user][:email])
+      if @user&.valid_password?(params[:user][:password]) && @user.is_deleted
+          redirect_to new_user_session_path, notice: 'アカウントは退会済みです。'
+      end
+   end
+  
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

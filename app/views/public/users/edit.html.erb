@@ -14,5 +14,6 @@
       <%= f.text_area :profile, class: 'form-control', rows: 5 %>
     </div>
     <%= f.submit "更新する", class: 'btn btn-primary' %>
+    <%= link_to "退会する", check_out_user_path(@user), class: 'btn btn-danger' %>
   <% end %>
 </div>

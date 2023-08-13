@@ -1,7 +1,7 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user! # ログインチェック
-  before_action :correct_user, only: [:edit, :update]
-  before_action :reject_guest, only: [:edit, :update] #ゲストユーザか確認
+  before_action :correct_user, only: [:edit, :update, :withdraw, :check_out]
+  before_action :reject_guest, only: [:edit, :update, :withdraw, :check_out] #ゲストユーザか確認
   
   def show
     @user = User.find(params[:id])
@@ -32,7 +32,12 @@ class Public::UsersController < ApplicationController
   end
    
   def withdraw
+     Rails.logger.debug "Current User: #{current_user.inspect}"
+     current_user.update(is_deleted: true)
+     reset_session
+     redirect_to root_path, notice: '退会しました。'
   end
+
   
   private
   
@@ -40,7 +45,7 @@ class Public::UsersController < ApplicationController
      params.require(:user).permit(:icon_image, :name, :profile)
     end
     
-    # 自分のプロフィールチェック
+    # ログインしているユーザーかチェック
     def correct_user
       @user = User.find(params[:id])
       unless @user == current_user

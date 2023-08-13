@@ -1,5 +1,4 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticate_user! # ログインチェック
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
   before_action :reject_guest, only: [:new, :create, :edit, :update] #ゲストユーザか確認
   
@@ -63,7 +62,7 @@ class Public::PostsController < ApplicationController
    def ensure_correct_user
      @post = Post.find(params[:id])
     unless @post.user == current_user
-      flash[:alert] = '権限がありません'
+      flash[:alert] = '権限がないよ、ログインしてね！'
       redirect_to posts_path
     end
    end
