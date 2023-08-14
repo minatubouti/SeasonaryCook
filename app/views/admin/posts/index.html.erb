@@ -18,10 +18,11 @@
                     <%= post.user.name %></p>
                   <% end %>
                 <% end %>
-                <p>
-                 <span><%= post.likes.count %> <i class="fas fa-heart" style="color: red; margin-left: 5px;"></i></span>
-                 <span style="margin-left: 15px;"><%= post.bookmarks.count %><i class="fa-solid fa-bookmark" style="color: #6495ED; margin-left: 5px;"></i></span>
-                 <span style="margin-left: 15px;"><%= post.comments.count %><i class="fa-solid fa-comment" style="color: #FFA500; margin-left: 5px;"></i></span>
+                
+                <p>  <!--有効数のみカウント-->
+                 <span><%= active_likes_count(post) %> <i class="fas fa-heart" style="color: red; margin-left: 5px;"></i></span>
+                 <span style="margin-left: 15px;"><%= active_bookmarks_count(post) %><i class="fa-solid fa-bookmark" style="color: #6495ED; margin-left: 5px;"></i></span>
+                 <span style="margin-left: 15px;"><%= active_comments_count(post) %><i class="fa-solid fa-comment" style="color: #FFA500; margin-left: 5px;"></i></span>
                 </p>
                 <p><strong>投稿日時:</strong> <%= post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
             </div>

@@ -10,12 +10,13 @@
           <h1><%= @post.title %></h1>
           <p><strong>メイン野菜:</strong> <%= @post.main_vegetable %></p>
           <p><strong>説明:</strong> <%= @post.description %></p>
-          <p>
-            <span><%= @post.likes.count %> <i class="fas fa-heart" style="color: red; margin-left: 5px;"></i></span>
-            <span style="margin-left: 15px;"><%= @post.bookmarks.count %><i class="fa-solid fa-bookmark" style="color: #6495ED; margin-left: 5px;"></i></span>
+          
+          <p> <!--有効数のみカウント-->
+            <span><%= active_likes_count(@post) %> <i class="fas fa-heart" style="color: red; margin-left: 5px;"></i></span>
+            <span style="margin-left: 15px;"><%= active_bookmarks_count(@post) %><i class="fa-solid fa-bookmark" style="color: #6495ED; margin-left: 5px;"></i></span>
             <span style="margin-left: 15px;">
-              <%= link_to "#comments-section" do %><!--コメント部分にスクロール-->
-               <%= @post.comments.count %><i class="fa-solid fa-comment" style="color: #FFA500; margin-left: 5px;"></i>
+              <%= link_to "#comments-section" do %> <!--コメント部分にスクロール-->
+               <%= active_comments_count(@post) %><i class="fa-solid fa-comment" style="color: #FFA500; margin-left: 5px;"></i>
               <% end %>
             </span>
           </p>

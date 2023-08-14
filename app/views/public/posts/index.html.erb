@@ -8,8 +8,11 @@
   <h1>投稿一覧</h1>
   <div class="row">
     <% @posts.each do |post| %>
+    <!--退会しているユーザーの投稿は表示されない-->
+     <% unless post.user.is_deleted %> 
      <!--投稿アイテム-->
       <%= render partial: 'public/posts/post_item', locals: {post: post} %>
+     <% end %>
     <% end %>
     <%= paginate @posts %>
   </div>

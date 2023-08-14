@@ -1,5 +1,7 @@
 <!--コメント一覧部分-->
 <% comments.each do |comment| %>
+<!--退会済のユーザーのコメントは表示されない-->
+ <% unless comment.user.is_deleted %>
   <div class="card mb-2">
     <div class="card-body">
      <h5 class="card-title">
@@ -14,4 +16,5 @@
       <p class="card-text"><small class="text-muted"><%= time_ago_in_words(comment.created_at) %>前</small></p>
     </div>
   </div>
+ <% end %>
 <% end %>
