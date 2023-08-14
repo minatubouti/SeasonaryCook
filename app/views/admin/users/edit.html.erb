@@ -24,9 +24,10 @@
             <%= f.label :is_deleted, '退会', value: true, class: "form-check-label" %>
           </div>
         </div>
-
-        <%= f.submit "更新", class: "btn btn-primary" %>
-
+        <%= f.submit "更新", class: "btn btn-success mt-4" %>
+        <div class="text-center mt-4 mb-5">
+          <%= link_to 'このユーザーのデータを削除', admin_user_path(@user), method: :delete, data: { confirm: '本当に全てのデータを削除しますか？' }, class: 'btn btn-danger' %>
+        </div>
       </div>
     </div>
   </div>

@@ -24,6 +24,13 @@ class Admin::UsersController < ApplicationController
   end
   
   def destroy
+    if @user.destroy
+      flash[:notice] = "ユーザーのデータを削除しました。"
+      redirect_to admin_users_path 
+    else
+      flash[:alert] = "ユーザーの削除に失敗しました。"
+      render :edit
+    end
   end
   
   private
