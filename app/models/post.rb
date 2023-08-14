@@ -3,8 +3,8 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
-  has_many :comments
-  has_many :bookmarks
+  has_many :comments, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_users, through: :bookmarks, source: :user
   has_many :recipe_steps, dependent: :destroy
   accepts_nested_attributes_for :recipe_steps, reject_if: :all_blank, allow_destroy: true

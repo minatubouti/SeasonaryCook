@@ -4,4 +4,11 @@
   max-height: 400px;
 }
 
+/* index 5カラムのレイアウトを追加 */
+@media (min-width: 768px) {
+  .col-md-5 {
+    flex: 0 0 auto;
+    width: 20%;
+  }
+}
 

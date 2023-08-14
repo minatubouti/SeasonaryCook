@@ -1,2 +1,66 @@
-<h1>Admin::Posts#show</h1>
-<p>Find me in app/views/admin/posts/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card mb-4">
+        <div class="card-body">
+          <%= image_tag @post.get_image, alt: @post.title, class: "img-fluid mb-3" if @post.get_image.attached? %>
+          <p><strong>投稿者:</strong> <%= @post.user.name %></p>
+          <p><strong>投稿日時:</strong> <%= @post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+          <p><strong>季節:</strong> <%= @post.season %></p>
+          <h1><%= @post.title %></h1>
+          <p><strong>メイン野菜:</strong> <%= @post.main_vegetable %></p>
+          <p><strong>説明:</strong> <%= @post.description %></p>
+          <p>
+            <span><%= @post.likes.count %> <i class="fas fa-heart" style="color: red; margin-left: 5px;"></i></span>
+            <span style="margin-left: 15px;"><%= @post.bookmarks.count %><i class="fa-solid fa-bookmark" style="color: #6495ED; margin-left: 5px;"></i></span>
+            <span style="margin-left: 15px;">
+              <%= link_to "#comments-section" do %><!--コメント部分にスクロール-->
+               <%= @post.comments.count %><i class="fa-solid fa-comment" style="color: #FFA500; margin-left: 5px;"></i>
+              <% end %>
+            </span>
+          </p>
+        </div>
+      </div>
+       <div class="card mb-4">
+        <div class="card-header">
+          食材
+        </div>
+        <div class="card-body">
+          <% @post.ingredients.each do |ingredient| %>
+            <p><strong>食材名:</strong> <%= ingredient.name %><strong> 分量:</strong> <%= ingredient.amount %></p>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          手順
+        </div>
+        <div class="card-body">
+          <% @post.recipe_steps.each do |recipe_step| %>
+            <p><strong>手順:</strong> <%= recipe_step.instructions %></p>
+          <% end %>
+        </div>
+      </div>
+         <!--コメント管理-->
+      <div id="comments-section">
+       <%= render 'admin/comments/comment_moderation', locals: { post: @post } %>
+      </div>
+      <!-- 管理者用の操作パネル -->
+        <div class="admin-controls">
+         <div class="col-8 mx-auto">
+          <div class="row g-2">
+            <div class="col">
+              <%= link_to '投稿一覧', admin_posts_path, class: 'btn btn-primary w-100 btn-lg' %>
+            </div>
+            <div class="col">
+              <%= link_to '投稿を削除', admin_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger w-100 btn-lg' %>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+

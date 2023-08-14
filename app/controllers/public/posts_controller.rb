@@ -18,8 +18,7 @@ class Public::PostsController < ApplicationController
   end
   
   def index
-    @posts = Post.where(is_public: true).includes(:user, :likes).recent.page(params[:page])
-  
+      @posts = Post.where(is_public: true).includes(:user, :likes).recent.page(params[:page])
     if params[:search].present?
       @posts = @posts.where('title LIKE ? OR main_vegetable LIKE ? OR season LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
     end
