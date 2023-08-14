@@ -8,7 +8,7 @@
               <p><%= image_tag comment.user.icon_image, class: 'img-fluid profile-icon' %>
             <% end %>
          <% end %>
-      <%= comment.user.name %>さんのコメント
+      <%= comment.user.name %>のコメント
      </h5>
       <p class="card-text"><%= comment.content %></p>
       <p class="card-text"><small class="text-muted"><%= time_ago_in_words(comment.created_at) %>前</small></p>

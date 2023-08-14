@@ -44,7 +44,9 @@
       </div>
          <!--コメント管理-->
       <div id="comments-section">
-       <%= render 'admin/comments/comment_moderation', locals: { post: @post } %>
+       <% @post.comments.each do |comment| %>
+        <%= render partial: 'admin/comments/comment_moderation', locals: { comment: comment } %>
+       <% end %>
       </div>
       <!-- 管理者用の操作パネル -->
         <div class="admin-controls">

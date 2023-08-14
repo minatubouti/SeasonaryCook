@@ -1,2 +1,11 @@
-<h1>Admin::Comments#index</h1>
-<p>Find me in app/views/admin/comments/index.html.erb</p>
+<div class="container mt-4">
+  <h1 class="mb-4">コメント一覧</h1>
+  <div class="row">
+    <% @comments.each do |comment| %>
+      <div class="col-md-6 mb-3">
+        <%= render partial: 'comment_moderation', locals: { comment: comment } %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%= paginate @comments %>
