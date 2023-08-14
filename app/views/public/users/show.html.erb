@@ -10,7 +10,7 @@
           <i class="fas fa-heart" style="color: red;"><span style="margin-left: 5px;"><%= current_user.likes.count %></span></i>
         <% end %>
       </div>
-      <div class="d-inline-block"> 
+      <div class="d-inline-block">
         <%= link_to bookmarks_user_path(current_user) do %>
           <i class="fa-solid fa-bookmark" style="color: #6495ED;"><span style="margin-left: 5px;"><%= current_user.bookmarks.count %></span></i>
         <% end %>
@@ -34,7 +34,11 @@
               <% end %>
               <div class="card-body">
                 <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
-                <p><%= post.likes.count %> <i class="fas fa-heart" style="color: red; margin-left: 5px;"></i></p>
+                <div class="d-flex justify-content-between">
+                  <p class="mb-0"><%= post.likes.count %> <i class="fas fa-heart" style="color: red; margin-left: 5px;"></i></p>
+                  <p class="mb-0"><%= post.bookmarks.count %> <i class="fa-solid fa-bookmark" style="color: #6495ED;"></i></p>
+                  <p class="mb-0"><%= post.comments.count %> <i class="fas fa-comment" style="color: #FFA500;"></i></p>
+                </div>
               </div>
             </div>
           </div>

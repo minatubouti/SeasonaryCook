@@ -1,5 +1,4 @@
 class Public::LikesController < ApplicationController
- before_action :reject_guest_user, only: [:create, :destroy]
  
   def create
     @like = current_user.likes.create(post_id: params[:post_id])
