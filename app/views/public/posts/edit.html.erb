@@ -62,6 +62,7 @@
       </div>
     </div>
     <%= f.submit "更新する", class: 'btn btn-success' %>
+    <%= link_to '投稿削除', post_path(@post),method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
   </div>
  <% end %>
 

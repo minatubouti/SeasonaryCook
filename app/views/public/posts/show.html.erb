@@ -3,7 +3,9 @@
     <div class="col-md-8 offset-md-2">
       <div class="card mb-4">
         <div class="card-body">
-          <%= image_tag @post.get_image, alt: @post.title, class: "img-fluid mb-3" if @post.get_image.attached? %>
+          <% if @post.get_image.attached? %>
+            <%= image_tag @post.get_image, alt: @post.title, class: "img-fluid mb-3", style: "width: 100%; max-height: 400px;" %>
+          <% end %>
           <p><strong>投稿日時:</strong> <%= @post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
           <p><strong>季節:</strong> <%= @post.season %></p>
           <h1><%= @post.title %></h1>
@@ -17,8 +19,9 @@
               </p>
               <p id="bookmark_button" class="ml-4">
                 <%= render partial: 'public/bookmarks/bookmark', locals: { post: @post } %>
+              </p>
+              <p><i class="fa-solid fa-comment ml-4" style="color: #FFA500;"><%= active_comments_count(@post) %>コメント</i></p>
             <% end %>
-            </p>
           </div>
         </div>
       </div>
@@ -33,30 +36,47 @@
           <% end %>
         </div>
       </div>
-
-      <div class="card mb-4">
-        <div class="card-header">
-          手順
-        </div>
-        <div class="card-body">
-          <% @post.recipe_steps.each do |recipe_step| %>
-            <p><strong>手順:</strong> <%= recipe_step.instructions %></p>
-          <% end %>
-        </div>
+     
+     <!--それぞれの手順を別々のカードで表示する-->
+      <div class="card-body">
+        <% @post.recipe_steps.each_with_index do |recipe_step, index| %>
+          <div class="card mb-2">
+            <div class="card-header">
+              <strong>ステップ<%= index + 1 %></strong>
+            </div>
+            <div class="card-body">
+              <p><%= recipe_step.instructions %></p>
+            </div>
+          </div>
+        <% end %>
       </div>
+      
+    <% if @post.user == current_user %>
+      <%= link_to '投稿編集', edit_post_path(@post), class: 'btn btn-success' %>
+      <%= link_to '投稿削除', post_path(@post),method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+    <% end %>
       <!--コメント機能-->
-        <div id="comments">
+        <div id="comments" class="mt-4 mb-4">
        <% if user_signed_in? && !current_user.guest? %>
           <%= render 'public/comments/form', post: @post %>
        <% end %>
-          <%= render 'public/comments/comment', comments: @post.comments %>
+         <button class="commentbox-toggle btn btn-info btn-block">コメントを非表示にする</button>
+          <div class="commentboxes">
+           <%= render 'public/comments/comment', comments: @post.comments %>
+          </div>
         </div>
-           
-      <%= link_to '投稿一覧に戻る', posts_path, class: 'btn btn-secondary' %>
-    <% if @post.user == current_user %>
-      <%= link_to '編集', edit_post_path(@post), class: 'btn btn-primary' %>
-      <%= link_to '削除', post_path(@post),method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
-    <% end %>
+         <%= link_to '投稿一覧に戻る', posts_path, class: 'btn btn-secondary' %>
     </div>
   </div>
 </div>
+
+
+<script>
+  jQuery(function(){
+    // 表示切替ボタンのクリックイベントを検知
+    jQuery('.commentbox-toggle').on('click', function(){
+      // 表示をslideToggleで切り替える
+      jQuery('.commentboxes').slideToggle();
+    });
+  });
+</script>
