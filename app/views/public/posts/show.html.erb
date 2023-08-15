@@ -21,6 +21,12 @@
                 <%= render partial: 'public/bookmarks/bookmark', locals: { post: @post } %>
               </p>
               <p><i class="fa-solid fa-comment ml-4" style="color: #FFA500;"><%= active_comments_count(@post) %>コメント</i></p>
+               <!--自分の投稿の非公開の場合のみ表示-->
+              <p>
+                <% if !@post.is_public %>
+                  <span class="badge badge-danger ml-5" style="font-size: 18px; padding: 10px;">非公開</span>
+                <% end %>
+              </p>
             <% end %>
           </div>
         </div>

@@ -5,7 +5,11 @@ class Public::UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.order(created_at: :desc)
+   if current_user == @user
+    @posts = @user.posts.order(created_at: :desc) # 自分のマイページなら全投稿
+   else
+    @posts = @user.posts.where(is_public: true).order(created_at: :desc) # 他人のマイページなら公開投稿のみ
+   end
   end
 
   def edit
@@ -22,13 +26,21 @@ class Public::UsersController < ApplicationController
   end
   
   def likes
-    @user = User.find(params[:id])
-    @liked_posts = @user.likes.includes(post: :user).map(&:post)# 現在のユーザーがいいねした投稿を取得
+      @user = User.find(params[:id])
+    if current_user == @user
+      @liked_posts = @user.likes.includes(post: :user).map(&:post)
+    else
+      @liked_posts = @user.likes.includes(post: :user).where(posts: { is_public: true }).map(&:post)
+    end
   end
   
   def bookmarks
-    @user = User.find(params[:id])
-    @bookmarks = @user.bookmarks.includes(post: :user).map(&:post)
+      @user = User.find(params[:id])
+    if current_user == @user
+      @bookmarks = @user.bookmarks.includes(post: :user).map(&:post)
+    else
+      @bookmarks = @user.bookmarks.includes(post: :user).where(posts: { is_public: true }).map(&:post)
+    end
   end
    
   def withdraw

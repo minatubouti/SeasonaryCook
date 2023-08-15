@@ -3,7 +3,7 @@ class Admin::PostsController < ApplicationController
   
   
   def index
-     @posts = Post.all.where(is_public: true).includes(:user, :likes).recent.page(params[:page])
+     @posts = Post.includes(:user, :likes).recent.page(params[:page])
   end
 
   def show

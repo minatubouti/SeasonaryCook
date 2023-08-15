@@ -53,6 +53,10 @@
                   <p class="mb-0"><%= post.likes.count %> <i class="fas fa-heart" style="color: red; margin-left: 5px;"></i></p>
                   <p class="mb-0"><%= post.bookmarks.count %> <i class="fa-solid fa-bookmark" style="color: #6495ED;"></i></p>
                   <p class="mb-0"><%= post.comments.count %> <i class="fas fa-comment" style="color: #FFA500;"></i></p>
+                  <!--自分の投稿の非公開の場合のみ表示-->
+                  <% if !post.is_public %>
+                   <span class="badge badge-danger">非公開</span>
+                 <% end %>
                 </div>
               </div>
             </div>

@@ -1,6 +1,6 @@
 class Public::PostsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
-  before_action :reject_guest, only: [:new, :create, :edit, :update] #ゲストユーザか確認
+  before_action :reject_guest, only: [:create, :edit, :update] #ゲストユーザか確認
   
   def new
    @post = Post.new
@@ -26,6 +26,11 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    # 投稿が非公開で、現在のユーザーが投稿のオーナーでない場合
+    if !@post.is_public && current_user != @post.user
+      redirect_to root_path, alert: "閲覧権限がありません。"
+      return
+    end
   end
 
   def edit

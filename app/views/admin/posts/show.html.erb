@@ -21,6 +21,9 @@
                <%= active_comments_count(@post) %><i class="fa-solid fa-comment" style="color: #FFA500; margin-left: 5px;"></i>
               <% end %>
             </span>
+            <span class="badge <%= @post.is_public ? 'badge-success' : 'badge-danger' %> ml-5" style="font-size: 18px; paddint: 10px;">
+               <%= @post.is_public ? '公開中' : '非公開' %>
+            </span>
           </p>
         </div>
       </div>
@@ -40,7 +43,7 @@
         <% @post.recipe_steps.each_with_index do |recipe_step, index| %>
           <div class="card mb-2">
             <div class="card-header">
-              <strong>手順 <%= index + 1 %>:</strong>
+              <strong>手順 <%= index + 1 %></strong>
             </div>
             <div class="card-body">
               <p><%= recipe_step.instructions %></p>
