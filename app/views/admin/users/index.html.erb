@@ -1,4 +1,10 @@
 <div class="container my-4">
+  <%= form_with url: admin_users_path, method: :get, local: true do |f| %>
+    
+    <%= f.text_field :search, placeholder: "ユーザー検索" %>
+    <%= f.submit "検索", class: "btn btn-primary" %>
+  <% end %>
+
   <h1 class="text-center">ユーザー一覧</h1>
 
   <div class="table-responsive">

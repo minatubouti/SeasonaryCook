@@ -1,2 +1,21 @@
-<h1>Admin::Homes#top</h1>
-<p>Find me in app/views/admin/homes/top.html.erb</p>
+<div class="container mt-4">
+  <h1>管理者ダッシュボード</h1>
+  <table class="table table-bordered">
+    <tr>
+      <th>1週間以内の新規登録ユーザー数</th>
+      <td><%= @new_users_count %></td>
+    </tr>
+    <tr>
+      <th>1週間の投稿合計数</th>
+      <td><%= @new_posts_count %></td>
+    </tr>
+    <tr>
+      <th>1週間のコメント合計数</th> 
+      <td><%= @new_comments_count %></td>
+    </tr>
+    <tr>
+      <th>アクティブユーザ数（1週間以内に投稿したユーザー）</th>
+      <td><%= @active_users_count %></td>
+    </tr>
+  </table>
+</div>

@@ -1,8 +1,13 @@
 class Admin::UsersController < ApplicationController
    before_action :authenticate_admin! #管理者であることを確認
    before_action :find_user, only: [:show, :edit, :update, :destroy] 
+   
   def index
-    @users = User.order(created_at: :desc)
+    if params[:search].present?
+      @users = User.where('name LIKE ?', "%#{params[:search]}%")
+    else
+      @users = User.order(created_at: :desc)
+    end
   end
 
   def show
