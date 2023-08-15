@@ -26,7 +26,7 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    # 投稿が非公開で、現在のユーザーが投稿のオーナーでない場合
+    # 投稿が非公開で、現在のユーザーが投稿のオーナーでない場合（URLでのアクセスを防ぐ)
     if !@post.is_public && current_user != @post.user
       redirect_to root_path, alert: "閲覧権限がありません。"
       return
@@ -66,7 +66,7 @@ class Public::PostsController < ApplicationController
    def ensure_correct_user
      @post = Post.find(params[:id])
     unless @post.user == current_user
-      flash[:alert] = '権限がないよ、ログインしてね！'
+      flash[:alert] = '権限がありません。'
       redirect_to posts_path
     end
    end
