@@ -22,8 +22,8 @@ Rails.application.routes.draw do
     get '/about' => 'homes#about'
     resources :users, only: [:show, :edit, :update] do
     resource :relationships, only:[:create, :destroy]
-     get 'follows' => 'relationships#follower'
-     get 'followers' => 'relationships#followed'
+      get 'follows' => 'relationships#follower'
+      get 'followers' => 'relationships#followed'
      get 'bookmarks', on: :member
     member do
       get 'likes'

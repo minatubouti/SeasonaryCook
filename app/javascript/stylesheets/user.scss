@@ -4,3 +4,22 @@
   border-radius: 50%; /* 丸い形状にするための設定 */
   object-fit: cover; /* 画像のアスペクト比を保つための設定 */
 }
+
+.profile-details {
+  font-size: 18px;
+  color: #555;
+}
+
+.profile-link {
+  font-weight: bold;
+  color: #6699CC; 
+}
+
+.btn-follow {
+  background-color: #00BFFF; 
+  color: #fff;
+}
+
+.btn-follow:hover {
+  background-color: #A7F1FF; /* ホバー時の色 */
+}

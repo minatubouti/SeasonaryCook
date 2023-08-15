@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_posts, through: :bookmarks, source: :post
+  
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
@@ -23,7 +24,20 @@ class User < ApplicationRecord
   # name空でない15字以下
   validates :name, presence: true, length: { maximum: 15 }
          
-    # ゲストメールアドレスを定数として定義
+    # 指定された他のユーザーをフォローする
+    def follow(other_user)
+      following << other_user
+    end
+    # 指定された他のユーザーのフォローを外す
+    def unfollow(other_user)
+      active_relationships.find_by(followed_id: other_user.id).destroy
+    end
+    # 指定された他のユーザーをフォローしているかどうかをチェック
+    def following?(other_user)
+      following.include?(other_user)
+    end
+    
+     # ゲストメールアドレスを定数として定義
    GUEST_USER_EMAIL = "guest@example.com"
 
     def self.guest
@@ -36,4 +50,5 @@ class User < ApplicationRecord
     def guest?
      email == GUEST_USER_EMAIL
     end
+    
 end

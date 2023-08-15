@@ -1,0 +1,29 @@
+<h1 class="text-center"><%= @user.name %>のフォロワー　一覧</h1>
+<div class="container">
+  <table class="table mx-auto">
+    <thead>
+      <tr>
+        <th>アイコン</th>
+        <th>名前</th>
+        <th>フォロー数</th>
+        <th>フォロワー数</th>
+        <th>投稿数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @followers.each do |follower| %>
+        <tr>
+          <td>
+            <%= link_to user_path(follower) do %>
+             <%= image_tag follower.icon_image, class: 'profile-icon' if follower.icon_image.attached? %>
+            <% end %>
+          </td>
+          <td><%= link_to follower.name, user_path(follower) %></td>
+          <td><%= follower.following.count %></td>
+          <td><%= follower.followers.count %></td>
+          <td><%= follower.posts.count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
