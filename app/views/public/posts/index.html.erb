@@ -1,6 +1,6 @@
 <div class="container mt-2">
   <%= form_with(url: posts_path, method: :get, local: true) do |f| %>
-    <%= f.text_field :search, placeholder: "キーワード検索" %>
+    <%= f.text_field :search, placeholder: "料理名,野菜,タグで検索" %>
     <%= f.submit "検索" %>
   <% end %>
 </div>

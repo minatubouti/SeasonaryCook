@@ -4,6 +4,7 @@
   height: 300px;
 }
 
+// 必須文字
 .required-label {
   color: red;
 }
@@ -18,6 +19,22 @@
   font-weight: bold; /* 太字にする */
 }
 
+.tag {
+  display: inline-block;
+  padding: 3px 12px;
+  background-color: #FFD5EC; 
+  border-radius: 20px; /* 丸みを持たせる */
+  margin: 2px;
+  color: #333; 
+  text-decoration: none; /* 下線を消す */
+}
+ /* マウスオーバー時の設定 */
+.tag:hover {  
+  background-color: #F5C2D6;
+  color: #333;
+  text-decoration: none; 
+}
+
   
   // コメント表示ボタン
 .commentbox-toggle {
@@ -26,6 +43,7 @@
     font-size: 16px;
     background_color: #FF8856;
   }
+
 
 /* index 5カラムのレイアウトを追加 */
 @media (min-width: 768px) {

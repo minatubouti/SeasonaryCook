@@ -11,6 +11,10 @@
           <p><strong class="col-3">季節</strong> <%= @post.season %></p>
           <p><strong class="col-3">メイン野菜</strong> <%= @post.main_vegetable %></p>
           <p><strong class="col-3">ポイント</strong> <%= @post.description %></p>
+          
+          <% @post.tag_list.each do |tag| %>
+            <%= link_to tag, posts_path(tag: tag), class: 'tag' %>
+          <% end %>
           <!--いいね機能・ブックマーク機能-->
           <div class="d-flex">
             <% if user_signed_in? && !current_user.guest? %>

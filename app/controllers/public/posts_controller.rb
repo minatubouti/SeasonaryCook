@@ -19,11 +19,26 @@ class Public::PostsController < ApplicationController
   end
   
   def index
-      @posts = Post.where(is_public: true).includes(:user, :likes).recent.page(params[:page])
-    if params[:search].present?
-      @posts = @posts.where('title LIKE ? OR main_vegetable LIKE ? OR season LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
-    end
+      @posts = Post.where(is_public: true).includes(:user, :likes).recent
+      if params[:search].present?
+        # タイトル、主要な野菜、または季節に基づいて絞り込む
+        posts_based_on_columns = @posts.where('title LIKE ? OR main_vegetable LIKE ? OR season LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
+        # タグに基づいて絞り込む
+        posts_based_on_tags = @posts.tagged_with(params[:search])
+        # 両方のクエリの結果のIDを取得
+        combined_post_ids = posts_based_on_columns.pluck(:id) + posts_based_on_tags.pluck(:id)
+        # IDに基づいて最終的なクエリを構築
+        @posts = Post.where(id: combined_post_ids)
+      end
+      # タグ検索のクエリがある場合はその条件でさらに絞り込む
+      if params[:tag].present?
+        @posts = @posts.tagged_with(params[:tag])
+      end
+    
+      @posts = @posts.page(params[:page])
   end
+
+
 
   def show
     @post = Post.find(params[:id])
@@ -57,7 +72,7 @@ class Public::PostsController < ApplicationController
    
    def post_params
     params.require(:post).permit(
-      :title, :description, :main_vegetable, :season, :is_public, :image,
+      :title, :description, :main_vegetable, :season, :is_public, :image, :tag_list,
       ingredients_attributes: [:id, :name, :amount],
       recipe_steps_attributes: [:id, :instructions] 
     )

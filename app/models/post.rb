@@ -1,5 +1,8 @@
 class Post < ApplicationRecord
   has_one_attached :image
+  # タグ付け可能にする
+  acts_as_taggable_on :tags
+  
   belongs_to :user
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
