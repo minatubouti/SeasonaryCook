@@ -13,6 +13,7 @@ class Public::PostsController < ApplicationController
     if @post.save
       redirect_to posts_path, notice: '投稿しました'
     else
+      flash.now[:alert] = '投稿に失敗しました。必須の項目の入力をしてください'
       render :new
     end
   end

@@ -1,70 +1,19 @@
-<%= form_with model: @post, url: post_path(@post), html: {class: 'row'} do |f| %>
-  <div class="image-preview" id="imagePreview">
-    <img src="" id="imagePreviewImg" alt="プレビュー画像" style="display: none;">
-  </div>
-  <%= f.label :image %>
-  <%= f.file_field :image, id: 'imageField' %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8"> 
+      <h1>投稿編集</h1>
+        <%= form_with model: @post, url: post_path(@post), html: {class: 'row'} do |f| %>
   
-  <div class="col-lg-6">
-    <div class="form-group">
-      <%= f.label :title, "料理名" %>
-      <%= f.text_field :title, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :description, "料理ポイント" %>
-      <%= f.text_area :description, class: 'form-control' %>
-    </div>
-    
-    <div class="form-group">
-      <%= f.label :season, "季節" %>
-      <%= f.select :season, Post::SEASONS, {}, class: 'form-control' %>
-    </div>
-    
-    <div class="form-group">
-      <%= f.label :main_vegetable, "メイン野菜" %>
-      <%= f.text_field :main_vegetable, class: 'form-control' %>
-    </div>
-    
-    <!--材料、分量フォーム追加できる-->
-    <%= f.fields_for :ingredients do |ingredient_field| %>
-      <%= render 'ingredient_fields', f: ingredient_field %>
-    <% end %>
-    <div id="ingredients"></div>
-    <div>
-      <button type="button" id="add-ingredient" class="btn btn-primary">材料を追加</button>
-    </div>
-    
-  　 <%# 作り方フォームのテンプレート %>
-      <div id="recipe_step-fields-template" style="display: none;">
-        <%= f.fields_for :recipe_steps, RecipeStep.new, child_index: "new_recipe_step" do |recipe_step_field| %>
-          <%= render 'recipe_step_fields', f: recipe_step_field %>
+      <!--画像、テキストフィールド-->
+         <%= render partial: 'post_text_form', locals: { f: f } %>
+           
+          <%= f.submit "更新する", class: 'btn btn-success mb-5 mt-5' %>
+          <%= link_to '投稿削除', post_path(@post),method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger mb-5 ml-4 mt-5' %>
         <% end %>
-      </div>
-      
-      <%# 実際の作り方フォーム %>
-      <%= f.fields_for :recipe_steps do |recipe_step_field| %>
-        <%= render 'recipe_step_fields', f: recipe_step_field %>
-      <% end %>
-      <div id="recipe_steps"></div>
-      <div>
-        <button type="button" id="add-recipe_step" class="btn btn-primary">作り方を追加</button>
-      </div>
-
-    <div class="form-group">
-      <%= f.label :is_public, "公開するか" %>
-      <div class="form-check">
-        <%= f.radio_button :is_public, true, class: 'form-check-input' %>
-        <label class="form-check-label">はい</label>
-      </div>
-      <div class="form-check">
-        <%= f.radio_button :is_public, false, class: 'form-check-input' %>
-        <label class="form-check-label">いいえ</label>
-      </div>
     </div>
-    <%= f.submit "更新する", class: 'btn btn-success' %>
-    <%= link_to '投稿削除', post_path(@post),method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
   </div>
- <% end %>
+</div>
+
 
 <!--材料、分量フォームの隠し要素テンプレート-->
 <% ingredient_form_builder = ActionView::Helpers::FormBuilder.new(:post, @post, self, {}) %>

@@ -1,17 +1,31 @@
 // 投稿画像サイズ
 #imagePreviewImg {
-  max-width: 500px; 
-  max-height: 400px;
+  width: 450px; 
+  height: 300px;
 }
 
-// コメント表示ボタン
+.required-label {
+  color: red;
+}
+
+// ラジオボタン
+.custom-radio .form-check-input {
+  width: 25px;
+  height: 25px;
+}
+.custom-radio .form-check-label {
+  font-size: 1.2rem; /* フォントサイズの調整 */
+  font-weight: bold; /* 太字にする */
+}
+
+  
+  // コメント表示ボタン
 .commentbox-toggle {
     width: 100%;
     padding: 10px;
     font-size: 16px;
     background_color: #FF8856;
   }
-
 
 /* index 5カラムのレイアウトを追加 */
 @media (min-width: 768px) {
