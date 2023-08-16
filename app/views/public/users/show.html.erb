@@ -39,7 +39,8 @@
     
     <!--投稿アイテム-->
     <div class="col-md-8">
-      <h3>投稿レシピ</h3>
+      <h3>投稿レシピ</h3> 
+      <p><strong class="col-3">投稿数</strong> <%= @user.posts.count %></p>
       <div class="row">
         <% @posts.each do |post| %>
           <div class="col-md-4 mb-4"> 

@@ -1,25 +1,31 @@
+<div class="container mt-2 mb-4">
+  <%= form_with(url: admin_posts_path, method: :get, local: true, class: "form-inline") do |f| %>
+    <%= f.text_field :search, placeholder: "料理名,野菜,タグで検索", class: "form-control mr-2" %>
+    <%= f.submit "検索", class: "btn btn-primary" %>
+  <% end %>
+</div>
 
- <h1>投稿一覧</h1>
-  <div class="row">
-    <% @posts.each do |post| %>
-      <div class="col-md-5 mb-4">
-        <div class="card h-100">
-         <!-- 料理画像のリンク -->
-           <%= link_to admin_post_path(post) do %>
-              <%= image_tag post.get_image, alt: post.title, class: "card-img-top", style: "height: 120px; object-fit: cover;" if post.get_image.attached? %>
-           <% end %>
-            <div class="card-body">
-              <h5 class="card-title"><%= link_to post.title, admin_post_path(post) %></h5>
-              <p class="card-text"><%= truncate(post.description, length: 25) %></p>
-                <!-- プロフィール画像のリンク -->
-                <% if post.user&.icon_image&.attached? %>
-                  <%= link_to admin_user_path(post.user) do %>
-                    <p><%= image_tag post.user.icon_image, class: 'img-fluid profile-icon' %>
-                     <%= post.user.name %>
-                    </p>
+   <h1>投稿一覧</h1>
+    <div class="row">
+      <% @posts.each do |post| %>
+        <div class="col-md-5 mb-4">
+          <div class="card h-100">
+           <!-- 料理画像のリンク -->
+             <%= link_to admin_post_path(post) do %>
+                <%= image_tag post.get_image, alt: post.title, class: "card-img-top", style: "height: 120px; object-fit: cover;" if post.get_image.attached? %>
+             <% end %>
+              <div class="card-body">
+                <h5 class="card-title"><%= link_to post.title, admin_post_path(post) %></h5>
+                <p class="card-text"><%= truncate(post.description, length: 25) %></p>
+                  <!-- プロフィール画像のリンク -->
+                  <% if post.user&.icon_image&.attached? %>
+                    <%= link_to admin_user_path(post.user) do %>
+                      <p><%= image_tag post.user.icon_image, class: 'img-fluid profile-icon' %>
+                       <%= post.user.name %>
+                      </p>
+                    <% end %>
                   <% end %>
-                <% end %>
-                
+                  
                 <p>  <!--有効数のみカウント-->
                   <span><%= active_likes_count(post) %> <i class="fas fa-heart" style="color: red; margin-left: 5px;"></i></span>
                   <span style="margin-left: 15px;"><%= active_bookmarks_count(post) %><i class="fa-solid fa-bookmark" style="color: #6495ED; margin-left: 5px;"></i></span>
@@ -29,11 +35,9 @@
                     <%= post.is_public ? '公開中' : '非公開' %>
                   </span>
                 </p>
-                 
-               
             </div>
+          </div>
         </div>
-      </div>
-    <% end %>
-  </div>
- 
+      <% end %>
+    </div>
+   

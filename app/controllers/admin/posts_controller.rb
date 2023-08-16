@@ -4,7 +4,19 @@ class Admin::PostsController < ApplicationController
   
   
   def index
-     @posts = Post.includes(:user, :likes).recent.page(params[:page])
+    @posts = Post.includes(:user, :likes).recent
+  
+    if params[:search].present?
+      posts_based_on_columns = @posts.where('title LIKE ? OR main_vegetable LIKE ? OR season LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
+      posts_based_on_tags = @posts.tagged_with(params[:search])
+      combined_post_ids = (posts_based_on_columns.pluck(:id) + posts_based_on_tags.pluck(:id)).uniq
+      @posts = Post.where(id: combined_post_ids)
+    end
+  
+    if params[:tag].present?
+      @posts = @posts.tagged_with(params[:tag])
+    end
+      @posts = @posts.page(params[:page])
   end
 
   def show

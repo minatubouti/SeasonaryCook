@@ -34,8 +34,7 @@ class Public::PostsController < ApplicationController
       if params[:tag].present?
         @posts = @posts.tagged_with(params[:tag])
       end
-    
-      @posts = @posts.page(params[:page])
+        @posts = @posts.page(params[:page])
   end
 
 

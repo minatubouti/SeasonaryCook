@@ -14,7 +14,7 @@
           <p><strong class="col-3">説明</strong> <%= @post.description %></p>
           
           <% @post.tag_list.each do |tag| %>
-            <%= link_to tag, posts_path(tag: tag), class: 'tag' %>
+            <%= link_to tag, admin_posts_path(tag: tag), class: 'tag' %>
           <% end %>
           
           <p> <!--有効数のみカウント-->
@@ -64,13 +64,7 @@
           </div>
         <% end %>
       </div>
-
-         <!--コメント管理-->
-      <div id="comments-section">
-       <% @post.comments.each do |comment| %>
-        <%= render partial: 'admin/comments/comment_moderation', locals: { comment: comment } %>
-       <% end %>
-      </div>
+      
       <!-- 管理者用の操作パネル -->
         <div class="admin-controls">
          <div class="col-8 mx-auto">
@@ -83,6 +77,14 @@
             </div>
           </div>
         </div>
+      </div>
+
+         <!--コメント管理-->
+      <div id="comments-section">
+        <h3>コメント</h3>
+       <% @post.comments.each do |comment| %>
+        <%= render partial: 'admin/comments/comment_moderation', locals: { comment: comment } %>
+       <% end %>
       </div>
     </div>
   </div>

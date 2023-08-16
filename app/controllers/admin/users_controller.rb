@@ -6,7 +6,7 @@ class Admin::UsersController < ApplicationController
     if params[:search].present?
       @users = User.where('name LIKE ?', "%#{params[:search]}%")
     else
-      @users = User.order(created_at: :desc)
+      @users = User.order(created_at: :desc).page(params[:page])
     end
   end
 

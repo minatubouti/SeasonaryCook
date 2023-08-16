@@ -27,3 +27,60 @@ footer {
   color: #E6FFE9 !important; 
 }
 
+// ページネーション
+.pagination-001 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0 8px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.pagination-001 a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2em;
+    height: 2em;
+    border: 1px solid #f48ae1;
+    border-radius: 25px;
+    color: #f48ae1;
+}
+
+.pagination-001 a:not(:hover) {
+    text-decoration: none;
+}
+
+.pagination-001 .current a {
+    background-color: #f48ae1;
+    color: #fff;
+    pointer-events: none;
+}
+
+.pagination-001 .prev a,
+.pagination-001 .next a {
+    gap: 0 4px;
+    width: auto;
+    padding: .5em .8em;
+    line-height: 1;
+}
+
+.pagination-001 .prev a::before,
+.pagination-001 .next a::after {
+    display: inline-block;
+    transform: rotate(45deg);
+    width: .3em;
+    height: .3em;
+    content: '';
+}
+
+.pagination-001 .prev a::before {
+    border-bottom: 1px solid #f48ae1;
+    border-left: 1px solid #f48ae1;
+}
+
+.pagination-001 .next a::after {
+    border-top: 1px solid #f48ae1;
+    border-right: 1px solid #f48ae1;
+}
