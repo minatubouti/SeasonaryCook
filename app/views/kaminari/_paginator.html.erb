@@ -6,20 +6,19 @@
     remote:        data-remote
     paginator:     the paginator that renders the pagination tags inside
 -%>
+
 <%= paginator.render do -%>
-  <nav class="pagination" role="navigation" aria-label="pager">
-    <%= first_page_tag unless current_page.first? %>
-    <%= prev_page_tag unless current_page.first? %>
-    <% each_page do |page| -%>
-      <% if page.display_tag? -%>
-        <%= page_tag page %>
-      <% elsif !page.was_truncated? -%>
-        <%= gap_tag %>
+  <div class="pager">
+    <ul class="pagination">
+      <li class="pre"><%= first_page_tag { raw('<span>&laquo;</span>') } unless current_page.first? %></li>
+      <% each_page do |page| -%>
+        <% if page.display_tag? -%>
+          <li><%= page_tag(page) { raw('<span>' + page.to_s + '</span>') } %></li>
+        <% elsif !page.was_truncated? -%>
+          <%= gap_tag %>
+        <% end -%>
       <% end -%>
-    <% end -%>
-    <% unless current_page.out_of_range? %>
-      <%= next_page_tag unless current_page.last? %>
-      <%= last_page_tag unless current_page.last? %>
-    <% end %>
-  </nav>
+      <li class="next"><%= last_page_tag { raw('<span>&raquo;</span>') } unless current_page.last? %></li>
+    </ul>
+  </div>
 <% end -%>
