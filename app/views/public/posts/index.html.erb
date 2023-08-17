@@ -15,6 +15,10 @@
       <%= render partial: 'public/posts/post_item', locals: {post: post} %>
      <% end %>
     <% end %>
-    <%= paginate @posts %>
+   
   </div>
+  <!--# ページネーション自体の幅を小さくして中央寄せ-->
+   <div style="width: 30%; margin: 0 auto;"> 
+    <%= paginate @posts %>
+   </div>
 
