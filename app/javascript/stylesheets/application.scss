@@ -7,7 +7,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   margin: 0;
-  padding-top: 70px;
+  padding-top: 150px;
   background-size: cover;
   background-position: center;
 }
@@ -20,7 +20,7 @@ body {
   position: absolute;
   top: 0;
   right: 0;
-  bottom: 90px; /* フッターの高さ分だけ上に設定する */
+  bottom: 50px; /* フッターの高さ分だけ上に設定する */
   left: 0;
 }
 
@@ -86,7 +86,7 @@ body {
 
 footer {
   flex-shrink: 0; /* フッターが縮まないように */
-  height: 90px;
+  height: 50px;
 }
 
 .header-footer-bg {
@@ -95,7 +95,23 @@ footer {
 
 // !important が使用されている理由は、Bootstrapなどのフレームワークが適用するスタイルを上書きするためです。
 .nav-item a {
-  color: #E6FFE9 !important; 
+  color: #F5FFFA !important; 
+}
+
+.nav-item {
+  font-size: 20px;
+}
+
+@media (max-width: 768px) { 
+  .navbar-nav .nav-item {
+    font-size: 18px; 
+  }
+  .navbar-light .navbar-toggler {
+    background-color: #F0FFF0; // ハンバーガーアイコンの背景色
+  }
+  .navbar-collapse {
+    padding: 10px; // 余白の調整
+  }
 }
 
 

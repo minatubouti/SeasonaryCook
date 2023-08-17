@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-lg-4 col-md-6 col-sm-12">
       <h3 class="mb-4"><%= image_tag @user.icon_image, class: 'img-fluid profile-icon' if @user.icon_image.attached? %> <%= @user.name %></h3>
 
       <div class="profile-details mb-4">
@@ -24,7 +24,7 @@
       </div>
 
       <% if current_user == @user && !current_user.guest? %>
-        <%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-info' %>
+        <%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-info mb-5' %>
       <% end %>
       
       <!--フォロー機能-->
@@ -38,7 +38,7 @@
     </div>
     
     <!--投稿アイテム-->
-    <div class="col-md-8">
+    <div class="col-lg-8 col-md-6 col-sm-12">
       <h3>投稿レシピ</h3> 
       <p><strong class="col-3">投稿数</strong> <%= @user.posts.count %></p>
       <div class="row">
