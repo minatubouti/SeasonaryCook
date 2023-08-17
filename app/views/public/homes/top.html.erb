@@ -1,2 +1,32 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<main class="top-page">
+  <div class="content-with-mask"> <!-- マスクをかけたい範囲を指定するコンテナ -->
+    <div class="mask">
+      <div class="app-name-wrapper">
+        <div class="app-name">SeasonaryCook</div>
+        <div class="app-sub-name">〜季節を活かす料理〜</div>
+      </div>
+      <div class="button-wrapper">
+          <%= link_to 'ログインはこちら', user_session_path, class: 'btn btn-info' %> 
+          <%= link_to '新規登録して始める', new_user_registration_path, class: 'btn btn-success' %> 
+      </div>
+    </div>
+  </div>
+  </main>
+
+
+
+
+<!--ユーザーの投稿した画像をランダムで表示-->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const images = <%= raw @images.to_json %>;
+    let currentIndex = 0;
+
+    function changeBackgroundImage() {
+      document.body.style.backgroundImage = `url(${images[currentIndex]})`;
+      currentIndex = (currentIndex + 1) % images.length;
+    }
+
+    setInterval(changeBackgroundImage, 5000); // 5秒ごとに切り替え
+  });
+</script>

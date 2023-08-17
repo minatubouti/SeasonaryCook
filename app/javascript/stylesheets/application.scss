@@ -8,14 +8,85 @@ body {
   min-height: 100vh;
   margin: 0;
   padding-top: 70px;
+  background-size: cover;
+  background-position: center;
 }
 
+// トップページ
+
+// マスク設定
+.mask {
+  background: rgba(255, 255, 255, 0.5); /* 白のマスクを半透明でかける */
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 90px; /* フッターの高さ分だけ上に設定する */
+  left: 0;
+}
+
+.app-name-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background: rgba(255,255,224,0.85); 
+  padding: 30px; /* パディングを増やしてマスクサイズを大きくする */
+  border-radius: 50px; /* 角を丸くする */
+}
+
+
+// 文字の設定
+.app-name {
+  font-size: 100px;
+  font-weight: bold;
+  color: #009900;
+}
+
+.app-sub-name { 
+  font-size: 35px;
+  font-weight: bold;
+  color: #66CDAA;
+}
+
+@media (max-width: 768px) { /* タブレットサイズ以下でのスタイル */
+  .app-name {
+    font-size: 50px; /* フォントサイズを小さく */
+  }
+
+  .app-sub-name {
+    font-size: 20px; /* フォントサイズを小さく */
+  }
+}
+
+// ボタンの設定
+.button-wrapper {
+  position: absolute;
+  top: 80%; /* ボタンの位置を調整 */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.top-page .btn {
+  margin: 10px; /* ボタン間の余白 */
+  width: 100%; /* ボタンの幅を最大に */
+}
+
+.app-name-wrapper, .button-wrapper {
+  max-width: 80%; /* コンテナの最大幅を設定 */
+  margin: auto; /* 中央寄せ */
+}
+
+
+// ヘッダー、フッター
 .content {
   flex: 1 0 auto; /* メインコンテンツがページを埋めるように */
 }
 
 footer {
   flex-shrink: 0; /* フッターが縮まないように */
+  height: 90px;
 }
 
 .header-footer-bg {
@@ -26,6 +97,8 @@ footer {
 .nav-item a {
   color: #E6FFE9 !important; 
 }
+
+
 
 // ここからページネーション
 .pager .pagination {
