@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1>お問い合わせ一覧</h1>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>名前</th>
+            <th>メールアドレス</th>
+            <th>内容</th>
+            <th>返信状態</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @inquiries.each do |inquiry| %>
+            <tr>
+              <td><%= inquiry.name %></td>
+              <td><%= inquiry.email %></td>
+              <td><%= truncate(inquiry.message, length: 50) %></td>
+              <td><%= inquiry.replied ? '返信済み' : '未返信' %></td>
+              <td>
+                <%= link_to '詳細', admin_inquiry_path(inquiry), class: 'btn btn-info' %>
+                <!-- 他の操作ボタンもここに追加 -->
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

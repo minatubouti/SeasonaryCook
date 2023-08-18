@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_18_022457) do
+ActiveRecord::Schema.define(version: 2023_08_18_111018) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -80,6 +80,18 @@ ActiveRecord::Schema.define(version: 2023_08_18_022457) do
     t.index ["post_id"], name: "index_ingredients_on_post_id"
   end
 
+  create_table "inquiries", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.string "email"
+    t.text "message"
+    t.text "reply"
+    t.boolean "replied"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_inquiries_on_user_id"
+  end
+
   create_table "likes", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id", null: false
@@ -98,6 +110,7 @@ ActiveRecord::Schema.define(version: 2023_08_18_022457) do
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "message"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -182,6 +195,7 @@ ActiveRecord::Schema.define(version: 2023_08_18_022457) do
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "ingredients", "posts"
+  add_foreign_key "inquiries", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "users"

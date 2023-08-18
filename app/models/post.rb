@@ -68,6 +68,7 @@ class Post < ApplicationRecord
     end
   end
   
+  
 # コメント通知の作成メソッド
     def create_notification_comment!(current_user, comment_id)
     # 自分以外にコメントしている人をすべて取得し、全員に通知を送る

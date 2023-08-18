@@ -1,0 +1,18 @@
+<%= form_with(model: @inquiry, local: true) do |form| %>
+  <div class="container mt-5">
+    <h1>お問い合わせ</h1>
+    <div class="form-group">
+      <%= form.label :name, 'お名前' %>
+      <%= form.text_field :name, class: 'form-control', required: true %>
+    </div>
+    <div class="form-group">
+      <%= form.label :email, 'メールアドレス' %>
+      <%= form.email_field :email, class: 'form-control', required: true %>
+    </div>
+    <div class="form-group">
+      <%= form.label :message, 'お問い合わせ内容' %>
+      <%= form.text_area :message, class: 'form-control', rows: 5, required: true %>
+    </div>
+    <%= form.submit '送信', class: 'btn btn-primary' %>
+  </div>
+<% end %>

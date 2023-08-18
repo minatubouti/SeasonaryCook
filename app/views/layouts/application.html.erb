@@ -31,17 +31,19 @@
             <div class="collapse navbar-collapse text-right" id="navbarNav">
               <ul class="navbar-nav ml-auto"> 
                 <% if admin_signed_in? %>
-                  <li class="nav-item mr-3"><%= link_to 'ホーム', admin_path %></li>
-                  <li class="nav-item mr-3"><%= link_to '顧客一覧', admin_users_path %></li>
-                  <li class="nav-item mr-3"><%= link_to '投稿一覧', admin_posts_path %></li>
-                  <li class="nav-item mr-3"><%= link_to 'コメント一覧', admin_comments_path %></li>
-                  <li class="nav-item mr-3"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
+                  <li class="nav-item mr-4"><%= link_to 'ホーム', admin_path %></li>
+                  <li class="nav-item mr-4"><%= link_to '顧客一覧', admin_users_path %></li>
+                  <li class="nav-item mr-4"><%= link_to '投稿一覧', admin_posts_path %></li>
+                  <li class="nav-item mr-4"><%= link_to 'コメント一覧', admin_comments_path %></li>
+                  <li class="nav-item mr-4"><%= link_to 'お問い合わせ', admin_inquiries_path %></li>
+                  <li class="nav-item mr-4"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
                 <% elsif user_signed_in? %>
                   <li class="nav-item mr-3"><%= link_to 'トップページ', root_path %></li>
                   <li class="nav-item mr-3"><%= link_to 'マイページ', user_path(current_user) %></li>
                   <li class="nav-item mr-3"><%= link_to '新規投稿', new_post_path %></li>
                   <li class="nav-item mr-3"><%= link_to '投稿一覧', posts_path %></li>
                   <li class="nav-item mr-4"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+                  <!--通知一覧-->
                   <div class="notification-icon">
                     <%= link_to notifications_path do %>
                       <i class="fa fa-bell mr-4"></i> <!-- ベルのアイコン -->
@@ -67,7 +69,8 @@
      </div>
      
     <footer class="header-footer-bg footer">
-      <li class="nav-item mr-3"><%= link_to 'アプリ概要', about_path %></li>
+      <%= link_to 'アプリ概要', about_path %>
+      <%= link_to 'お問い合わせ', new_inquiry_path %>
     </footer>
 
    </body>

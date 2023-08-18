@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
     # 管理者側
     devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
@@ -8,6 +9,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :edit, :update, :destroy]
     resources :posts, only: [:index, :show, :edit, :update, :destroy]
     resources :comments, only: [:index, :destroy]
+    resources :inquiries, only: [:index, :show, :update] 
   end
   
   
@@ -39,6 +41,7 @@ Rails.application.routes.draw do
     resources :bookmarks, only: [:create, :destroy]
    end
      resources :notifications, only: [:index]
+     resources :inquiries, only: [:new, :create]
   end
   
   devise_scope :user do

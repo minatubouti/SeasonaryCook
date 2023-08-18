@@ -36,14 +36,22 @@
                 <%= image_tag notification.post.user.icon_image, class: "img-fluid profile-icon" %>
               <% end %>
               <strong><%= notification.post.user.name + 'さんの投稿: ' + notification.post.title %></strong>
-            <% end %>
+         <% end %>
           </span>
           <%= "にコメントしました" %>
           <p class="text-muted mb-0"><%= Comment.find_by(id: notification.comment_id)&.content %></p>
-        <% end %>
       <% end %>
     </span>
+      <!--お問い合わせ返信通知の場合-->
+        <% when 'reply' then %>
+          <span class="text-success"> <!-- ここで色やマークを追加 -->
+            <%= "運営部があなたのお問い合わせに返信しました" %>
+            <i class="fas fa-reply"></i> <!-- FontAwesomeの返信アイコン -->
+          </span>
+          <p class="text-muted mb-0"><%= notification.message %></p>
+        <% end %>
   </div>
+  <!--時間表示-->
   <div class="small text-muted text-right">
     <%= time_ago_in_words(notification.created_at).upcase + '前' %>
   </div>
