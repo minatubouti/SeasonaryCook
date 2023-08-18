@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     resource :relationships, only:[:create, :destroy]
       get 'follows' => 'relationships#follower'
       get 'followers' => 'relationships#followed'
-     get 'bookmarks', on: :member
+      get 'bookmarks', on: :member
     member do
       get 'likes'
     end
@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
     resources :bookmarks, only: [:create, :destroy]
    end
+     resources :notifications, only: [:index]
   end
   
   devise_scope :user do

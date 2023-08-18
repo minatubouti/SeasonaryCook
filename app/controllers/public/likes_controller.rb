@@ -3,6 +3,9 @@ class Public::LikesController < ApplicationController
   def create
    @like = current_user.likes.create(post_id: params[:post_id])
    @post = @like.post
+   # いいね通知の作成
+  @post.create_notification_like!(current_user)
+
    respond_to do |format|
     format.js
    end

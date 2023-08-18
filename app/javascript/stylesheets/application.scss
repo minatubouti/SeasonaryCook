@@ -102,6 +102,31 @@ footer {
   font-size: 20px;
 }
 
+// 通知用アイコン
+.notification-icon i {
+  font-size: 28px; /* アイコンの大きさを変更 */
+  color: #FFD700; /* アイコンの色を変更 */
+  position: relative; /* 未読マークの位置を調整するための基準 */
+}
+
+.notification-mark {
+  background-color: red; /* 未読マークの色を変更 */
+  width: 10px; /* 未読マークの幅 */
+  height: 10px; /* 未読マークの高さ */
+  position: absolute; /* 未読マークの位置を絶対位置で指定 */
+  top: 40px; /* 未読マークの上方向の位置 */
+  right: 38px; /* 未読マークの右方向の位置 */
+  border-radius: 50%; /* 未読マークを円形に */
+}
+
+@media (max-width: 768px) { 
+.notification-mark {
+  top: 252px; /* 未読マークの上方向の位置 */
+  right: 46px; /* 未読マークの右方向の位置 */
+ }
+}
+
+
 @media (max-width: 768px) { 
   .navbar-nav .nav-item {
     font-size: 18px; 
@@ -113,6 +138,8 @@ footer {
     padding: 10px; // 余白の調整
   }
 }
+
+
 
 
 

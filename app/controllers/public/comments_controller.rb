@@ -6,6 +6,8 @@ class Public::CommentsController < ApplicationController
     @comment = @post.comments.build(comment_params)
     @comment.user = current_user
     if @comment.save
+      # コメント通知の作成
+     @post.create_notification_comment!(current_user, @comment.id)
       respond_to do |format|
         format.html { redirect_to @post }
         format.js

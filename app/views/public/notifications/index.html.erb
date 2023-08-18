@@ -1,0 +1,5 @@
+<h1 class="ml-4 mb-5">お知らせ</h1>
+ <!--インスタンスの数だけ、部分テンプレートが呼び出される-->
+  <% @notifications.each do |notification| %>
+    <%= render 'notification', notification: notification %>
+  <% end %>

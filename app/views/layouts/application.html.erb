@@ -41,7 +41,15 @@
                   <li class="nav-item mr-3"><%= link_to 'マイページ', user_path(current_user) %></li>
                   <li class="nav-item mr-3"><%= link_to '新規投稿', new_post_path %></li>
                   <li class="nav-item mr-3"><%= link_to '投稿一覧', posts_path %></li>
-                  <li class="nav-item mr-3"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+                  <li class="nav-item mr-4"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+                  <div class="notification-icon">
+                    <%= link_to notifications_path do %>
+                      <i class="fa fa-bell mr-4"></i> <!-- ベルのアイコン -->
+                      <% if unread_notifications? %>
+                        <span class="notification-mark"></span> <!-- 未読マーク -->
+                      <% end %>
+                    <% end %>
+                  </div>
                 <% else %>
                   <li class="nav-item mr-3"><%= link_to 'トップページ', root_path %></li>
                   <li class="nav-item mr-3"><%= link_to '新規登録', new_user_registration_path %></li>
