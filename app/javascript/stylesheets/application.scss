@@ -49,11 +49,10 @@ body {
   color: #66CDAA;
 }
 
-@media (max-width: 768px) { /* タブレットサイズ以下でのスタイル */
+@media (max-width: 768px) { 
   .app-name {
     font-size: 50px; /* フォントサイズを小さく */
   }
-
   .app-sub-name {
     font-size: 20px; /* フォントサイズを小さく */
   }
@@ -126,7 +125,6 @@ footer {
  }
 }
 
-
 @media (max-width: 768px) { 
   .navbar-nav .nav-item {
     font-size: 18px; 
@@ -139,6 +137,45 @@ footer {
   }
 }
 
+
+// 検索フォーム
+.search_container{
+  box-sizing: border-box; 
+  position: relative;  //絶対位置を使う場合の基準位置を設定
+  border: 1px solid #999;
+  padding: 3px 10px;
+  border-radius: 20px; //ボーダーの角を丸くします。
+  height: 2.3em;
+  width: 265px;
+  overflow: hidden; //子要素がはみ出した場合に隠す
+}
+.search_container input[type="text"]{
+  border: none;
+  height: 2.0em;  //テキスト入力部分の高さを設定します。
+}
+// （入力欄を選択したとき）に表示されるアウトラインを削除
+.search_container input[type="text"]:focus { 
+  outline: 0;
+}
+// placeholderの文字色を変更
+.search_container input[type="text"]::placeholder {
+  color: #aaa; 
+  opacity: 0.7; 
+}
+// 送信ボタン
+.search_container input[type="submit"]{
+  cursor: pointer;
+  font-family: FontAwesome;
+  border: none;
+  background: #3879D9;
+  color: #fff;
+  position: absolute;
+  width: 3.5em;
+  height: 3.0em;
+  right: 0px;
+  top: -3px;
+  outline : none;
+}
 
 
 

@@ -32,10 +32,11 @@ class Post < ApplicationRecord
   # キーワード検索を行うスコープ
   scope :search, ->(keyword) { where("content LIKE ?", "%#{keyword}%") }
   
+  # 画像がない場合no-image
   def get_image
     unless image.attached?
-      file_path = Rails.root.join('app/assets/images/no_image.jpeg')
-      image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+      file_path = Rails.root.join('app/assets/images/no-image.jpg')
+      image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpg')
     end
     image
   end
