@@ -67,11 +67,14 @@
      <div class="content">
         <%= yield %>
      </div>
-     
-    <footer class="header-footer-bg footer">
-      <%= link_to 'アプリ概要', about_path %>
-      <%= link_to 'お問い合わせ', new_inquiry_path %>
-    </footer>
-
+       
+      <footer class="header-footer-bg footer">
+        <div class="container"> 
+          <% if user_signed_in? %> <!-- ログインしている場合のみリンクを表示 -->
+            <%= link_to 'お問い合わせ', new_inquiry_path, class: "btn btn-light m-2" %> 
+            <%= link_to 'アプリ概要', about_path, class: "btn btn-outline-light m-2" %>
+          <% end %>
+        </div>
+      </footer>
    </body>
 </html>
