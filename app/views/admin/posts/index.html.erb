@@ -1,14 +1,15 @@
+<!--検索フォーム-->
 <div class="container mt-2 mb-4">
-  <%= form_with(url: admin_posts_path, method: :get, local: true, class: "form-inline") do |f| %>
-    <%= f.text_field :search, placeholder: "料理名,野菜,タグで検索", class: "form-control mr-2" %>
-    <%= f.submit "検索", class: "btn btn-primary" %>
-  <% end %>
+  <form method="get" action="<%= admin_posts_path %>" class="search_container">
+    <input type="text" name="search" size="25" placeholder="料理名,野菜,タグで検索">
+    <input type="submit" value="&#xf002">
+  </form>
 </div>
    
-   <h1>投稿一覧</h1>
+   <h1 class="ml-5 mb-4">投稿一覧</h1>
     <div class="row">
       <% @posts.each do |post| %>
-        <div class="col-md-5 mb-4">
+        <div class="col-md-5 col-sm-6 mb-4">
           <div class="card h-100">
            <!-- 料理画像のリンク -->
              <%= link_to admin_post_path(post) do %>

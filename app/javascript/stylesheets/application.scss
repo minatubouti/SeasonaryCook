@@ -177,8 +177,16 @@ footer {
   outline : none;
 }
 
-
-
+// 投稿アイテム
+@media (max-width: 768px) {
+  .card {
+    /* カード全体の幅 */
+    width: 80%;
+    /* カード内の文字サイズ */
+    font-size: 0.7rem; /* 元のサイズの90% */
+    height: auto;
+  }
+}
 
 // ここからページネーション
 .pager .pagination {

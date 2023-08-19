@@ -1,12 +1,12 @@
-<div class="container my-4">
-  <%= form_with url: admin_users_path, method: :get, local: true do |f| %>
-    
-    <%= f.text_field :search, placeholder: "ユーザー検索" %>
-    <%= f.submit "検索", class: "btn btn-primary" %>
-  <% end %>
+<!--検索フォーム-->
+<div class="container mt-2 mb-4">
+  <form method="get" action="<%= admin_users_path %>" class="search_container">
+    <input type="text" name="search" size="25" placeholder="料理名,野菜,タグで検索">
+    <input type="submit" value="&#xf002">
+  </form>
+</div>
 
   <h1 class="text-center">ユーザー一覧</h1>
-
   <div class="table-responsive">
     <table class="table">
       <thead>

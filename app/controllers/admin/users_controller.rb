@@ -4,7 +4,7 @@ class Admin::UsersController < ApplicationController
    
   def index
     if params[:search].present?
-      @users = User.where('name LIKE ?', "%#{params[:search]}%")
+      @users = User.where('name LIKE ?', "%#{params[:search]}%").page(params[:page])
     else
       @users = User.order(created_at: :desc).page(params[:page])
     end
