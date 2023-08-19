@@ -1,6 +1,6 @@
 class Public::PostsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
-  before_action :reject_guest, only: [:create, :edit, :update] #ゲストユーザか確認
+  # before_action :reject_guest, only: [:create, :edit, :update] 
   
   def new
    @post = Post.new
@@ -10,6 +10,7 @@ class Public::PostsController < ApplicationController
   
   def create
     @post = current_user.posts.new(post_params)
+    @post.is_guest = current_user.guest? # ゲストユーザーの場合はフラグをセット
     if @post.save
       redirect_to posts_path, notice: '投稿しました'
     else
@@ -19,7 +20,7 @@ class Public::PostsController < ApplicationController
   end
   
   def index
-      @posts = Post.where(is_public: true).includes(:user, :likes).recent
+       @posts = Post.where(is_public: true, is_guest: false).includes(:user, :likes).recent #ゲスト、退会済みのユーザーの投稿を表示しないようにする
       if params[:search].present?
         # タイトル、主要な野菜、または季節に基づいて絞り込む
         posts_based_on_columns = @posts.where('title LIKE ? OR main_vegetable LIKE ? OR season LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
@@ -69,27 +70,21 @@ class Public::PostsController < ApplicationController
   
   private
    
-   def post_params
+  def post_params
     params.require(:post).permit(
       :title, :description, :main_vegetable, :season, :is_public, :image, :tag_list,
       ingredients_attributes: [:id, :name, :amount],
       recipe_steps_attributes: [:id, :instructions] 
     )
-   end
+  end
    
   # 自身の投稿かチェック
-   def ensure_correct_user
+  def ensure_correct_user
      @post = Post.find(params[:id])
     unless @post.user == current_user
       flash[:alert] = '権限がありません。'
       redirect_to posts_path
     end
-   end
+  end
    
-  # ゲストユーザか判別
-   def reject_guest
-      if current_user&.guest?
-        redirect_to root_path, alert: "ゲストユーザーは投稿できません。"
-      end
-   end
 end

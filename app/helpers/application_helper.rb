@@ -1,5 +1,6 @@
 module ApplicationHelper
-   def active_likes_count(post)
+  # 退会済みのユーザーのいいね等カウントされないように
+  def active_likes_count(post)
     post.likes.joins(:user).where(users: { is_deleted: false }).count
   end
 
