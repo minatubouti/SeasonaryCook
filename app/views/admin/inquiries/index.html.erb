@@ -7,9 +7,9 @@
         <thead>
           <tr>
             <th>名前</th>
-            <th>メールアドレス</th>
+            <th>email</th>
             <th>内容</th>
-            <th>返信状態</th>
+            <th>対応</th>
             <th>操作</th>
           </tr>
         </thead>
@@ -18,8 +18,14 @@
             <tr>
               <td><%= inquiry.name %></td>
               <td><%= inquiry.email %></td>
-              <td><%= truncate(inquiry.message, length: 50) %></td>
-              <td><%= inquiry.replied ? '返信済み' : '未返信' %></td>
+              <td><%= truncate(inquiry.message, length: 8) %></td>
+              <td>
+                <% if inquiry.replied? %>
+                  <span class="badge badge-success">返信済み</span>
+                <% else %>
+                  <span class="badge badge-danger">未返信</span>
+                <% end %>
+              </td>
               <td>
                 <%= link_to '詳細', admin_inquiry_path(inquiry), class: 'btn btn-info' %>
                 <!-- 他の操作ボタンもここに追加 -->

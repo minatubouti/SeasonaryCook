@@ -6,36 +6,38 @@
   </form>
 </div>
    
-   <h1 class="ml-5 mb-4">投稿一覧</h1>
-    <div class="row">
+  <h1 class="ml-5 mb-4">投稿一覧</h1>
+    <div class="row justify-content-center">
       <% @posts.each do |post| %>
-        <div class="col-md-5 col-sm-6 mb-4">
-          <div class="card h-100">
-           <!-- 料理画像のリンク -->
-             <%= link_to admin_post_path(post) do %>
-                <%= image_tag post.get_image, alt: post.title, class: "card-img-top", style: "height: 120px; object-fit: cover;" if post.get_image.attached? %>
-             <% end %>
-              <div class="card-body">
-                <h5 class="card-title"><%= link_to post.title, admin_post_path(post) %></h5>
-                <p class="card-text"><%= truncate(post.description, length: 25) %></p>
-                  <!-- プロフィール画像のリンク -->
-                  <% if post.user&.icon_image&.attached? %>
-                    <%= link_to admin_user_path(post.user) do %>
-                      <p><%= image_tag post.user.icon_image, class: 'img-fluid profile-icon' %>
-                       <%= post.user.name %>
-                      </p>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <div class="card-wrapper px-3"> <!-- スペースを追加する外側の要素 -->
+            <div class="card h-100">
+             <!-- 料理画像のリンク -->
+               <%= link_to admin_post_path(post) do %>
+                  <%= image_tag post.get_image, alt: post.title, class: "card-img-top", style: "height: 120px; object-fit: cover;" if post.get_image.attached? %>
+               <% end %>
+                <div class="card-body">
+                  <h5 class="card-title"><%= link_to post.title, admin_post_path(post) %></h5>
+                  <p class="card-text"><%= truncate(post.description, length: 25) %></p>
+                    <!-- プロフィール画像のリンク -->
+                    <% if post.user&.icon_image&.attached? %>
+                      <%= link_to admin_user_path(post.user) do %>
+                        <p><%= image_tag post.user.icon_image, class: 'img-fluid profile-icon' %>
+                         <%= post.user.name %>
+                        </p>
+                      <% end %>
                     <% end %>
-                  <% end %>
-                  
-                <p>  <!--有効数のみカウント-->
-                  <span><%= active_likes_count(post) %> <i class="fas fa-heart" style="color: red; margin-left: 5px;"></i></span>
-                  <span style="margin-left: 15px;"><%= active_bookmarks_count(post) %><i class="fa-solid fa-bookmark" style="color: #6495ED; margin-left: 5px;"></i></span>
-                  <span style="margin-left: 15px;"><%= active_comments_count(post) %><i class="fa-solid fa-comment" style="color: #FFA500; margin-left: 5px;"></i></span>
-                   <!-- 公開・非公開情報の表示 -->
-                  <span class="badge <%= post.is_public ? 'badge-success' : 'badge-danger' %> ml-3">
-                    <%= post.is_public ? '公開中' : '非公開' %>
-                  </span>
-                </p>
+                    
+                  <p>  <!--有効数のみカウント-->
+                    <span><%= active_likes_count(post) %> <i class="fas fa-heart" style="color: red; margin-left: 5px;"></i></span>
+                    <span style="margin-left: 15px;"><%= active_bookmarks_count(post) %><i class="fa-solid fa-bookmark" style="color: #6495ED; margin-left: 5px;"></i></span>
+                    <span style="margin-left: 15px;"><%= active_comments_count(post) %><i class="fa-solid fa-comment" style="color: #FFA500; margin-left: 5px;"></i></span>
+                     <!-- 公開・非公開情報の表示 -->
+                    <span class="badge <%= post.is_public ? 'badge-success' : 'badge-danger' %> ml-3">
+                      <%= post.is_public ? '公開中' : '非公開' %>
+                    </span>
+                  </p>
+              </div>
             </div>
           </div>
         </div>

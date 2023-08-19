@@ -14,7 +14,7 @@
           <th>ID</th>
           <th>アイコン</th>
           <th>名前</th>
-          <th>メールアドレス</th>
+          <th>email</th>
           <th>登録日</th>
           <th>退会フラグ</th>
         </tr>
@@ -31,7 +31,9 @@
             <td><%= link_to user.name, admin_user_path(user) %></td>
             <td><%= user.email %></td>
             <td><%= user.created_at.strftime('%Y-%m-%d') %></td>
-            <td><%= user.is_deleted? ? '退会済み' : '有効' %></td>
+            <td class="<%= user.is_deleted? ? 'text-danger' : 'text-success' %>">
+              <%= user.is_deleted? ? '退会' : '有効' %>
+            </td>
           </tr>
         <% end %>
       </tbody>

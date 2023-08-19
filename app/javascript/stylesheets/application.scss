@@ -50,11 +50,26 @@ body {
 }
 
 @media (max-width: 768px) { 
+  .app-name-wrapper {
+    text-align: center;
+  }
   .app-name {
     font-size: 50px; /* フォントサイズを小さく */
   }
   .app-sub-name {
     font-size: 20px; /* フォントサイズを小さく */
+  }
+}
+
+@media (max-width: 420px) {
+  .app-name-wrapper {
+    text-align: center;
+  }
+  .app-name {
+    font-size: 30px; /* フォントサイズを小さく */
+  }
+  .app-sub-name {
+    font-size: 15px; /* フォントサイズを小さく */
   }
 }
 
@@ -177,16 +192,6 @@ footer {
   outline : none;
 }
 
-// 投稿アイテム
-@media (max-width: 768px) {
-  .card {
-    /* カード全体の幅 */
-    width: 80%;
-    /* カード内の文字サイズ */
-    font-size: 0.7rem; /* 元のサイズの90% */
-    height: auto;
-  }
-}
 
 // ここからページネーション
 .pager .pagination {
