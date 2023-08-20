@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card mt-4">
+        <div class="card-header" style="background-color: #F0FFF0;">
+          <h2>お問い合わせ内容</h2>
+        </div>
+        <div class="card-body">
+          <p><%= @inquiry.message %></p>
+        </div>
+      </div>
+      <div class="card mt-4">
+        <div class="card-header" style="background-color: #F0FFFF;">
+          <h2>返信内容</h2>
+        </div>
+        <div class="card-body">
+          <p><%= @inquiry.reply %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

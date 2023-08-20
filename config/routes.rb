@@ -35,13 +35,13 @@ Rails.application.routes.draw do
       patch :withdraw
     end
   end
-   resources :posts do
+  resources :posts do
     resources :comments, only: [:create]
     resources :likes, only: [:create, :destroy]
     resources :bookmarks, only: [:create, :destroy]
-   end
+  end
      resources :notifications, only: [:index]
-     resources :inquiries, only: [:new, :create]
+     resources :inquiries, only: [:new, :create, :show]
   end
   
   devise_scope :user do

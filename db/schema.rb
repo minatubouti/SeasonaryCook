@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 2023_08_19_112807) do
     t.string "email"
     t.text "message"
     t.text "reply"
-    t.boolean "replied"
+    t.boolean "replied", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_inquiries_on_user_id"
@@ -106,11 +106,12 @@ ActiveRecord::Schema.define(version: 2023_08_19_112807) do
     t.integer "visited_id", null: false
     t.integer "post_id"
     t.integer "comment_id"
+    t.integer "inquiry_id"
+    t.text "message"
     t.string "action", default: "", null: false
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.text "message"
   end
 
   create_table "posts", force: :cascade do |t|

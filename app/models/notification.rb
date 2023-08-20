@@ -6,4 +6,6 @@ class Notification < ApplicationRecord
   # optional: trueは、nilを許可するもの
   belongs_to :post, optional: true 
   belongs_to :comment, optional: true
+  # お問い合わせとの関連付け
+  belongs_to :inquiry, optional: true 
 end

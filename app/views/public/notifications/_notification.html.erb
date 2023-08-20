@@ -47,8 +47,8 @@
         <!--お問い合わせ返信通知の場合-->
         <% when 'reply' then %>
           <span class="text-success"> <!-- ここで色やマークを追加 -->
-            <%= "運営部があなたのお問い合わせに返信しました" %>
-            <i class="fas fa-reply"></i> <!-- FontAwesomeの返信アイコン -->
+            <%= link_to "運営部があなたのお問い合わせに返信しました", inquiry_path(notification.inquiry_id), class: "text-success" %>
+            <i class="fas fa-reply"></i> 
           </span>
           <p class="text-muted mb-0"><%= notification.message %></p>
         <% end %>

@@ -20,7 +20,7 @@ class Public::PostsController < ApplicationController
   end
   
   def index
-      @posts = Post.where(is_public: true, is_guest: false).includes(:user, :likes).recent #ゲスト、退会済みのユーザーの投稿を表示しないようにする
+      @posts = Post.where(is_public: true, is_guest: false).includes(:user, :likes) #ゲスト、退会済みのユーザーの投稿を表示しないようにする
       if params[:search].present?
         # タイトル、主要な野菜、または季節に基づいて絞り込む
         posts_based_on_columns = @posts.where('title LIKE ? OR main_vegetable LIKE ? OR season LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
@@ -29,7 +29,7 @@ class Public::PostsController < ApplicationController
         # 両方のクエリの結果のIDを取得
         combined_post_ids = posts_based_on_columns.pluck(:id) + posts_based_on_tags.pluck(:id)
         # IDに基づいて最終的なクエリを構築
-        @posts = Post.where(id: combined_post_ids)
+        @posts = @posts.where(id: combined_post_ids)
       end
       # タグ検索のクエリがある場合はその条件でさらに絞り込む
       if params[:tag].present?
@@ -37,11 +37,11 @@ class Public::PostsController < ApplicationController
       end
       # 並べ替え機能
       if params[:popular]
-        @posts = Post.popular
+        @posts = @posts.popular
       elsif params[:oldest]
-        @posts = Post.oldest
+        @posts = @posts.oldest
       else
-        @posts = Post.recent # デフォルトは新しい順にする
+        @posts = @posts.recent # デフォルトは新しい順にする
       end
      
       @posts = @posts.page(params[:page])
@@ -77,6 +77,8 @@ class Public::PostsController < ApplicationController
     redirect_to posts_path, notice: "投稿を削除しました"
   end
   
+
+
   private
    
   def post_params

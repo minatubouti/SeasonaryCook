@@ -13,9 +13,8 @@ class Post < ApplicationRecord
   accepts_nested_attributes_for :recipe_steps, reject_if: :all_blank, allow_destroy: true
   has_many :ingredients, dependent: :destroy
   accepts_nested_attributes_for :ingredients
-  
   has_many :notifications, dependent: :destroy
-
+ 
   
   validates :title, :main_vegetable, :season, presence: true
   # 後悔するか判定

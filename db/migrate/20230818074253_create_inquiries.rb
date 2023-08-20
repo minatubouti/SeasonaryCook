@@ -6,7 +6,7 @@ class CreateInquiries < ActiveRecord::Migration[6.1]
       t.string :email
       t.text :message
       t.text :reply
-      t.boolean :replied
+      t.boolean :replied, default: false
 
       t.timestamps
     end

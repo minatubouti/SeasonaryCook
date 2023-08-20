@@ -36,7 +36,7 @@ class Admin::InquiriesController < ApplicationController
     Notification.create!(
       visitor_id: current_admin.id, # 管理者ID
       visited_id: inquiry.user_id,  # お問い合わせしたユーザーID
-      post_id: inquiry.id,          # お問い合わせID
+      inquiry_id: inquiry.id, # お問い合わせID
       action: 'reply',
       message: inquiry.reply        # 返信内容
     )
