@@ -1,6 +1,9 @@
 ja:
   devise:
     failure:
+      not_found_in_database: "ログイン情報が見つかりませんでした。"
+      admin:
+        not_found_in_database: "管理者のログイン情報が見つかりませんでした。"
       invalid: メールアドレスまたはパスワードが正しくありません。
     sessions:
       signed_in: ログインに成功しました。

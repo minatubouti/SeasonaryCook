@@ -2,8 +2,24 @@
   <h1>管理者ダッシュボード</h1>
   <table class="table table-bordered">
     <tr>
+      <th>登録ユーザー(退会済みユーザーを含む）</th>
+      <td><%= @users_count %></td>
+    </tr>
+    <tr>
+      <th>退会済みユーザー</th>
+      <td><%= @deleted_users_count %></td>
+    </tr>
+    <tr>
       <th>1週間以内の新規登録ユーザー数</th>
       <td><%= @new_users_count %></td>
+    </tr>
+    <tr>
+      <th>アクティブユーザ数（1週間以内に投稿したユーザー）</th>
+      <td><%= @active_users_count %></td>
+    </tr>
+    <tr>
+      <th>投稿件数</th>
+      <td><%= @posts_count %></td>
     </tr>
     <tr>
       <th>1週間の投稿合計数</th>
@@ -14,8 +30,8 @@
       <td><%= @new_comments_count %></td>
     </tr>
     <tr>
-      <th>アクティブユーザ数（1週間以内に投稿したユーザー）</th>
-      <td><%= @active_users_count %></td>
+      <th>未返信のお問い合わせ件数</th>
+      <td><%= @unreplied_inquiries_count %></td>
     </tr>
   </table>
 </div>
