@@ -27,8 +27,14 @@ class Post < ApplicationRecord
   # 季節のバリデーション
   validates :season, inclusion: { in: SEASONS }
   
+  # 並び替え機能で使用
   # 投稿を新しいものから順に取得するスコープ
   scope :recent, -> { order(created_at: :desc) }
+  # 投稿をいいねの多い順に取得するスコープ
+  scope :popular, -> { left_joins(:likes).group(:id).order('COUNT(likes.id) DESC') }
+  # 投稿を古いものから順に取得するスコープ
+  scope :oldest, -> { order(created_at: :asc) }
+
   # キーワード検索を行うスコープ
   scope :search, ->(keyword) { where("content LIKE ?", "%#{keyword}%") }
   

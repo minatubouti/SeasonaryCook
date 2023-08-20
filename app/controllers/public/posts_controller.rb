@@ -20,7 +20,7 @@ class Public::PostsController < ApplicationController
   end
   
   def index
-       @posts = Post.where(is_public: true, is_guest: false).includes(:user, :likes).recent #ゲスト、退会済みのユーザーの投稿を表示しないようにする
+      @posts = Post.where(is_public: true, is_guest: false).includes(:user, :likes).recent #ゲスト、退会済みのユーザーの投稿を表示しないようにする
       if params[:search].present?
         # タイトル、主要な野菜、または季節に基づいて絞り込む
         posts_based_on_columns = @posts.where('title LIKE ? OR main_vegetable LIKE ? OR season LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
@@ -35,7 +35,16 @@ class Public::PostsController < ApplicationController
       if params[:tag].present?
         @posts = @posts.tagged_with(params[:tag])
       end
-        @posts = @posts.page(params[:page])
+      # 並べ替え機能
+      if params[:popular]
+        @posts = Post.popular
+      elsif params[:oldest]
+        @posts = Post.oldest
+      else
+        @posts = Post.recent # デフォルトは新しい順にする
+      end
+     
+      @posts = @posts.page(params[:page])
   end
 
 
