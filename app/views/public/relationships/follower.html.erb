@@ -1,31 +1,31 @@
-<h1 class="text-center"><%= @user.name %>のフォロー　一覧</h1>
 <div class="container">
-  <table class="table mx-auto">
-    <thead>
-      <tr>
-        <th>アイコン</th>
-        <th>名前</th>
-        <th>フォロー数</th>
-        <th>フォロワー数</th>
-        <th>投稿数</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @followings.each do |following| %>
+  <h3 class="text-center" style="background-color:#F0FFFF;"><%= @user.name %>のフォロー 一覧</h3>
+    <table class="table mx-auto">
+      <thead>
         <tr>
-          <td>
-            <%= link_to user_path(following) do %>
-             <%= image_tag following.icon_image, class: 'profile-icon' if following.icon_image.attached? %>
-            <% end %>
-          </td>
-          <td><%= link_to following.name, user_path(following) %></td>
-          <td><%= following.following.count %></td>
-          <td><%= following.followers.count %></td>
-          <td><%= following.posts.count %></td>
+          <th>アイコン</th>
+          <th>名前</th>
+          <th>フォロー数</th>
+          <th>フォロワー数</th>
+          <th>投稿数</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @followings.each do |following| %>
+          <tr>
+            <td>
+              <%= link_to user_path(following) do %>
+               <%= image_tag following.icon_image, class: 'profile-icon' if following.icon_image.attached? %>
+              <% end %>
+            </td>
+            <td><%= link_to following.name, user_path(following) %></td>
+            <td><%= following.following.count %></td>
+            <td><%= following.followers.count %></td>
+            <td><%= following.posts.count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   <div style="width: 30%; margin: 0 auto;">
   <%= paginate @followings %>
   </div>

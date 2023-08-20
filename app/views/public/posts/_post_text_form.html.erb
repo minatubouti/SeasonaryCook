@@ -1,71 +1,71 @@
-   <div class="col-lg-12 mb-3">
-      <div class="image-preview" id="imagePreview">
-         <img src="" id="imagePreviewImg" alt="画像を投稿してください">
-      </div>
-        <%= f.label :image %>
-        <%= f.file_field :image, id: 'imageField' %>
-   </div>
-        
-    <div class="col-lg-12">
-        <div class="form-group">
-          <%= f.label :title, raw("料理名" + content_tag(:span, "（必須）", class: "required-label")) %>
-          <%= f.text_field :title, class: 'form-control' %>
-        </div>
-        
-        <div class="form-group">
-          <%= f.label :description, "料理ポイント" %>
-          <%= f.text_area :description, class: 'form-control' %>
-        </div>
-        
-        <div class="form-group">
-          <%= f.label :tag_list, "タグ（＃で区切って複数入力可）" %>
-          <%= f.text_field :tag_list, placeholder: "#揚げ物 #圧力鍋" ,class: 'form-control' %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :season, raw("季節" + content_tag(:span, "（必須）", class: "required-label")) %>
-          <%= f.select :season, Post::SEASONS, {}, class: 'form-control' %>
-        </div>
-          
-        <div class="form-group">
-          <%= f.label :main_vegetable, raw("メイン野菜" + content_tag(:span, "（必須）", class: "required-label")) %>
-          <%= f.text_field :main_vegetable, class: 'form-control' %>
-        </div>
-          
-          <!--材料、分量フォーム追加できる-->
-          <%= f.fields_for :ingredients do |ingredient_field| %>
-            <%= render 'ingredient_fields', f: ingredient_field %>
-          <% end %>
-          <div id="ingredients"></div>
-          <div>
-            <button type="button" id="add-ingredient" class="btn mb-4"  style="background-color: #FFD5EC;">材料を追加</button>
-          </div>
-          
-          <%# 作り方フォームのテンプレート %>
-            <div id="recipe_step-fields-template" style="display: none;">
-              <%= f.fields_for :recipe_steps, RecipeStep.new, child_index: "new_recipe_step" do |recipe_step_field| %>
-                <%= render 'recipe_step_fields', f: recipe_step_field %>
-              <% end %>
-            </div>
-            
-            <%# 実際の作り方フォーム %>
-            <%= f.fields_for :recipe_steps do |recipe_step_field| %>
-              <%= render 'recipe_step_fields', f: recipe_step_field %>
-            <% end %>
-            <div id="recipe_steps"></div>
-            <div>
-              <button type="button" id="add-recipe_step" class="btn"  style="background-color: #FFD5EC;">作り方を追加</button>
-            </div>
-      
-         <div class="form-group mt-3 custom-radio mt-4">
-            <h5><%= f.label :is_public,raw("公開しますか？" + content_tag(:span, "（必須）", class: "required-label")) %></h5>
-            <div class="form-check form-check-inline">
-              <%= f.radio_button :is_public, true, class: 'form-check-input' %>
-              <label class="form-check-label">はい</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <%= f.radio_button :is_public, false, class: 'form-check-input' %>
-              <label class="form-check-label">いいえ</label>
-            </div>
-          </div>
+  <div class="col-lg-12 mb-3">
+    <div class="image-preview" id="imagePreview">
+      <img src="" id="imagePreviewImg" alt="画像を投稿してください">
     </div>
+      <%= f.label :image %>
+      <%= f.file_field :image, id: 'imageField' %>
+  </div>
+        
+  <div class="col-lg-12">
+    <div class="form-group">
+      <%= f.label :title, raw("料理名" + content_tag(:span, "（必須）", class: "required-label")) %>
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :description, "料理ポイント" %>
+      <%= f.text_area :description, class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :tag_list, "タグ（＃で区切って複数入力可）" %>
+      <%= f.text_field :tag_list, placeholder: "#揚げ物 #圧力鍋" ,class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :season, raw("季節" + content_tag(:span, "（必須）", class: "required-label")) %>
+      <%= f.select :season, Post::SEASONS, {}, class: 'form-control' %>
+    </div>
+      
+    <div class="form-group">
+      <%= f.label :main_vegetable, raw("メイン野菜" + content_tag(:span, "（必須）", class: "required-label")) %>
+      <%= f.text_field :main_vegetable, class: 'form-control' %>
+    </div>
+      
+    <!--材料、分量フォーム追加できる-->
+    <%= f.fields_for :ingredients do |ingredient_field| %>
+      <%= render 'ingredient_fields', f: ingredient_field %>
+    <% end %>
+    <div id="ingredients"></div>
+    <div>
+      <button type="button" id="add-ingredient" class="btn mb-4"  style="background-color: #FFD5EC;">材料を追加</button>
+    </div>
+    
+  <%# 作り方フォームのテンプレート %>
+    <div id="recipe_step-fields-template" style="display: none;">
+      <%= f.fields_for :recipe_steps, RecipeStep.new, child_index: "new_recipe_step" do |recipe_step_field| %>
+        <%= render 'recipe_step_fields', f: recipe_step_field %>
+      <% end %>
+    </div>
+    
+    <%# 実際の作り方フォーム %>
+    <%= f.fields_for :recipe_steps do |recipe_step_field| %>
+      <%= render 'recipe_step_fields', f: recipe_step_field %>
+    <% end %>
+    <div id="recipe_steps"></div>
+    <div>
+      <button type="button" id="add-recipe_step" class="btn"  style="background-color: #FFD5EC;">作り方を追加</button>
+    </div>
+
+    <div class="form-group mt-3 custom-radio mt-4">
+      <h5><%= f.label :is_public,raw("公開しますか？" + content_tag(:span, "（必須）", class: "required-label")) %></h5>
+      <div class="form-check form-check-inline">
+        <%= f.radio_button :is_public, true, class: 'form-check-input' %>
+        <label class="form-check-label">はい</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= f.radio_button :is_public, false, class: 'form-check-input' %>
+        <label class="form-check-label">いいえ</label>
+      </div>
+    </div>
+  </div>

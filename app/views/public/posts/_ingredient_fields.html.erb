@@ -1,4 +1,12 @@
-<div class="ingredient-fields form-group">
-  <%= f.text_field :name, placeholder: "材料名(必須)" %>
-  <%= f.text_field :amount, placeholder: "分量(必須)" %>
+<div class="ingredient-fields row">
+  <div class="col">
+    <div class="form-group">
+      <%= f.text_field :name, placeholder: "材料名(必須)", class: "form-control" %>
+    </div>
+  </div>
+  <div class="col">
+    <div class="form-group">
+      <%= f.text_field :amount, placeholder: "分量(必須)", class: "form-control" %>
+    </div>
+  </div>
 </div>

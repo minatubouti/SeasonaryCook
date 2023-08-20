@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row justify-content-center">
+  <div class="row justify-content-center text-center">
     <div class="col-md-8">
       <h1>お問い合わせ一覧</h1>
 
@@ -8,7 +8,6 @@
           <tr>
             <th>名前</th>
             <th>email</th>
-            <th>内容</th>
             <th>対応</th>
             <th>操作</th>
           </tr>
@@ -18,7 +17,6 @@
             <tr>
               <td><%= inquiry.name %></td>
               <td><%= inquiry.email %></td>
-              <td><%= truncate(inquiry.message, length: 8) %></td>
               <td>
                 <% if inquiry.replied? %>
                   <span class="badge badge-success">返信済み</span>

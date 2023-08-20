@@ -1,31 +1,41 @@
-<div class="container">
+<div class="container mt-4">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <h1>お問い合わせ詳細</h1>
+      <div class="card">
+        <div class="card-header" style="background-color: #F0FFF0;">
+          <h1 class="mb-0">お問い合わせ詳細</h1>
+        </div>
+        <div class="card-body">
+          <p><span class="font-weight-bold col-3">名前</span> <%= @inquiry.name %></p>
+          <p><span class="font-weight-bold col-3">メールアドレス</span> <%= @inquiry.email %></p>
+          <p><span class="font-weight-bold col-3">内容</span> <%= @inquiry.message %></p>
+        </div>
+      </div>
 
-      <p><strong>名前:</strong> <%= @inquiry.name %></p>
-      <p><strong>メールアドレス:</strong> <%= @inquiry.email %></p>
-      <p><strong>内容:</strong> <%= @inquiry.message %></p>
+      <div class="card mt-4">
+        <div class="card-header" style="background-color: #F0FFFF;">
+          <h2 class="mb-0">返信</h2>
+        </div>
+        <div class="card-body">
+          <!--返信済みの場合返信内容が表示される-->
+          <% if @inquiry.replied %>
+            <p class="font-weight-bold text-success">返信済み</p>
+            <p><%= @inquiry.reply %></p>
+          <% else %>
+           <!--そうでなければ管理者側のお問い合わせ詳細ページに返信ボタンが表示され、そのボタンがクリックされると、repliedフィールドがtrueに更新される-->
+            <%= form_with(model: [:admin, @inquiry]) do |f| %>
+              <div class="form-group">
+                <%= f.label :reply, "返信内容" %>
+                <%= f.text_area :reply, class: "form-control" %>
+              </div>
 
-      <h2>返信</h2>
-      
-      <!--返信済みの場合返信内容が表示される-->
-      <% if @inquiry.replied %>
-        <p><strong>返信済み</strong></p>
-        <p><%= @inquiry.reply %></p>
-      <% else %>
-      <!--そうでなければ管理者側のお問い合わせ詳細ページに返信ボタンが表示され、そのボタンがクリックされると、repliedフィールドがtrueに更新される-->
-        <%= form_with(model: [:admin, @inquiry]) do |f| %>
-          <div class="form-group">
-            <%= f.label :reply, "返信内容" %>
-            <%= f.text_area :reply, class: "form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= f.submit "返信を送信", class: "btn btn-primary" %>
-          </div>
-        <% end %>
-      <% end %>
+              <div class="form-group">
+                <%= f.submit "返信を送信", class: "btn btn-primary" %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
