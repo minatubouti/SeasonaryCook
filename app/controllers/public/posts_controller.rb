@@ -1,6 +1,6 @@
 class Public::PostsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
-  # before_action :reject_guest, only: [:create, :edit, :update] 
+  #before_action :reject_guest, only: [:update] 
   
   def new
    @post = Post.new
@@ -83,7 +83,7 @@ class Public::PostsController < ApplicationController
    
   def post_params
     params.require(:post).permit(
-      :title, :description, :main_vegetable, :season, :is_public, :image, :tag_list,
+      :title, :description, :main_vegetable, :season, :is_public, :image, :tag_list, :serving_size,
       ingredients_attributes: [:id, :name, :amount],
       recipe_steps_attributes: [:id, :instructions] 
     )

@@ -20,8 +20,8 @@
         
        <!--いいね通知の場合-->
       <% when 'like' then %>
-        <%= link_to 'あなたの投稿', notification.post, style: "font-weight: bold;" %>
-        <%= "にいいねしました" %>
+        <%= link_to "あなたの投稿: #{notification.post.title}", notification.post, style: "font-weight: bold;" %>
+        に<i class="fas fa-heart" style="color: red; margin-left: 5px;"></i><%= "いいねしました" %>
         
       <!--コメント通知の場合-->
       <% when 'comment' then %>

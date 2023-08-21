@@ -1,3 +1,5 @@
+// 新規投稿フォーム
+
 // 投稿画像サイズ
 #imagePreviewImg {
   width: 450px; 
@@ -7,6 +9,11 @@
 // 必須文字
 .required-label {
   color: red;
+}
+
+// placeholder文字色変更
+.light-placeholder::placeholder {
+  color: #ccc; /* この色を調整して希望の薄さに */
 }
 
 // ラジオボタン
@@ -19,6 +26,7 @@
   font-weight: bold; /* 太字にする */
 }
 
+// 投稿詳細ページ
 .tag {
   display: inline-block;
   padding: 3px 12px;
@@ -35,7 +43,6 @@
   text-decoration: none; 
 }
 
-  
   // コメント表示ボタン
 .commentbox-toggle {
     width: 100%;

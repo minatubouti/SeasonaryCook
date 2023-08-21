@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_19_112807) do
+ActiveRecord::Schema.define(version: 2023_08_21_090716) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 2023_08_19_112807) do
     t.integer "post_id"
     t.integer "comment_id"
     t.integer "inquiry_id"
+    t.text "message"
     t.string "action", default: "", null: false
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -123,6 +124,7 @@ ActiveRecord::Schema.define(version: 2023_08_19_112807) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "is_guest", default: false
+    t.integer "serving_size"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 

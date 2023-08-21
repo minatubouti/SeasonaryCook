@@ -9,6 +9,6 @@ class CreatePosts < ActiveRecord::Migration[6.1]
      
       t.boolean :is_public
       t.timestamps
-  end 
+    end 
   end
 end

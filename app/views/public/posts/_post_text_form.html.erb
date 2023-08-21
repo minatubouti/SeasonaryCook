@@ -19,7 +19,7 @@
     
     <div class="form-group">
       <%= f.label :tag_list, "タグ（＃で区切って複数入力可）" %>
-      <%= f.text_field :tag_list, placeholder: "#揚げ物 #圧力鍋" ,class: 'form-control' %>
+      <%= f.text_field :tag_list, placeholder: "#揚げ物 #中華", class: 'form-control light-placeholder'  %>
     </div>
 
     <div class="form-group">
@@ -31,6 +31,12 @@
       <%= f.label :main_vegetable, raw("メイン野菜" + content_tag(:span, "（必須）", class: "required-label")) %>
       <%= f.text_field :main_vegetable, class: 'form-control' %>
     </div>
+    
+    <div class="form-group col-lg-4">
+      <%= f.label :serving_size,"何人前?" %>
+      <%= f.number_field :serving_size, placeholder: "2", in: 1..100, class: 'form-control light-placeholder' %>
+    </div>
+
       
     <!--材料、分量フォーム追加できる-->
     <%= f.fields_for :ingredients do |ingredient_field| %>
