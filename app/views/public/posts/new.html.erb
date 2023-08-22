@@ -13,22 +13,5 @@
   </div>
 </div>
 
-
-    <!--材料、分量フォームの隠し要素テンプレート-->
-    <% ingredient_form_builder = ActionView::Helpers::FormBuilder.new(:post, @post, self, {}) %>
-    <%= content_tag :div, id: 'ingredient-fields-template', style: 'display: none;', data: {id: Time.now.to_i, ingredient: {}} do %>
-      <%= ingredient_form_builder.fields_for :ingredients, Ingredient.new, child_index: Time.now.to_i do |ingredient_field| %>
-        <%= render 'ingredient_fields', f: ingredient_field %>
-      <% end %>
-    <% end %>
-    
-    <!--作り方フォームの隠し要素テンプレート-->
-    <% recipe_step_form_builder = ActionView::Helpers::FormBuilder.new(:post, @post, self, {}) %>
-    <%= content_tag :div, id: 'recipe-step-fields-template', style: 'display: none;', data: {id: Time.now.to_i, recipe_step: {}} do %>
-      <%= recipe_step_form_builder.fields_for :recipe_steps, RecipeStep.new, child_index: Time.now.to_i do |recipe_step_field| %>
-        <%= render 'recipe_step_fields', f: recipe_step_field %>
-      <% end %>
-    <% end %>
-    
-    <!--javascript-->
-    <%= render partial: 'public/posts/post_form_js' %>
+<!--隠し要素テンプレートとjavascript-->
+<%= render partial: 'post_form_js' %>
