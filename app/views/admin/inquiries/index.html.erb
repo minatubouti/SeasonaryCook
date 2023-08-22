@@ -15,7 +15,7 @@
         <tbody>
           <% @inquiries.each do |inquiry| %>
             <tr>
-              <td><%= inquiry.name %></td>
+              <td><%= link_to inquiry.name, admin_user_path(inquiry.user_id) %></td>
               <td><%= inquiry.email %></td>
               <td>
                 <% if inquiry.replied? %>

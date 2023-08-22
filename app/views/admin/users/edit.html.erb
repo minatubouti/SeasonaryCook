@@ -8,7 +8,7 @@
           <%= f.file_field :icon_image, class: 'form-control-file' %>
           <%= image_tag @user.icon_image, class: 'img-fluid profile-icon' if @user.icon_image.attached? %>
         </div>
-
+        
         <div class="form-group">
           <%= f.label :name, "名前" %>
           <%= f.text_field :name, class: "form-control" %>
@@ -31,7 +31,8 @@
           </div>
         </div>
         <%= f.submit "更新", class: "btn btn-success mt-4" %>
-        <div class="text-center mt-4 mb-5">
+        <%= link_to '編集をキャンセル', admin_user_path(@user), class: 'btn btn-warning mt-4 ml-4' %>
+        <div class="text-center mt-5 mb-5">
           <%= link_to 'このユーザーのデータを削除', admin_user_path(@user), method: :delete, data: { confirm: '本当に全てのデータを削除しますか？' }, class: 'btn btn-danger' %>
         </div>
       </div>

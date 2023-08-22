@@ -12,7 +12,7 @@ class Public::PostsController < ApplicationController
     @post = current_user.posts.new(post_params)
     @post.is_guest = current_user.guest? # ゲストユーザーの場合はフラグをセット
     if @post.save
-      redirect_to posts_path, notice: '投稿しました'
+      redirect_to post_path(@post), notice: '投稿しました'
     else
       flash.now[:alert] = '投稿に失敗しました。必須の項目の入力をしてください'
       render :new
@@ -67,6 +67,7 @@ class Public::PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to post_path(@post), notice: '投稿が更新されました'
     else
+      flash[:alert] = "更新に失敗しました"
       render :edit
     end
   end

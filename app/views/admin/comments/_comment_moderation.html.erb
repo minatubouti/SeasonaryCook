@@ -15,11 +15,9 @@
           <p class="card-text"><%= comment.content %></p>
           <p class="card-text"><small class="text-muted"><%= time_ago_in_words(comment.created_at) %>前</small></p>
         </div>
-        <% if admin_signed_in? %> 
-          <div class="col-2 text-right">
-            <%= link_to '削除', admin_comment_path(comment), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
-          </div>
-        <% end %>
+        <div class="col-2 text-right">
+          <%= link_to '削除', admin_comment_path(comment), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
+        </div>
       </div>
     </div>
   </div>

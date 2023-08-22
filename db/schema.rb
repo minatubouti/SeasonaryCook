@@ -82,8 +82,8 @@ ActiveRecord::Schema.define(version: 2023_08_21_090716) do
 
   create_table "inquiries", force: :cascade do |t|
     t.integer "user_id"
-    t.string "name"
-    t.string "email"
+    t.string "name", null: false
+    t.string "email", null: false
     t.text "message"
     t.text "reply"
     t.boolean "replied", default: false

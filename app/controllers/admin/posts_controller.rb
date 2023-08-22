@@ -29,6 +29,7 @@ class Admin::PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to admin_post_path(@post), notice: '投稿が更新されました。'
     else
+      flash[:alert] = "更新に失敗しました"
       render :edit
     end
   end
