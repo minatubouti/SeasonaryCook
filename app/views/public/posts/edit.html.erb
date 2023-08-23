@@ -7,8 +7,9 @@
       <!--画像、テキストフィールド-->
          <%= render partial: 'post_text_form', locals: { f: f } %>
            
-          <%= f.submit "更新する", class: 'btn btn-success mb-5 mt-5' %>
+          <%= f.submit "更新する", class: 'btn btn-success mb-5 mt-5 ml-4' %>
           <%= link_to '投稿削除', post_path(@post),method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger mb-5 ml-4 mt-5' %>
+          <%= link_to 'キャンセル', post_path(@post), class: 'btn btn-outline-warning mb-5 ml-4 mt-5' %>
         <% end %>
     </div>
   </div>

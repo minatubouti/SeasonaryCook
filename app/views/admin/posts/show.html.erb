@@ -7,7 +7,7 @@
             <%= image_tag @post.get_image, alt: @post.title, class: "img-fluid mb-3", style: "width: 100%; max-height: 400px;" %>
           <% end %>
           <p><%= @post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
-          <p><strong class="col-3">投稿者</strong> <%= link_to @post.user.name, admin_user_path(@post.user) %></p>
+          <p><strong class="col-3">投稿者</strong> <%= link_to @post.user.name, admin_user_path(@post.user), class: 'black-link' %></p>
           <h1><%= @post.title %></h1>
           <p><strong class="col-3">季節</strong> <%= @post.season %></p>
           <p><strong class="col-3">メイン野菜</strong> <%= @post.main_vegetable %></p>
@@ -17,7 +17,7 @@
             <%= link_to tag, admin_posts_path(tag: tag), class: 'tag' %>
           <% end %>
           
-          <p> <!--有効数のみカウント-->
+          <p class="mt-3"> <!--有効数のみカウント-->
             <span><%= active_likes_count(@post) %> <i class="fas fa-heart" style="color: red; margin-left: 5px;"></i></span>
             <span style="margin-left: 15px;"><%= active_bookmarks_count(@post) %><i class="fa-solid fa-bookmark" style="color: #6495ED; margin-left: 5px;"></i></span>
             <span style="margin-left: 15px;">

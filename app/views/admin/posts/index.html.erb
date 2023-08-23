@@ -10,23 +10,23 @@
     <div class="row justify-content-center">
       <% @posts.each do |post| %>
         <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-          <div class="card-wrapper px-3"> <!-- スペースを追加する外側の要素 -->
+          <div class="card-wrapper px-3"> 
             <div class="card h-100">
              <!-- 料理画像のリンク -->
                <%= link_to admin_post_path(post) do %>
                   <%= image_tag post.get_image, alt: post.title, class: "card-img-top", style: "height: 120px; object-fit: cover;" if post.get_image.attached? %>
                <% end %>
                 <div class="card-body">
-                  <h5 class="card-title"><%= link_to post.title, admin_post_path(post) %></h5>
+                  <h5 class="card-title"><%= link_to post.title, admin_post_path(post), class: 'item-link' %></h5>
                   <p class="card-text"><%= truncate(post.description, length: 25) %></p>
                     <!-- プロフィール画像のリンク -->
                     <% if post.user&.icon_image&.attached? %>
-                      <%= link_to admin_user_path(post.user) do %>
+                      <%= link_to admin_user_path(post.user), class: 'black-link' do %>
                         <%= image_tag post.user.icon_image, class: 'img-fluid profile-icon' %> 
                         <%= post.user.name %>
                       <% end %>
                     <% else %>
-                      <%= link_to post.user.name, admin_user_path(post.user) %>
+                      <%= link_to post.user.name, admin_user_path(post.user), class: 'black-link' %>
                     <% end %>
                             
                   <p>  <!--有効数のみカウント-->

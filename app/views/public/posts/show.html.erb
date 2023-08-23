@@ -8,6 +8,7 @@
           <% end %>
           <p><%= @post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
           <h1><%= @post.title %></h1>
+          <p><strong class="col-3">投稿者</strong> <%= link_to @post.user.name, user_path(@post.user), class: 'black-link' %></p>
           <p><strong class="col-3">季節</strong> <%= @post.season %></p>
           <p><strong class="col-3">メイン野菜</strong> <%= @post.main_vegetable %></p>
           <p><strong class="col-3">ポイント</strong> <%= @post.description %></p>
@@ -17,7 +18,7 @@
           <% end %>
           <!--いいね機能・ブックマーク機能-->
           <div class="d-flex mt-4">
-            <% if user_signed_in? && !current_user.guest? %>
+            <% if user_signed_in? %>
               <p id="like_buttons_<%= @post.id %>">
                 <%= render partial: 'public/likes/like', locals: { post: @post } %>
               </p>
@@ -78,7 +79,7 @@
     <% end %>
       <!--コメント機能-->
         <div id="comments" class="mt-4 mb-4">
-       <% if user_signed_in? && !current_user.guest? %>
+       <% if user_signed_in? %>
           <%= render 'public/comments/form', post: @post %>
        <% end %>
          <button class="commentbox-toggle btn btn-info btn-block">コメントを表示する</button>

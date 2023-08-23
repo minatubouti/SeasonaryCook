@@ -6,11 +6,13 @@
           <h5 class="card-title">
       　　  <!--ユーザーがアイコン画像を持っている場合、その画像と名前にリンクを付ける。アイコン画像がない場合は、名前だけにリンクを付けます。-->
             <% if comment.user&.icon_image&.attached? %>
-              <%= link_to admin_user_path(comment.user) do %>
-                <p><%= image_tag comment.user.icon_image, class: 'img-fluid profile-icon' %> <%= comment.user.name %></p>
+              <%= link_to admin_user_path(comment.user), class: 'black-link' do %>
+                <p><%= image_tag comment.user.icon_image, class: 'img-fluid profile-icon' %><%= comment.user.name %>
               <% end %>
+              のコメント
+                </p>
             <% else %>
-              <p><%= link_to comment.user.name, admin_user_path(comment.user) %></p>
+              <p><%= link_to comment.user.name, admin_user_path(comment.user), class: 'black-link' %>のコメント</p>
             <% end %>
 
           <!-- 退会済みユーザーの場合に表示 -->

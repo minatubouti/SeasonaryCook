@@ -7,11 +7,14 @@
       <div class="card-body">
        <h5 class="card-title">
           <% if comment.user&.icon_image&.attached? %>
-              <%= link_to user_path(comment.user) do %>
-                <p><%= image_tag comment.user.icon_image, class: 'img-fluid profile-icon' %>
+              <%= link_to user_path(comment.user), class: 'black-link' do %>
+                <p><%= image_tag comment.user.icon_image, class: 'img-fluid profile-icon' %><%= comment.user.name %>
               <% end %>
-           <% end %>
-        <%= comment.user.name %>のコメント
+              のコメント
+                </p>
+          <% else %>
+            <p><%= link_to comment.user.name, user_path(comment.user), class: 'black-link' %>のコメント</p>
+          <% end %>
        </h5>
         <p class="card-text"><%= comment.content %></p>
         <p class="card-text"><small class="text-muted"><%= time_ago_in_words(comment.created_at) %>前</small></p>

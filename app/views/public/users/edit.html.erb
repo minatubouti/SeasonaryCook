@@ -13,7 +13,8 @@
       <%= f.label :profile, "自己紹介" %>
       <%= f.text_area :profile, class: 'form-control', rows: 5 %>
     </div>
-    <%= f.submit "更新する", class: 'btn btn-success ml-4' %>
-    <%= link_to "退会する", check_out_user_path(@user), class: 'btn btn-danger ml-4' %>
+    <%= f.submit "更新する", class: 'btn btn-success ml-3' %>
+    <%= link_to "退会する", check_out_user_path(@user), class: 'btn btn-danger ml-3' %>
+    <%= link_to "キャンセル", user_path(@user), class: 'btn btn-outline-warning ml-3' %>
   <% end %>
 </div>

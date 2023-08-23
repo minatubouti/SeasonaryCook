@@ -111,10 +111,15 @@ footer {
 .nav-item a {
   color: #F5FFFA !important; 
 }
-
+// マウスオーバー時
+.nav-item a:hover {
+  color: #FFD5EC !important;
+  text-decoration: none; 
+}
 .nav-item {
   font-size: 20px;
 }
+
 
 // 通知用アイコン
 .notification-icon i {

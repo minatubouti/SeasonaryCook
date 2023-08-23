@@ -26,6 +26,35 @@
   font-weight: bold; /* 太字にする */
 }
 
+// 投稿アイテムリンク
+.item-link {
+  color: black !important;
+  text-decoration: none; /* アンダーラインを削除する */
+  font-weight: bold;
+}
+// ホバー時
+.item-link:hover {
+  text-decoration: none; 
+  color: #BBB !important;
+  font-weight: bold;
+}
+// レシピポイント
+.card-text {
+  color: #666;
+}
+
+// ユーザー名リンク文字
+.black-link {
+  color: #00CED1 !important;
+  text-decoration: none; /* アンダーラインを削除する */
+}
+// ホバー時
+.black-link:hover {
+  text-decoration: none; 
+  color: #BAD3FF !important;
+}
+
+
 // 投稿詳細ページ
 .tag {
   display: inline-block;
@@ -36,7 +65,7 @@
   color: #333; 
   text-decoration: none; /* 下線を消す */
 }
- /* マウスオーバー時の設定 */
+ // マウスオーバー時の設定 
 .tag:hover {  
   background-color: #F5C2D6;
   color: #333;
@@ -44,15 +73,16 @@
 }
 
   // コメント表示ボタン
-.commentbox-toggle {
+ .commentbox-toggle {
     width: 100%;
     padding: 10px;
     font-size: 16px;
     background_color: #FF8856;
   }
+  
+ 
 
-
-/* index 5カラムのレイアウトを追加 */
+// index 5カラムのレイアウトを追加 
 @media (min-width: 768px) {
   .col-md-5 {
     flex: 0 0 auto;

@@ -2,13 +2,16 @@ class Public::HomesController < ApplicationController
   def top
       # 最新の投稿から5つを取得
     # @posts = Post.order(created_at: :desc).limit(5)
-    # # RubyのArray#shuffleメソッドでランダムに並び替え
+    #  RubyのArray#shuffleメソッドでランダムに並び替え
     # @images = @posts.shuffle.map { |post| url_for(post.image) }
     
-    # # 本番環境(mySQL)とSQLliteで関数を使い分ける
+     # 本番環境(mySQL)とSQLliteで関数を使い分ける
      # rand = Rails.env.production? ? "rand()" : "RANDOM()"
-    # # 最新の投稿から5つの画像をランダムに取得
+     
+     # 最新の投稿から5つの画像をランダムに取得
       @images = Post.all.sample(5).map { |post| url_for(post.image) }
+      
+      # @posts = Post.offset( rand(Post.count) ).first
   end
 
   def about
