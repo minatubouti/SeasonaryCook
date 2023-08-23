@@ -65,6 +65,7 @@ class User < ApplicationRecord
       end
     end
     
+  # ゲストユーザーかどうかを判断するメソッド
     def guest?
      email == GUEST_USER_EMAIL
     end

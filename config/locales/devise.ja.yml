@@ -1,6 +1,9 @@
 ja:
   devise:
     failure:
+      user:
+        unauthenticated: "ログインしてください。"
+      unauthenticated: "ログインまたはアカウント登録してください。"
       not_found_in_database: "ログイン情報が見つかりませんでした。"
       admin:
         not_found_in_database: "管理者のログイン情報が見つかりませんでした。"
