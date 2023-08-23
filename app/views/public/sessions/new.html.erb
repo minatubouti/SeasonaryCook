@@ -23,13 +23,6 @@
             <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "パスワード" %>
           </div>
 
-          <% if devise_mapping.rememberable? %>
-            <div class="form-group form-check">
-              <%= f.check_box :remember_me, class: 'form-check-input' %>
-              <%= f.label :remember_me, "ログイン情報を記憶する", class: 'form-check-label' %>
-            </div>
-          <% end %>
-
           <%= f.submit "ログイン", class: "btn btn-lg btn-block btn-info mt-5" %>
         <% end %>
 

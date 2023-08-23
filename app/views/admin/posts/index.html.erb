@@ -22,12 +22,13 @@
                     <!-- プロフィール画像のリンク -->
                     <% if post.user&.icon_image&.attached? %>
                       <%= link_to admin_user_path(post.user) do %>
-                        <p><%= image_tag post.user.icon_image, class: 'img-fluid profile-icon' %>
-                         <%= post.user.name %>
-                        </p>
+                        <%= image_tag post.user.icon_image, class: 'img-fluid profile-icon' %> 
+                        <%= post.user.name %>
                       <% end %>
+                    <% else %>
+                      <%= link_to post.user.name, admin_user_path(post.user) %>
                     <% end %>
-                    
+                            
                   <p>  <!--有効数のみカウント-->
                     <span><%= active_likes_count(post) %> <i class="fas fa-heart" style="color: red; margin-left: 5px;"></i></span>
                     <span style="margin-left: 15px;"><%= active_bookmarks_count(post) %><i class="fa-solid fa-bookmark" style="color: #6495ED; margin-left: 5px;"></i></span>
