@@ -2,9 +2,9 @@ class Public::UsersController < ApplicationController
   before_action :authenticate_user! # ログインチェック
   before_action :correct_user, only: [:edit, :update, :withdraw, :check_out]
   before_action :reject_guest, only: [:edit, :update, :withdraw, :check_out] #ゲストユーザか確認
+  before_action :find_user, only: [:show, :edit, :update, :likes, :bookmarks]  # @user = User.find(params[:id])を使用するアクション
   
   def show
-    @user = User.find(params[:id])
      # ゲストユーザーのマイページを閲覧しようとしているが、現在のユーザーがゲストユーザーでない場合
     if @user.guest? && !current_user.guest?
       redirect_to root_path, alert: 'ゲストユーザーのページは表示できません。'
@@ -18,11 +18,9 @@ class Public::UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
   
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to user_path(@user), notice: 'プロフィールを更新しました'
     else
@@ -32,7 +30,6 @@ class Public::UsersController < ApplicationController
   end
   
   def likes
-      @user = User.find(params[:id])
     if current_user == @user
       @liked_posts = @user.likes.includes(post: :user).map(&:post)
     else
@@ -41,7 +38,6 @@ class Public::UsersController < ApplicationController
   end
   
   def bookmarks
-      @user = User.find(params[:id])
     if current_user == @user
       @bookmarks = @user.bookmarks.includes(post: :user).map(&:post)
     else
@@ -58,6 +54,10 @@ class Public::UsersController < ApplicationController
 
   
   private
+  
+    def find_user
+      @user = User.find(params[:id])
+    end
   
     def user_params
      params.require(:user).permit(:icon_image, :name, :profile)

@@ -6,8 +6,10 @@
         <div class="app-sub-name">〜季節を活かす料理〜</div>
       </div>
       <div class="button-wrapper">
+        <% unless user_signed_in? %>
           <%= link_to 'ログインはこちら', user_session_path, class: 'btn btn-info' %> 
           <%= link_to '新規登録して始める', new_user_registration_path, class: 'btn btn-success' %> 
+        <% end %>
       </div>
     </div>
   </div>
