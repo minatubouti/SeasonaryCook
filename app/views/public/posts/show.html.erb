@@ -7,10 +7,12 @@
             <%= image_tag @post.get_image, alt: @post.title, class: "img-fluid mb-3", style: "width: 100%; max-height: 400px;" %>
           <% end %>
           <p><%= @post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
-          <h1><%= @post.title %></h1>
           <p><strong class="col-3">投稿者</strong> <%= link_to @post.user.name, user_path(@post.user), class: 'black-link' %></p>
-          <p><strong class="col-3">季節</strong> <%= @post.season %></p>
-          <p><strong class="col-3">メイン野菜</strong> <%= @post.main_vegetable %></p>
+          <h1 class="item-title text-center mb-4"><%= @post.title %></h1>
+          <p>
+            <strong class="col-3">季節</strong> <%= @post.season %>
+            <strong class="col-3">メイン野菜</strong> <%= @post.main_vegetable %>
+          </p>
           <p><strong class="col-3">ポイント</strong> <%= @post.description %></p>
           
           <% @post.tag_list.each do |tag| %>

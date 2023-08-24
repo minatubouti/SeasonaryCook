@@ -1,25 +1,33 @@
-<h2 class="text-center">管理者ログイン(管理者専用です)</h2>
-
+<h2 class="text-center">管理者専用です</h2>
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="form-group">
-          <%= f.label :email, "メールアドレス" %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+  <div class="row no-gutters justify-content-center">
+    <div class="col-md-6 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
+      <h5 class="text-dark py-4 mb-0" style="background-color: #E0FFFF;">管理者ログイン</h5>
+      <div class="form-body p-4">
+
+        <div class="mx-auto text-center">
+          <p>メールアドレスと<br>パスワードを入力してください。</p>
         </div>
 
-        <div class="form-group">
-          <%= f.label :password, "パスワード" %>
-          <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
-        </div>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" aria-hidden="true"><i class="fas fa-user"></i></span>
+            </div>
+            <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "メールアドレス" %>
+          </div>
 
-        <div class="form-groupr">
-          <%= f.submit "ログイン", class: 'btn btn-info' %>
-        </div>
-      <% end %>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" aria-hidden="true"><i class="fas fa-lock"></i></span>
+            </div>
+            <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "パスワード" %>
+          </div>
+
+          <%= f.submit "ログイン", class: "btn btn-lg btn-block btn-info mt-5" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
 
-<%= render "admin/shared/links" %>
