@@ -41,10 +41,10 @@
                   <p class="mb-0"><%= post.likes.count %> <i class="fas fa-heart" style="color: red;"></i></p>
                   <p class="mb-0"><%= post.bookmarks.count %> <i class="fa-solid fa-bookmark" style="color: #6495ED;"></i></p>
                   <p class="mb-0"><%= post.comments.count %> <i class="fas fa-comment" style="color: #FFA500;"></i></p>
-                  <!--投稿が公開中であり、かつユーザーが退会していない場合にのみtrue(公開中)となる-->
-                  <span class="badge <%= (post.is_public && !post.user.is_deleted) ? 'badge-success' : 'badge-danger' %> ml-1">
+                  <!--投稿が公開中かつユーザーが退会していないかつゲストユーザーではない場合にのみtrue(公開中)となる-->
+                  <span class="badge <%= (post.is_public && !post.user.is_deleted && !post.user.guest?) ? 'badge-success' : 'badge-danger' %> ml-1">
                    <!--上記の条件が true ならば、バッジに badge-success クラスが適用され公開中となり、条件が false の場合は、badge-danger クラスが適用され、非公開となる-->
-                    <%= (post.is_public && !post.user.is_deleted) ? '公開中' : '非公開' %>
+                    <%= (post.is_public && !post.user.is_deleted && !post.user.guest?) ? '公開中' : '非公開' %>
                   </span>
                 </div>
               </div>

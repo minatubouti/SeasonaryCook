@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
    before_action :authenticate_admin! #管理者であることを確認
-   before_action :find_user, only: [:show, :edit, :update, :destroy] 
+   before_action :find_user, only: [:show, :edit, :update, :destroy] # @user = User.find(params[:id])を使うアクション
    
   def index
     if params[:search].present?

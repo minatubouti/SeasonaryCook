@@ -5,11 +5,16 @@ class Public::UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-   if current_user == @user
-    @posts = @user.posts.order(created_at: :desc) # 自分のマイページなら全投稿
-   else
-    @posts = @user.posts.where(is_public: true).order(created_at: :desc) # 他人のマイページなら公開投稿のみ
-   end
+     # ゲストユーザーのマイページを閲覧しようとしているが、現在のユーザーがゲストユーザーでない場合
+    if @user.guest? && !current_user.guest?
+      redirect_to root_path, alert: 'ゲストユーザーのページは表示できません。'
+      return
+    end
+    if current_user == @user
+      @posts = @user.posts.order(created_at: :desc) # 自分のマイページなら全投稿
+    else
+      @posts = @user.posts.where(is_public: true).order(created_at: :desc) # 他人のマイページなら公開投稿のみ
+    end
   end
 
   def edit

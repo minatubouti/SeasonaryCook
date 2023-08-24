@@ -27,9 +27,8 @@
         <%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-info mb-5' %>
       <% end %>
       
-      <!--フォロー機能-->
-      <!--マイページ、ゲストユーザーの場合には表示されない-->
-      <% unless @user == current_user || current_user&.guest? %>
+      <!--マイページの場合には表示されない-->
+      <% unless @user == current_user %>
         <% if current_user.following?(@user) %>
           <%= link_to 'フォローを外す', user_relationships_path(@user), method: :delete, class: 'btn btn-follow mb-4' %>
         <% else %>
