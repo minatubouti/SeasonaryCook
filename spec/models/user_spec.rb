@@ -127,7 +127,7 @@ RSpec.describe User, type: :model do
       it 'unfollows another user' do
         user.follow(other_user)
         user.unfollow(other_user)
-        
+        # フォローがカウントが０
         expect(user.following.count).to eq(0)
       end
     end

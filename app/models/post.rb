@@ -36,7 +36,7 @@ class Post < ApplicationRecord
   scope :oldest, -> { order(created_at: :asc) }
 
   # キーワード検索を行うスコープ
-  scope :search, ->(keyword) { where("content LIKE ?", "%#{keyword}%") }
+  scope :search, ->(keyword) { where("title LIKE ?", "%#{keyword}%") }
   
   # 画像がない場合no-image
   def get_image
