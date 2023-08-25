@@ -60,6 +60,14 @@
   font-weight: bold;
 }
 
+// いいね等のアイコン
+@media (max-width: 768px) {
+  .count-item {
+  font-size: 13px;
+  }
+}
+
+
 .tag {
   display: inline-block;
   padding: 3px 12px;
