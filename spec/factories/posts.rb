@@ -6,6 +6,6 @@ FactoryBot.define do
     main_vegetable { 'Test Main_vegetable' }
     season { '春' }
     is_public { true }
-    association :user # Userとの関連付け
+     association :user # Userとの関連付け
   end
 end

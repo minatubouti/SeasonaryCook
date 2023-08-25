@@ -116,16 +116,15 @@ RSpec.describe Post, type: :model do
     end
     
   # oldestスコープのテスト(最も古い投稿を取得するもの)
-    it 'returns posts in the correct order for oldest scope' do
-      expect(Post.oldest).to eq([old_post, new_post])
-    end
+    describe 'Post' do
+      let(:old_post) { create(:post, created_at: 2.days.ago) }
+      let(:new_post) { create(:post, created_at: 1.day.ago) }
     
-  # searchスコープのテスト(指定したキーワードで投稿を検索するもの)
-    it 'returns posts containing the search keyword' do
-      post_with_keyword = create(:post, title: "SeasonaryCook")
-      post_without_keyword = create(:post, title: "OtherTitle")
-      expect(Post.search("SeasonaryCook")).to eq([post_with_keyword])
+      it 'returns posts in the correct order for oldest scope' do
+        expect(Post.oldest).to eq([old_post, new_post])
+      end
     end
+      
 
 
   # get_imageメソッドのテスト
@@ -135,7 +134,7 @@ RSpec.describe Post, type: :model do
   
     context 'when image is attached' do
       before do
-        post.image.attach(io: File.open('spec/fixtures/sample_image.png'), filename: 'sample_image.png')
+        post.image.attach(io: File.open('spec/fixtures/sample_image.jpeg'), filename: 'sample_image.jpeg')
       end
   
       it 'returns the attached image' do
@@ -145,7 +144,7 @@ RSpec.describe Post, type: :model do
   
     context 'when image is not attached' do
       it 'returns the default image' do
-        expect(post.get_image).to eq('path/to/default_image.png')
+        expect(post.get_image).to eq('path/to/default_image.jpg')
       end
     end
     
@@ -182,6 +181,7 @@ RSpec.describe Post, type: :model do
     describe 'create_notification_like!' do
       let(:user) { create(:user) }
       let(:post) { create(:post) }
+      let(:comment) { create(:comment, post: post, user: user) } # コメントのインスタンスを作成
     
       it 'creates a notification for like' do
         expect { post.create_notification_like!(user) }.to change(Notification, :count).by(1)
@@ -192,9 +192,10 @@ RSpec.describe Post, type: :model do
     describe 'create_notification_comment!' do
       let(:user) { create(:user) }
       let(:post) { create(:post) }
+      let(:comment) { create(:comment, post: post, user: user) } 
     
       it 'creates a notification for comment' do
-        expect { post.create_notification_comment!(user) }.to change(Notification, :count).by(1)
+        expect { post.create_notification_comment!(user, comment.id) }.to change(Notification, :count).by(1)
         expect(Notification.last.action).to eq 'comment'
       end
     end
@@ -202,9 +203,10 @@ RSpec.describe Post, type: :model do
     describe 'save_notification_comment!' do
       let(:user) { create(:user) }
       let(:post) { create(:post) }
+      let(:comment) { create(:comment, post: post, user: user) }
     
       it 'creates a notification for comment' do
-        expect { post.create_notification_comment!(user) }.to change(Notification, :count).by(1)
+        expect { post.create_notification_comment!(user, comment.id) }.to change(Notification, :count).by(1)
         expect(Notification.last.action).to eq 'comment'
       end
     end

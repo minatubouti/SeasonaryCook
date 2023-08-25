@@ -3,32 +3,32 @@
     <div class="row justify-content-center">
       <div class="col-lg-8">
         <h3><%= @post.user.name %>の投稿編集</h3>
-        <div class="form-group">
-          <%= f.label :title, "料理名" %>
-          <%= f.text_field :title, class: 'form-control' %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :tag_list, "タグ（＃で区切って複数入力可）" %>
-          <%= f.text_field :tag_list, placeholder: "#揚げ物 #圧力鍋", class: 'form-control' %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :season, "季節" %>
-          <%= f.select :season, Post::SEASONS, {}, class: 'form-control' %>
-        </div>
-
-        <div class="form-group mt-3 custom-radio mt-4">
-          <h5><%= f.label :is_public, "公開フラグ" %></h5>
-          <div class="form-check form-check-inline">
-            <%= f.radio_button :is_public, true, class: 'form-check-input' %>
-            <label class="form-check-label">公開</label>
+          <div class="form-group">
+            <%= f.label :title, "料理名" %>
+            <%= f.text_field :title, class: 'form-control' %>
           </div>
-          <div class="form-check form-check-inline">
-            <%= f.radio_button :is_public, false, class: 'form-check-input' %>
-            <label class="form-check-label">非公開</label>
+  
+          <div class="form-group">
+            <%= f.label :tag_list, "タグ（＃で区切って複数入力可）" %>
+            <%= f.text_field :tag_list, placeholder: "#揚げ物 #圧力鍋", class: 'form-control' %>
           </div>
-        </div>
+  
+          <div class="form-group">
+            <%= f.label :season, "季節" %>
+            <%= f.select :season, Post::SEASONS, {}, class: 'form-control' %>
+          </div>
+  
+          <div class="form-group mt-3 custom-radio mt-4">
+            <h5><%= f.label :is_public, "公開フラグ" %></h5>
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :is_public, true, class: 'form-check-input' %>
+              <label class="form-check-label">公開</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :is_public, false, class: 'form-check-input' %>
+              <label class="form-check-label">非公開</label>
+            </div>
+          </div>
 
         <div class="form-group text-center">
           <%= f.submit "更新", class: "btn btn-success mr-4" %>

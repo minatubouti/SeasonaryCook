@@ -1,6 +1,6 @@
 class Admin::PostsController < ApplicationController
   before_action :authenticate_admin! # 管理者認証
-  before_action :find_user, only: [:show, :edit, :update, :destroy] 
+  before_action :find_post, only: [:show, :edit, :update, :destroy] 
   
   
   def index
@@ -41,7 +41,7 @@ class Admin::PostsController < ApplicationController
   
   private
   #@user = User.find(params[:id])が共同で使えるようにする
-  def find_user
+  def find_post
     @post = Post.find(params[:id])
   end
   

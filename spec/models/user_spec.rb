@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
  # バリデーションのテスト
- 
+
   describe 'validations' do
     it 'is valid with a valid email, name, and password' do
       user = User.new(email: 'test@example.com', name: 'Test User', password: 'password')

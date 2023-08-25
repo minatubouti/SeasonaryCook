@@ -35,8 +35,6 @@ class Post < ApplicationRecord
   # 投稿を古いものから順に取得するスコープ
   scope :oldest, -> { order(created_at: :asc) }
 
-  # キーワード検索を行うスコープ
-  scope :search, ->(keyword) { where("title LIKE ?", "%#{keyword}%") }
   
   # 画像がない場合no-image
   def get_image

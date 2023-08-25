@@ -1,6 +1,6 @@
 class Public::PostsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
-  before_action :find_user, only: [:show, :edit, :update, :destroy]
+  before_action :find_post, only: [:show, :edit, :update, :destroy]
   
   def new
    @post = Post.new
@@ -78,7 +78,7 @@ class Public::PostsController < ApplicationController
 
   private
   
-  def find_user
+  def find_post
     @post = Post.find(params[:id])
   end
    
@@ -98,5 +98,4 @@ class Public::PostsController < ApplicationController
       redirect_to posts_path
     end
   end
-   
 end
