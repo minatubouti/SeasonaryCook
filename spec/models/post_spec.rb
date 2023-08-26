@@ -68,7 +68,6 @@ RSpec.describe Post, type: :model do
     end
   end
   
-  
     
   # recentスコープのテスト(最新の投稿を取得するもの)
     describe 'scopes' do
@@ -186,5 +185,4 @@ RSpec.describe Post, type: :model do
       end
     end
   end
-
 end

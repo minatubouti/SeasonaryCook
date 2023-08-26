@@ -1,0 +1,13 @@
+ <!--それぞれの手順を別々のカードで表示する-->
+<div class="card-body">
+  <% recipe_steps.each_with_index do |recipe_step, index| %>
+    <div class="card mb-2">
+      <div class="card-header">
+        <strong>ステップ<%= index + 1 %></strong>
+      </div>
+      <div class="card-body">
+        <p><%= recipe_step.instructions %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,13 @@
+<% if @post.get_image.attached? %>
+  <%= image_tag @post.get_image, alt: @post.title, class: "img-fluid mb-3", style: "width: 100%; max-height: 400px;" %>
+<% end %>
+<p><%= @post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+<!--yieldを使用して、特定のパスを動的に変更する-->
+<p><strong class="col-3">投稿者</strong> <%= link_to @post.user.name, yield(:user_path), class: 'black-link' %></p>
+<h1 class="item-title text-center mb-4"><%= @post.title %></h1>
+<p>
+  <strong class="col-3">季節</strong> <%= @post.season %>
+  <strong class="col-3">メイン野菜</strong> <%= @post.main_vegetable %>
+</p>
+<p><strong class="col-3">ポイント</strong> <%= @post.description %></p>
+          

@@ -1,0 +1,17 @@
+<div class="card mb-4">
+  <div class="card-header">
+    食材(<%= serving_size %>人前)
+  </div>
+  <div class="card-body">
+    <% ingredients.each do |ingredient| %>
+      <div class="row">
+        <div class="col-6">
+           <%= ingredient.name %>
+        </div>
+        <div class="col-6">
+          <strong class="col-3">分量</strong> <%= ingredient.amount %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
