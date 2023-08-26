@@ -2,6 +2,19 @@ require 'rails_helper'
 
 RSpec.describe Post, type: :model do
  let(:user) { create(:user) } 
+ 
+# アソシエーションのテスト
+ describe "Associations" do
+    it { should belong_to(:user) }
+    it { should have_many(:likes).dependent(:destroy) }
+    it { should have_many(:liked_users).through(:likes).source(:user) }
+    it { should have_many(:comments).dependent(:destroy) }
+    it { should have_many(:bookmarks).dependent(:destroy) }
+    it { should have_many(:bookmarked_users).through(:bookmarks).source(:user) }
+    it { should have_many(:recipe_steps).dependent(:destroy) }
+    it { should have_many(:ingredients).dependent(:destroy) }
+    it { should have_many(:notifications).dependent(:destroy) }
+  end
 
   # バリデーションのテスト
   describe 'validations' do
@@ -55,45 +68,7 @@ RSpec.describe Post, type: :model do
     end
   end
   
-  # アソシエーションのテスト
   
-  # Postモデルが多数のlikesを持つことを確認するテスト
-    describe 'associations' do
-      it 'has many likes' do
-        expect(Post.reflect_on_association(:likes).macro).to eq(:has_many)
-      end
-    end
-    
-  # Postモデルが多数のliked_usersを持つことを確認するテスト
-    it 'has many liked_users' do
-      expect(Post.reflect_on_association(:liked_users).macro).to eq(:has_many)
-    end
-    
-  # Postモデルが多数のcommentsを持つことを確認するテスト
-    it 'has many comments' do
-      expect(Post.reflect_on_association(:comments).macro).to eq(:has_many)
-    end
-    
-  # Postモデルが多数のbookmarksを持つことを確認するテスト
-    it 'has many bookmarks' do
-      expect(Post.reflect_on_association(:bookmarks).macro).to eq(:has_many)
-    end
-    
-  # Postモデルが多数のrecipe_steps(作り方)を持つことを確認するテスト
-    it 'has many recipe_steps' do
-      expect(Post.reflect_on_association(:recipe_steps).macro).to eq(:has_many)
-    end
-    
-  # Postモデルが多数のingredients(材料)を持つことを確認
-    it 'has many ingredients' do
-      expect(Post.reflect_on_association(:ingredients).macro).to eq(:has_many)
-    end
-    
-  # Postモデルが多数のnotifications(通知)を持つことを確認するテスト
-    it 'has many notifications' do
-      expect(Post.reflect_on_association(:notifications).macro).to eq(:has_many)
-    end
-    
     
   # recentスコープのテスト(最新の投稿を取得するもの)
     describe 'scopes' do
