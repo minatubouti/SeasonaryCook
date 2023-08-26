@@ -23,11 +23,12 @@ class User < ApplicationRecord
   
   # emailが空でない、同じemail使用不可、形式をチェック
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  
   # パスワード6字以上
   validates :password, length: { minimum: 6 }, if: :password_required?
   # name空でない15字以下
   validates :name, presence: true, length: { maximum: 15 }
-         
+        
     # 指定された他のユーザーをフォローする
     def follow(other_user)
       following << other_user

@@ -144,7 +144,7 @@ RSpec.describe Post, type: :model do
   
     context 'when image is not attached' do
       it 'returns the default image' do
-        expect(post.get_image).to eq('path/to/default_image.jpg')
+        expect(post.get_image.filename.to_s).to eq('default-image.jpg')
       end
     end
     

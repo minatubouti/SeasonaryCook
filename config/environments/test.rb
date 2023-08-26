@@ -10,7 +10,7 @@ Rails.application.configure do
 
   config.cache_classes = false
   config.action_view.cache_template_loading = true
-
+  
   # Do not eager load code on boot. This avoids loading your whole application
   # just for the purpose of running a single test. If you are using a tool that
   # preloads Rails for running tests, you may have to set it to true.
@@ -58,3 +58,5 @@ Rails.application.configure do
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
 end
+ host = 'https://ap-northeast-1.console.aws.amazon.com/' #←先ほどの上のコードのhost名と合わせる
+ Rails.application.routes.default_url_options[:host] = host
