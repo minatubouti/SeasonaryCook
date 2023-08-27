@@ -1,18 +1,8 @@
 <div class="container">
   <%= form_with(model: @user, local: true) do |f| %>
-    <div class="form-group">
-      <%= f.label :icon_image, "プロフィール画像" %>
-      <%= f.file_field :icon_image, class: 'form-control-file' %>
-      <%= image_tag @user.icon_image, class: 'img-fluid profile-icon' if @user.icon_image.attached? %>
-    </div>
-    <div class="form-group">
-      <%= f.label :name, "名前(ニックネーム）" %>
-      <%= f.text_field :name, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :profile, "自己紹介" %>
-      <%= f.text_area :profile, class: 'form-control', rows: 5 %>
-    </div>
+    <!--ユーザー編集フィールド-->
+    <%= render 'form_fields', f: f, user: @user %>
+  
     <%= f.submit "更新する", class: 'btn btn-success ml-3' %>
     <%= link_to "退会する", check_out_user_path(@user), class: 'btn btn-danger ml-3' %>
     <%= link_to "キャンセル", user_path(@user), class: 'btn btn-outline-warning ml-3' %>

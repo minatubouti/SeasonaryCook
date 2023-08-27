@@ -6,7 +6,7 @@
           
           <!--yieldを使用して、特定のパスを動的に変更-->
           <%= provide(:user_path, admin_user_path(@post.user)) %>
-          <%= render partial: 'public/posts/post_details' %>
+          <%= render partial: 'public/posts/post_details', locals: { post: @post }  %>
 
           <% @post.tag_list.each do |tag| %>
             <%= link_to tag, admin_posts_path(tag: tag), class: 'tag' %>
@@ -28,10 +28,10 @@
         </div>
       </div>
       
-    <!--材料部分テンプレート-->
-    <%= render 'public/posts/ingredients_card', ingredients: @post.ingredients, serving_size: @post.serving_size %>
-    <!--作り方部分テンプレート-->
-    <%= render 'public/posts/recipe_steps_card', recipe_steps: @post.recipe_steps %>
+      <!--材料部分テンプレート-->
+      <%= render 'public/posts/ingredients_card', ingredients: @post.ingredients, serving_size: @post.serving_size %>
+      <!--作り方部分テンプレート-->
+      <%= render 'public/posts/recipe_steps_card', recipe_steps: @post.recipe_steps %>
       
       <!-- 管理者用の操作パネル -->
         <div class="admin-controls">

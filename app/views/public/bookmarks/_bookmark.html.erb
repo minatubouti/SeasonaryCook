@@ -7,7 +7,7 @@
   <% end %>
 <% else %>
   <%= link_to post_bookmarks_path(post), method: :post, remote: true do %>
-    <i class="fa-regular fa-bookmark count-item" aria-hidden="true"></i>
-    <%= active_bookmarks_count(post) %> ブックマーク
+    <i class="fa-regular fa-bookmark count-item" aria-hidden="true">
+    <%= active_bookmarks_count(post) %> ブックマーク</i>
   <% end %>
 <% end %>
