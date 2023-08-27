@@ -28,6 +28,26 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }, if: :password_required?
   # name空でない15字以下
   validates :name, presence: true, length: { maximum: 15 }
+  
+  # ユーザーのいいねした投稿数に非公開の投稿がカウントされないようにするメソッド
+  def active_likes_count
+    self.likes.joins(:post).where('posts.is_public = ?', true).count
+  end
+  # 同じくブックマークがカウントされないようにする
+  def active_bookmarks_count
+    self.bookmarks.joins(:post).where('posts.is_public = ?', true).count
+  end
+  
+  # ユーザーのいいねした投稿数に退会中のユーザーの投稿がカウントされないようにするメソッド
+  def active_likes_count
+    self.likes.joins(:post).where('posts.is_deleted = ?', true).count
+  end
+  # 同じくブックマークがカウントされないようにする
+  def active_bookmarks_count
+    self.bookmarks.joins(:post).where('posts.is_deleted = ?', true).count
+  end
+  
+  
         
     # 指定された他のユーザーをフォローする
     def follow(other_user)

@@ -1,7 +1,8 @@
  <h3 class="text-center mb-5" style="background-color:#D9E5FF;"><%= @user.name %>のブックマーク</h3>
   <div class="row">
     <% @bookmarks.each do |post| %>
-     <% unless post.user.is_deleted %>
+    <!--退会済みのユーザーと非公開の投稿は表示されない-->
+     <% unless post.user.is_deleted || !post.is_public %>
      <!--投稿アイテム-->
       <%= render partial: 'public/posts/post_item', locals: { post: post } %>
      <% end %>
