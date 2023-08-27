@@ -25,9 +25,9 @@
     </div>
     
         <!--投稿アイテム-->
-    <div class="col-md-8">
-      <p><strong>投稿数:</strong> <%= @user.posts.count %></p>
+    <div class="col-lg-8 col-md-6 col-sm-12">
       <h3>投稿レシピ</h3>
+      <p><strong class="col-3">投稿数</strong> <%= @user.posts.count %></p>
       <div class="row">
         <% @posts.each do |post| %>
           <div class="col-md-4 mb-4"> 
@@ -36,7 +36,7 @@
                 <%= image_tag post.get_image, alt: post.title, class: "card-img-top", style: "height: 120px; object-fit: cover;" if post.get_image.attached? %>
               <% end %>
               <div class="card-body">
-                <h5 class="card-title"><%= post.title %></h5>
+                <h5 class="card-title"><%= link_to post.title, admin_post_path(post), class: 'item-link' %></h5>
                 <div class="d-flex justify-content-between">
                   <p class="mb-0"><%= post.likes.count %> <i class="fas fa-heart" style="color: red;"></i></p>
                   <p class="mb-0"><%= post.bookmarks.count %> <i class="fa-solid fa-bookmark" style="color: #6495ED;"></i></p>

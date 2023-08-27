@@ -1,21 +1,5 @@
-<!--検索フォーム-->
-<div class="container mt-2 mb-4 d-flex justify-content-between">
-  <form method="get" action="<%= posts_path %>" class="search_container">
-    <input type="text" name="search" size="25" placeholder="料理名,野菜,タグで検索">
-    <input type="submit" value="&#xf002">
-  </form>
-
-  <div class="dropdown ml-auto">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      並び替え
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <%= link_to "新しい順", posts_path, class: 'dropdown-item' %>
-      <%= link_to "いいねの多い順", posts_path(popular: true), class: 'dropdown-item' %>
-      <%= link_to "古い順", posts_path(oldest: true), class: 'dropdown-item' %>
-    </div>
-  </div>
-</div>
+<!--検索、並び替え部分テンプレート-->
+<%= render partial: 'search_and_sort', locals: { posts_path_variable: posts_path } %> 
 
 <h1 class="ml-4 mb-5">投稿一覧</h1>
   <div class="row justify-content-center">

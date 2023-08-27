@@ -1,0 +1,17 @@
+<!--変わる部分だけをローカル変数に動的に変更（action属性のパスを変更）-->
+<div class="container mt-2 mb-4 d-flex justify-content-between">
+  <form method="get" action="<%= posts_path_variable %>" class="search_container">
+    <input type="text" name="search" size="25" placeholder="料理名,野菜,タグで検索">
+    <input type="submit" value="&#xf002">
+  </form>
+  <div class="dropdown ml-auto">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      並び替え
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <%= link_to "新しい順", posts_path_variable, class: 'dropdown-item' %>
+      <%= link_to "いいねの多い順", "#{posts_path_variable}?popular=true", class: 'dropdown-item' %>
+      <%= link_to "古い順", "#{posts_path_variable}?oldest=true", class: 'dropdown-item' %>
+    </div>
+  </div>
+</div>
