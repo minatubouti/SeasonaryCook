@@ -12,6 +12,12 @@ body {
   background-position: center;
 }
 
+@media (max-width: 768px) { 
+  .about-title {
+    font-size: 23px;
+  }
+}
+
 // トップページ
 
 // マスク設定

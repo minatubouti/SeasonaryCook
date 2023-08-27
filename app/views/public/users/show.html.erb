@@ -7,12 +7,12 @@
         <% if current_user == @user %>
           <div class="d-inline-block mr-3">
             <%= link_to likes_user_path(current_user) do %>
-              <i class="fas fa-heart" style="color: red;"><span style="margin-left: 5px;"><%= current_user.likes.count %></span></i>
+              <i class="fas fa-heart like-link">いいねした投稿<span style="margin-left: 5px;"><%= current_user.likes.count %></span></i>
             <% end %>
           </div>
           <div class="d-inline-block mb-4">
             <%= link_to bookmarks_user_path(current_user) do %>
-              <i class="fa-solid fa-bookmark" style="color: #6495ED;"><span style="margin-left: 5px;"><%= current_user.bookmarks.count %></span></i>
+              <i class="fa-solid fa-bookmark bookmark_link">ブックマーク<span style="margin-left: 5px;"><%= current_user.bookmarks.count %></span></i>
             <% end %>
           </div>
         <% end %>

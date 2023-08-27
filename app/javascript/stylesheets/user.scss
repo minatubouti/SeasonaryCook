@@ -5,6 +5,22 @@
   object-fit: cover; /* 画像のアスペクト比を保つための設定 */
 }
 
+// いいね、ブックマーク一覧リンク
+.like-link {
+  color: red;
+}
+.bookmark_link {
+  color: #6495ED;
+}
+// ホバー時
+.like-link:hover {
+  color: #FF82B2;
+}
+.bookmark_link:hover {
+  color: #A4C6FF;
+}
+
+
 // フォロー、フォロワーリンク
 .profile-details {
   font-size: 18px;
