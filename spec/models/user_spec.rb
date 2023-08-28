@@ -73,6 +73,17 @@ RSpec.describe User, type: :model do
       expect(user.errors[:name]).to include("は15文字以内で入力してください")
     end
     
+    # active スコープが退会していない（is_deleted: false）ユーザーだけを取得することのテスト
+    describe "Scopes" do
+      let!(:active_user) { create(:user, is_deleted: false) }
+      let!(:inactive_user) { create(:user, is_deleted: true) }
+  
+      it "returns only active users" do
+        expect(User.active).to include(active_user)
+        expect(User.active).not_to include(inactive_user)
+      end
+    end
+    
     # Postとのアソシエーションの関連
     describe 'association with posts' do
       let(:user) { create(:user) }
@@ -136,6 +147,10 @@ RSpec.describe User, type: :model do
     # メソッドのテスト
     let(:user) { create(:user) }
     let(:other_user) { create(:user, email: "test@sample.com") }
+    let!(:public_post) { create(:post, user: other_user, is_public: true) }
+    let!(:private_post) { create(:post, user: other_user, is_public: false) }
+    let!(:like) { create(:like, user: user, post: public_post) }
+    let!(:bookmark) { create(:bookmark, user: user, post: public_post) }
   
     describe '#follow' do
       it 'follows another user' do
@@ -151,6 +166,15 @@ RSpec.describe User, type: :model do
         # フォローがカウントが０
         expect(user.following.count).to eq(0)
       end
+    end
+    
+  # メソッドが非公開の投稿や退会済みのユーザーの投稿を除外して、「いいね」の総数を正確にカウントすることのテスト
+    it "counts the number of active liked posts" do
+      expect(user.active_liked_posts_count).to eq(1)
+    end
+  # メソッドが非公開の投稿や退会済みのユーザーの投稿を除外して、「ブックマーク」の総数を正確にカウントすることのテスト
+    it "counts the number of active bookmarked posts" do
+      expect(user.active_bookmarked_posts_count).to eq(1)
     end
   end
 end
