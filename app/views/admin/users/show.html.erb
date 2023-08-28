@@ -1,23 +1,24 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <h3><%= image_tag @user.icon_image, class: 'img-fluid profile-icon' if @user.icon_image.attached? %> <%= @user.name %></h3>
-       
+      <h3><%= image_tag @user.icon_image, class: 'img-fluid profile-icon' if @user.icon_image.attached? %> <%= @user.name %>
+        <span class="badge ml-3 <%= @user.is_deleted? ? 'badge-danger' : 'badge-success' %>">
+          <%= @user.is_deleted? ? '退会' : '有効' %>
+        </span>
+      </h3>
       <!--ユーザーの全投稿についているいいねの合計をカウント-->
         <div class="d-inline-block mr-4">
-          <i class="fas fa-heart" style="color: red;"><span style="margin-left: 5px;"><%= @likes_count %></span></i>
+          <i class="fas fa-heart" style="color: red;">合計<span style="margin-left: 5px;"><%= @likes_count %></span></i>
         </div>
       <!--ユーザーの全投稿についているブックマークの合計をカウント-->
         <div class="d-inline-block mr-4">
-          <i class="fa-solid fa-bookmark" style="color: #6495ED;"><span style="margin-left: 5px;"><%= @bookmarks_count %></span></i>
+          <i class="fa-solid fa-bookmark" style="color: #6495ED;">合計<span style="margin-left: 5px;"><%= @bookmarks_count %></span></i>
         </div>
       <!--ユーザーの全投稿についているコメントの合計をカウント-->
         <div class="d-inline-block mr-4">
-          <i class="fas fa-comment" style="color: #FFA500;"><span style="margin-left: 5px;"><%= @comments_count %></span></i>
+          <i class="fas fa-comment" style="color: #FFA500;">合計<span style="margin-left: 5px;"><%= @comments_count %></span></i>
         </div>
-        <span class="badge <%= @user.is_deleted? ? 'badge-danger' : 'badge-success' %>">
-          <%= @user.is_deleted? ? '退会' : '有効' %>
-        </span>
+       
         
         <p class="profile-link"><i class="fas fa-user-friends mt-4"></i>フォロー<%= @user.following.count %></p>
         <p class="profile-link"><i class="fas fa-users"></i>フォロワー<%= @user.followers.count %></p>

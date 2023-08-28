@@ -18,9 +18,9 @@
             <% end %>
           </div>
         <% end %>
-        
-        <p class="profile-link"><i class="fas fa-user-friends"></i> <%= link_to "フォロー #{@user.following.count}", user_follows_path(@user) %></p>
-        <p class="profile-link"><i class="fas fa-users"></i> <%= link_to "フォロワー #{@user.followers.count}", user_followers_path(@user) %></p>
+        <!--user.rbのスコープを使用して退会したユーザーはフォロー・フォロワー数にカウントされないようにする-->
+        <p class="profile-link"><i class="fas fa-user-friends"></i> <%= link_to "フォロー #{@user.following.active.count}", user_follows_path(@user) %></p>
+        <p class="profile-link"><i class="fas fa-users"></i> <%= link_to "フォロワー #{@user.followers.active.count}", user_followers_path(@user) %></p>
 
         <p><%= @user.profile %></p>
       </div>

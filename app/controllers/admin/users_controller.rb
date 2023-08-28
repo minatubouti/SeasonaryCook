@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
    before_action :authenticate_admin! #管理者であることを確認
    before_action :find_user, only: [:show, :edit, :update, :destroy] # @user = User.find(params[:id])を使うアクション
+   include ApplicationHelper #ApplicationHelperに定義されたメソッドをAdmin::UsersControllerでも使えるようにする
    
   def index
     if params[:search].present?
@@ -12,9 +13,10 @@ class Admin::UsersController < ApplicationController
 
   def show
     @posts = @user.posts.order(created_at: :desc)
-    @likes_count = @posts.sum { |post| post.likes.count }         # ユーザーのいいねの合計を計算
-    @bookmarks_count = @posts.sum { |post| post.bookmarks.count } # ユーザーのブックマークの合計を計算
-    @comments_count = @posts.sum { |post| post.comments.count }   # ユーザーのコメントの合計の計算
+     # ヘルパーメソッドを使用して退会済みユーザーのカウントを除外
+    @likes_count = @posts.sum { |post| active_likes_count(post) }         # ユーザーのいいねの合計を計算
+    @bookmarks_count = @posts.sum { |post| active_bookmarks_count(post) } # ユーザーのブックマークの合計を計算
+    @comments_count = @posts.sum { |post| active_comments_count(post) }   # ユーザーのコメントの合計の計算
   end
 
   def edit

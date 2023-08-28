@@ -38,6 +38,8 @@ class User < ApplicationRecord
     bookmarks.joins(post: :user).where(posts: { is_public: true }, users: { is_deleted: false }).count
   end
   
+  # 退会していないユーザーのみを取得するスコープ
+  scope :active, -> { where(is_deleted: false) }
         
   # 指定された他のユーザーをフォローする
   def follow(other_user)

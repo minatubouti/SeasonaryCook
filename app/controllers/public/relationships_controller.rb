@@ -17,11 +17,12 @@ class Public::RelationshipsController < ApplicationController
   
   def followed
     @user = User.find(params[:user_id])
-    @followers = @user.followers.page(params[:page])
+    # (退会していない）の条件を加え、退会しているユーザーは表示でされないようにする
+    @followers = @user.followers.where(is_deleted: false).page(params[:page])
   end
   
   def follower
     @user = User.find(params[:user_id])
-    @followings = @user.following.page(params[:page])
+    @followings = @user.following.where(is_deleted: false).page(params[:page])
   end
 end
