@@ -45,6 +45,18 @@ class Post < ApplicationRecord
     image
   end
   
+  # def active_likes_count
+  #   self.likes.joins(:user).where('users.is_deleted = ?', false).count
+  # end
+
+  # def active_bookmarks_count
+  #   self.bookmarks.joins(:user).where('users.is_deleted = ?', false).count
+  # end
+
+  # def active_comments_count
+  #   self.comments.joins(:user).where('users.is_deleted = ?', false).count
+  # end
+  
   # 特定のユーザーが投稿に「いいね」をしているかどうかをチェック
   def likes_by?(user)
     likes.exists?(user_id: user.id)

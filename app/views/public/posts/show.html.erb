@@ -20,6 +20,7 @@
               <p id="bookmark_button" class="ml-4">
                 <%= render partial: 'public/bookmarks/bookmark', locals: { post: @post } %>
               </p>
+               <p><i class="fa-solid fa-comment count-item ml-4 mr-4" style="color: #FFA500;"><%= active_comments_count(@post) %>コメント</i></p>
                <!--自分の投稿の非公開の場合のみ表示-->
               <p>
                 <% if !@post.is_public %>
@@ -27,7 +28,6 @@
                 <% end %>
               </p>
             <% end %>
-              <p><i class="fa-solid fa-comment count-item ml-4 mr-4" style="color: #FFA500;"><%= active_comments_count(@post) %>コメント</i></p>
           </div>
            <!--ツイッターリンク-->
             <!--<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="%= @post.title %> via SeasonaryCook" data-show-count="false">Tweet</a>-->

@@ -3,14 +3,15 @@
     <div class="col-md-4">
       <h3><%= image_tag @user.icon_image, class: 'img-fluid profile-icon' if @user.icon_image.attached? %> <%= @user.name %></h3>
        
+      <!--ユーザーの全投稿についているいいねの合計をカウント-->
         <div class="d-inline-block mr-4">
           <i class="fas fa-heart" style="color: red;"><span style="margin-left: 5px;"><%= @likes_count %></span></i>
         </div>
-     
+      <!--ユーザーの全投稿についているブックマークの合計をカウント-->
         <div class="d-inline-block mr-4">
           <i class="fa-solid fa-bookmark" style="color: #6495ED;"><span style="margin-left: 5px;"><%= @bookmarks_count %></span></i>
         </div>
-       
+      <!--ユーザーの全投稿についているコメントの合計をカウント-->
         <div class="d-inline-block mr-4">
           <i class="fas fa-comment" style="color: #FFA500;"><span style="margin-left: 5px;"><%= @comments_count %></span></i>
         </div>
@@ -38,9 +39,10 @@
               <div class="card-body">
                 <h5 class="card-title"><%= link_to post.title, admin_post_path(post), class: 'item-link' %></h5>
                 <div class="d-flex justify-content-between">
-                  <p class="mb-0"><%= post.likes.count %> <i class="fas fa-heart" style="color: red;"></i></p>
-                  <p class="mb-0"><%= post.bookmarks.count %> <i class="fa-solid fa-bookmark" style="color: #6495ED;"></i></p>
-                  <p class="mb-0"><%= post.comments.count %> <i class="fas fa-comment" style="color: #FFA500;"></i></p>
+                  <!--退会しているユーザーのいいね等はカウントされない-->
+                  <p class="mb-0"><%= active_likes_count(post) %> <i class="fas fa-heart" style="color: red;"></i></p>
+                  <p class="mb-0"><%= active_bookmarks_count(post) %> <i class="fa-solid fa-bookmark" style="color: #6495ED;"></i></p>
+                  <p class="mb-0"><%= active_comments_count(post) %> <i class="fas fa-comment" style="color: #FFA500;"></i></p>
                   <!--投稿が公開中かつユーザーが退会していないかつゲストユーザーではない場合にのみtrue(公開中)となる-->
                   <span class="badge <%= (post.is_public && !post.user.is_deleted && !post.user.guest?) ? 'badge-success' : 'badge-danger' %> ml-1">
                    <!--上記の条件が true ならば、バッジに badge-success クラスが適用され公開中となり、条件が false の場合は、badge-danger クラスが適用され、非公開となる-->

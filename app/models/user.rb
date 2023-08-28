@@ -29,38 +29,28 @@ class User < ApplicationRecord
   # name空でない15字以下
   validates :name, presence: true, length: { maximum: 15 }
   
-  # ユーザーのいいねした投稿数に非公開の投稿がカウントされないようにするメソッド
-  def active_likes_count
-    self.likes.joins(:post).where('posts.is_public = ?', true).count
+  # current_userが「いいね」や「ブックマーク」した投稿の総数をカウントする場合に非公開の投稿や退会済みのユーザーの投稿を除外する
+  def active_liked_posts_count
+    likes.joins(post: :user).where(posts: { is_public: true }, users: { is_deleted: false }).count
   end
-  # 同じくブックマークがカウントされないようにする
-  def active_bookmarks_count
-    self.bookmarks.joins(:post).where('posts.is_public = ?', true).count
+
+  def active_bookmarked_posts_count
+    bookmarks.joins(post: :user).where(posts: { is_public: true }, users: { is_deleted: false }).count
   end
-  
-  # ユーザーのいいねした投稿数に退会中のユーザーの投稿がカウントされないようにするメソッド
-  def active_likes_count
-    self.likes.joins(:post).where('posts.is_deleted = ?', true).count
-  end
-  # 同じくブックマークがカウントされないようにする
-  def active_bookmarks_count
-    self.bookmarks.joins(:post).where('posts.is_deleted = ?', true).count
-  end
-  
   
         
-    # 指定された他のユーザーをフォローする
-    def follow(other_user)
-      following << other_user
-    end
-    # 指定された他のユーザーのフォローを外す
-    def unfollow(other_user)
-      active_relationships.find_by(followed_id: other_user.id).destroy
-    end
-    # 指定された他のユーザーをフォローしているかどうかをチェック
-    def following?(other_user)
-      following.include?(other_user)
-    end
+  # 指定された他のユーザーをフォローする
+  def follow(other_user)
+    following << other_user
+  end
+  # 指定された他のユーザーのフォローを外す
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy
+  end
+  # 指定された他のユーザーをフォローしているかどうかをチェック
+  def following?(other_user)
+    following.include?(other_user)
+  end
     
     
     # フォロー通知の作成メソッド

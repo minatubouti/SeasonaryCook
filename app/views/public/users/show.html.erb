@@ -7,12 +7,14 @@
         <% if current_user == @user %>
           <div class="d-inline-block mr-3">
             <%= link_to likes_user_path(current_user) do %>
-              <i class="fas fa-heart like-link">いいねした投稿<span style="margin-left: 5px;"><%= current_user.active_likes_count %></span></i>
+              <!--退会済みのユーザーと非公開の投稿を除外して、current_userが「いいね」した数をカウントする（user.rbのロジック使用）-->
+              <i class="fas fa-heart like-link">いいねした投稿<span style="margin-left: 5px;"><%= current_user.active_liked_posts_count %></span></i>
             <% end %>
           </div>
           <div class="d-inline-block mb-4">
             <%= link_to bookmarks_user_path(current_user) do %>
-              <i class="fa-solid fa-bookmark bookmark_link">ブックマーク<span style="margin-left: 5px;"><%= current_user.active_bookmarks_count %></span></i>
+            <!--退会済みのユーザーと非公開の投稿を除外して、current_userが「ブックマーク」した数をカウントする-->
+              <i class="fa-solid fa-bookmark bookmark_link">ブックマーク<span style="margin-left: 5px;"><%= current_user.active_bookmarked_posts_count %></span></i>
             <% end %>
           </div>
         <% end %>
@@ -51,9 +53,10 @@
               <div class="card-body">
                 <h5 class="card-title"><%= link_to post.title, post_path(post), class: 'item-link' %></h5>
                 <div class="d-flex justify-content-between">
-                  <p class="mb-0"><%= post.likes.count %> <i class="fas fa-heart" style="color: red; margin-left: 5px;"></i></p>
-                  <p class="mb-0"><%= post.bookmarks.count %> <i class="fa-solid fa-bookmark" style="color: #6495ED;"></i></p>
-                  <p class="mb-0"><%= post.comments.count %> <i class="fas fa-comment" style="color: #FFA500;"></i></p>
+                  <!--ヘルパーを使用して有効数のみカウントされる-->
+                  <p class="mb-0"><%= active_likes_count(post) %> <i class="fas fa-heart" style="color: red; margin-left: 5px;"></i></p>
+                  <p class="mb-0"><%= active_bookmarks_count(post) %> <i class="fa-solid fa-bookmark" style="color: #6495ED;"></i></p>
+                  <p class="mb-0"><%= active_comments_count(post) %> <i class="fas fa-comment" style="color: #FFA500;"></i></p>
                   <!--自分の投稿の非公開の場合のみ表示-->
                   <% if !post.is_public %>
                    <span class="badge badge-danger">非公開</span>

@@ -21,14 +21,13 @@ class Public::SessionsController < Devise::SessionsController
   # 退会済のアカウントがログインできないようにする
    before_action :withdraw, only: [:create]
 
-    protected
 
-   def withdraw
-        @user = User.find_by(email: params[:user][:email])
-      if @user&.valid_password?(params[:user][:password]) && @user.is_deleted
-          redirect_to new_user_session_path, alert: 'アカウントは退会済みです。'
-      end
-   end
+  def withdraw
+     @user = User.find_by(email: params[:user][:email])
+    if @user&.valid_password?(params[:user][:password]) && @user.is_deleted
+      redirect_to new_user_session_path, aler: 'アカウントは退会済みです。'
+    end
+  end
   
   # before_action :configure_sign_in_params, only: [:create]
 

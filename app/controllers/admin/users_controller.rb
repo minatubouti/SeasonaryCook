@@ -12,9 +12,9 @@ class Admin::UsersController < ApplicationController
 
   def show
     @posts = @user.posts.order(created_at: :desc)
-    @likes_count = @posts.sum { |post| post.likes.count }    # いいねの合計を計算
-    @bookmarks_count = @posts.sum { |post| post.bookmarks.count } # ブックマークの合計を計算
-    @comments_count = @posts.sum { |post| post.comments.count } #コメントの合計の計算
+    @likes_count = @posts.sum { |post| post.likes.count }         # ユーザーのいいねの合計を計算
+    @bookmarks_count = @posts.sum { |post| post.bookmarks.count } # ユーザーのブックマークの合計を計算
+    @comments_count = @posts.sum { |post| post.comments.count }   # ユーザーのコメントの合計の計算
   end
 
   def edit
