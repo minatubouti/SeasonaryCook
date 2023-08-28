@@ -19,9 +19,11 @@
               <% end %>
             </td>
             <td><%= link_to following.name, user_path(following) %></td>
-            <td><%= following.following.count %></td>
-            <td><%= following.followers.count %></td>
-            <td><%= following.posts.count %></td>
+            <!--user.rbのスコープを使用して退会済みのユーザーはカウントされないようにする-->
+            <td><%= following.following.active.count %></td>
+            <td><%= following.followers.active.count %></td>
+            <!--非公開の投稿はカウントされないようにする-->
+            <td><%= following.posts.where(is_public: true).count %></td>
           </tr>
         <% end %>
       </tbody>

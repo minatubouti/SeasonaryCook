@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
    before_action :authenticate_admin! #管理者であることを確認
-   before_action :find_user, only: [:show, :edit, :update, :destroy] # @user = User.find(params[:id])を使うアクション
+   before_action :find_user, only: [:show, :edit, :update, :destroy] # find_userを使うアクション
    include ApplicationHelper #ApplicationHelperに定義されたメソッドをAdmin::UsersControllerでも使えるようにする
    
   def index
@@ -41,12 +41,18 @@ class Admin::UsersController < ApplicationController
     end
   end
   
+  
   private
  
- #@user = User.find(params[:id])が共同で使えるようにする
+ # find_userが共同で使えるようにする
   def find_user
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
+    unless @user
+      flash[:alert] = "指定されたユーザーは存在しないか、削除されました。"
+      redirect_to admin_users_path
+    end
   end
+
 
   def user_params
     params.require(:user).permit(:name, :profile, :icon_image, :is_deleted)

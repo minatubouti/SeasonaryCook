@@ -47,12 +47,16 @@ class Public::PostsController < ApplicationController
     @posts = @posts.page(params[:page])
   end
 
-
-
   def show
     # 投稿が非公開で、現在のユーザーが投稿のオーナーでない場合（URLでのアクセスを防ぐ)
     if !@post.is_public && current_user != @post.user
       redirect_to root_path, alert: "閲覧権限がありません。"
+      return
+    end
+    
+    # 投稿のオーナーが退会済みの場合
+    if @post.user.is_deleted
+      redirect_to root_path, alert: "この投稿のオーナーは退会済みです。"
       return
     end
   end
@@ -79,7 +83,11 @@ class Public::PostsController < ApplicationController
   private
   
   def find_post
-    @post = Post.find(params[:id])
+    @post = Post.find_by(id: params[:id])
+    unless @post
+      # 投稿が削除されている場合urlでアクセス時にエラーにならないように
+      redirect_to posts_path, alert: '指定された投稿は存在しないか、削除されました。'
+    end
   end
    
   def post_params

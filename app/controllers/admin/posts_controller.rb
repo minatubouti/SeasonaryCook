@@ -42,8 +42,13 @@ class Admin::PostsController < ApplicationController
   private
   #@user = User.find(params[:id])が共同で使えるようにする
   def find_post
-    @post = Post.find(params[:id])
+    @post = Post.find_by(id: params[:id])
+    unless @post
+      # 投稿が削除されている場合urlでアクセス時にエラーにならないように
+      redirect_to admin_posts_path, alert: '指定された投稿は存在しないか、削除されました。'
+    end
   end
+
   
   def post_params
     params.require(:post).permit(:title, :tag_list, :season, :is_public)

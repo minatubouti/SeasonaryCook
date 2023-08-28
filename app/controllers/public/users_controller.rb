@@ -2,14 +2,22 @@ class Public::UsersController < ApplicationController
   before_action :authenticate_user! # ログインチェック
   before_action :correct_user, only: [:edit, :update, :withdraw, :check_out]
   before_action :reject_guest, only: [:edit, :update, :withdraw, :check_out] #ゲストユーザか確認
-  before_action :find_user, only: [:show, :edit, :update, :likes, :bookmarks]  # @user = User.find(params[:id])を使用するアクション
+  before_action :find_user, only: [:show, :edit, :update, :likes, :bookmarks]  # find_userを使用するアクション
   
   def show
-     # ゲストユーザーのマイページを閲覧しようとしているが、現在のユーザーがゲストユーザーでない場合
+     # 退会済みのユーザーの場合(urlでのアクセスを防ぐ)
+    if @user.is_deleted
+      flash[:alert] = "このユーザーは退会済みです。"
+      redirect_to root_path
+      return
+    end
+    
+    # ゲストユーザーのマイページを閲覧しようとしているが、現在のユーザーがゲストユーザーでない場合
     if @user.guest? && !current_user.guest?
       redirect_to root_path, alert: 'ゲストユーザーのページは表示できません。'
       return
     end
+    
     if current_user == @user
       @posts = @user.posts.order(created_at: :desc) # 自分のマイページなら全投稿
     else
@@ -56,8 +64,13 @@ class Public::UsersController < ApplicationController
   private
   
     def find_user
-      @user = User.find(params[:id])
+      @user = User.find_by(id: params[:id])
+      unless @user
+        flash[:alert] = "指定されたユーザーは存在しないか、削除されました。"
+        redirect_to root_path
+      end
     end
+
   
     def user_params
      params.require(:user).permit(:icon_image, :name, :profile)
