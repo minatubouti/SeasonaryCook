@@ -56,14 +56,14 @@ class Post < ApplicationRecord
   end
   
   
-  # いいね通知の作成メソッド
+  # いいねを行った際に通知（Notification）を作成するメソッド、引数としてcurrent_user（いいねを行ったユーザー）を受け取ります。
   def create_notification_like!(current_user)
-    user_id = self.user_id  # self はこの場合 Post オブジェクトを指す
+    user_id = self.user_id  # self はこの場合 Post オブジェクトを指す(self.user_idは投稿の作成者のID)
     
     # すでに「いいね」されているか検索
     temp = Notification.where(["visitor_id = ? and visited_id = ? and post_id = ? and action = ?", current_user.id, user_id, id, 'like'])
   
-    # いいねされていない場合、かつ、自分自身へのいいねでない場合のみ、通知レコードを作成
+    # temp.blank?がtrue（すでに同じ通知がない）であり、かつcurrent_user.id != user_id（自分自身の投稿にいいねしていない）場合、新しい通知レコードを作成
     if temp.blank? && current_user.id != user_id
       notification = current_user.active_notifications.new(
         post_id: id,
@@ -74,7 +74,7 @@ class Post < ApplicationRecord
       if notification.visitor_id == notification.visited_id
         notification.checked = true
       end
-  
+      # notificationオブジェクトが有効（valid?メソッドがtrueを返す）であれば、この通知を保存
       notification.save if notification.valid?
     end
   end
@@ -82,7 +82,7 @@ class Post < ApplicationRecord
   
 # コメント通知の作成メソッド
   def create_notification_comment!(current_user, comment_id)
-  # 自分以外にコメントしている人をすべて取得し、全員に通知を送る
+  # 対象となる投稿（post_id: id）にコメントした人々（user_id）を検索します。ただしコメントが自分（current_user）によるものである場合は除外される
     temp_ids = Comment.select(:user_id).where(post_id: id).where.not(user_id: current_user.id).distinct
     temp_ids.each do |temp_id|
       # 自分自身の投稿へのコメントでなければ通知を保存

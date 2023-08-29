@@ -29,7 +29,7 @@
         <% if notification.post.user_id == visited.id %>
           <%= link_to "あなたの投稿: #{notification.post.title}", notification.post, style: "font-weight: bold;" %>
           <%= "にコメントしました" %>
-          <p class="text-muted mb-0"><%= Comment.find_by(id: notification.comment_id)&.content %></p>
+          <p class="text-muted mb-0 mt-3 ml-5"><%= Comment.find_by(id: notification.comment_id)&.content %></p>
         <% else %>
           <!--コメントしたことがある投稿に自分以外のコメントがついた場合-->
           <span>
