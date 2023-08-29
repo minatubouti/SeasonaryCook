@@ -34,5 +34,4 @@ ER図　https://drive.google.com/file/d/1jwcQ9YMyjfxELW2VcfNgaWuJ62QvDFnU/view?u
 - JSライブラリ：jQuery
 - IDE：Cloud9
 ​
-## 使用素材
 
