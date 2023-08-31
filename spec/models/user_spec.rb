@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   
   # アソシエーションのテスト
-  describe "Associations" do
+  describe "アソシエーション" do
     it { should have_many(:posts).dependent(:destroy) }
     it { should have_many(:likes).dependent(:destroy) }
     it { should have_many(:liked_posts).through(:likes).source(:post) }
@@ -24,28 +24,28 @@ RSpec.describe User, type: :model do
 
 
  # バリデーションのテスト
-  describe 'validations' do
-    it 'is valid with a valid email, name, and password' do
+  describe 'バリデーション' do
+    it '有効なメール、名前、パスワードが存在する場合は登録できる' do
       user = User.new(email: 'test@example.com', name: 'Test User', password: 'password')
       expect(user).to be_valid
     end
     
     # emailの存在性の検証
-    it 'is invalid without an email' do
+    it 'メールが存在しない場合は登録できない' do
       user = User.new(email: nil, password: 'password', name: 'Test User')
       user.valid?
       expect(user.errors[:email]).to include("を入力してください")
     end
 
     # emailの形式の検証（正規表現に一致するか）
-    it 'is invalid with an incorrect email format' do
+    it 'メールの形式が不正な場合は登録できない' do
       user = User.new(email: 'invalid-email', password: 'password', name: 'Test User')
       user.valid?
       expect(user.errors[:email]).to include("は不正な値です")
     end
     
     # emailが重複しないことの検証
-    it 'is invalid with a duplicate email' do
+    it 'emailが重複する場合は登録できない' do
       User.create(email: 'test@example.com', password: 'password', name: 'Test User')
       user = User.new(email: 'test@example.com', password: 'password', name: 'Test User')
       user.valid?
@@ -53,97 +53,95 @@ RSpec.describe User, type: :model do
     end
   
     # passwordの長さの検証（６文字以上か）
-    it 'is invalid with a password less than 6 characters' do
+    it 'パスワードが６文字以下の場合は登録できない' do
       user = User.new(email: 'test@example.com', password: 'short', name: 'Test User')
       user.valid?
       expect(user.errors[:password]).to include("は6文字以上で入力してください")
     end
     
     # nameの存在性の検証
-    it 'is invalid without a name' do
+    it 'nemeが空の場合は登録できない' do
       user = User.new(email: 'test@example.com', password: 'password', name: nil)
       user.valid?
       expect(user.errors[:name]).to include("を入力してください")
     end
     
     # nameの長さの検証
-    it 'is invalid with a name longer than 15 characters' do
+    it 'nameの長さが15文字以上の場合登録できない' do
       user = User.new(email: 'test@example.com', password: 'password', name: 'a' * 16)
       user.valid?
       expect(user.errors[:name]).to include("は15文字以内で入力してください")
     end
     
     # active スコープが退会していない（is_deleted: false）ユーザーだけを取得することのテスト
-    describe "Scopes" do
+    describe "スコープ" do
       let!(:active_user) { create(:user, is_deleted: false) }
       let!(:inactive_user) { create(:user, is_deleted: true) }
   
-      it "returns only active users" do
+      it "退会していないユーザーだけ取得される" do
         expect(User.active).to include(active_user)
         expect(User.active).not_to include(inactive_user)
       end
     end
     
     # Postとのアソシエーションの関連
-    describe 'association with posts' do
+    describe 'postとuserの関係' do
       let(:user) { create(:user) }
       let!(:post) { create(:post, user: user) }
     
-      it 'has many posts' do
+      it '複数の投稿を持っている' do
         expect(user.posts).to include(post)
       end
     
-      it 'deletes associated posts when deleted' do
+      it 'ユーザーが削除されると関連する投稿も削除される' do
         expect { user.destroy }.to change(Post, :count).by(-1)
       end
     end
     
     # likeとのアソシエーションの関係
-    describe 'association with likes' do
+    describe 'likeとuserの関係' do
       let(:user) { create(:user) }
       let!(:like) { create(:like, user: user) }
     
-      it 'has many likes' do
+      it '複数のいいねを持っている' do
         expect(user.likes).to include(like)
       end
     
-      it 'deletes associated likes when deleted' do
+      it 'ユーザーが削除されると関連するいいねも削除される' do
         expect { user.destroy }.to change(Like, :count).by(-1)
       end
     end
     
     # コメントとのアソシエーションの関係
-    describe 'association with comments' do
+    describe 'commentとuserの関係' do
       let(:user) { create(:user) }
       let!(:comment) { create(:comment, user: user) }
     
-      it 'has many comments' do
+      it '複数のコメントを持っている' do
         expect(user.comments).to include(comment)
       end
     
-      it 'deletes associated comments when deleted' do
+      it 'ユーザーが削除されると関連するコメントも削除される' do
         expect { user.destroy }.to change(Comment, :count).by(-1)
       end
     end
     
     # bookmarkとのアソシエーションの関係
-    describe 'association with bookmarks' do
+    describe 'bookmarkとuserの関係' do
       let(:user) { create(:user) }
       let!(:bookmark) { create(:bookmark, user: user) }
     
-      it 'has many bookmarks' do
+      it '複数のブックマークを持っている' do
         expect(user.bookmarks).to include(bookmark)
       end
     
-      it 'deletes associated bookmarks when deleted' do
+      it 'ユーザーが削除されると関連するブックマークも削除される' do
         expect { user.destroy }.to change(Bookmark, :count).by(-1)
       end
     end
-
-
   end
   
-  describe 'methods' do
+  describe 'メソッド' do
     # メソッドのテスト
     let(:user) { create(:user) }
     let(:other_user) { create(:user, email: "test@sample.com") }
@@ -153,14 +151,14 @@ RSpec.describe User, type: :model do
     let!(:bookmark) { create(:bookmark, user: user, post: public_post) }
   
     describe '#follow' do
-      it 'follows another user' do
+      it '他のユーザーをフォローする' do
         user.follow(other_user)
         expect(user.following).to include(other_user)
       end
     end
   
     describe '#unfollow' do
-      it 'unfollows another user' do
+      it '他のユーザーのフォローを解除する' do
         user.follow(other_user)
         user.unfollow(other_user)
         # フォローがカウントが０
@@ -169,11 +167,11 @@ RSpec.describe User, type: :model do
     end
     
   # メソッドが非公開の投稿や退会済みのユーザーの投稿を除外して、「いいね」の総数を正確にカウントすることのテスト
-    it "counts the number of active liked posts" do
+    it "アクティブな「いいね」の総数を正確にカウントする" do
       expect(user.active_liked_posts_count).to eq(1)
     end
   # メソッドが非公開の投稿や退会済みのユーザーの投稿を除外して、「ブックマーク」の総数を正確にカウントすることのテスト
-    it "counts the number of active bookmarked posts" do
+    it "アクティブな「ブックマーク」の総数を正確にカウントする" do
       expect(user.active_bookmarked_posts_count).to eq(1)
     end
   end
