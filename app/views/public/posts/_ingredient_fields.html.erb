@@ -24,6 +24,7 @@
     $(document).on('click', '.remove-ingredient', function(){
         // クリックされた.削除ボタンに最も近い.ingredient-fieldsを削除する
       $(this).closest('.ingredient-fields').find("input[name$='[_destroy]']").val('true');
+       // そして、そのフィールドを隠す
       $(this).closest('.ingredient-fields').hide();
     });
   });

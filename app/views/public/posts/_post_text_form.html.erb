@@ -38,13 +38,12 @@
     </div>
     
     <!--材料、分量フォームの隠し要素テンプレート、desplay: noneを指定しているため表示はされない-->
-    <% ingredient_form_builder = ActionView::Helpers::FormBuilder.new(:post, @post, self, {}) %>
-      <%= content_tag :div, id: 'ingredient-fields-template', style: 'display: none;', data: {id: Time.now.to_i, ingredient: {}} do %>
-        <%= ingredient_form_builder.fields_for :ingredients, Ingredient.new, child_index: Time.now.to_i do |ingredient_field| %>
+    <%= content_tag :div, id: 'ingredient-fields-template', style: 'display: none;', data: {id: Time.now.to_i, ingredient: {}} do %>
+      <%= f.fields_for :ingredients, Ingredient.new, child_index: Time.now.to_i do |ingredient_field| %>
         <%= render 'ingredient_fields', f: ingredient_field %>
       <% end %>
     <% end %>
-      
+          
     <!--材料、分量フォーム追加できる-->
     <%= f.fields_for :ingredients do |ingredient_field| %>
       <%= render 'ingredient_fields', f: ingredient_field %>
