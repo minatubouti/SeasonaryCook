@@ -1,4 +1,4 @@
-<div class="ingredient-fields row">
+<div class="ingredient-fields row align-items-center">
   <div class="col">
     <div class="form-group">
       <%= f.text_field :name, placeholder: "材料名(必須)", class: 'form-control light-placeholder' %>
@@ -9,4 +9,19 @@
       <%= f.text_field :amount, placeholder: "分量(必須)", class: "form-control light-placeholder" %>
     </div>
   </div>
+  <div class="col-auto">
+    <button type="button" class="btn btn-danger remove-ingredient">
+      <i class="fas fa-trash-alt"></i> 
+    </button>
+  </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+    // 削除ボタンがクリックされたときの処理
+    $(document).on('click', '.remove-ingredient', function(){
+     // クリックされた.削除ボタンに最も近い.ingredient-fieldsを削除する
+      $(this).closest('.ingredient-fields').remove();
+    });
+  });
+</script>

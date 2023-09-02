@@ -1,6 +1,19 @@
-<div class="instruction-field form-group">
-  <div class="form-group">
+<div class="instruction-field form-group d-flex align-items-center" id="instruction-field">
+  <div class="flex-grow-1">
     <%= f.label :instructions, raw("ステップ" + content_tag(:span, "（必須）", class: "required-label")) %>
     <%= f.text_area :instructions, class: "form-control" %>
   </div>
+  <button type="button" class="btn btn-danger remove-instruction ml-2 mt-5">
+    <i class="fas fa-trash-alt"></i> <!-- FontAwesomeのゴミ箱アイコン -->
+  </button>
 </div>
+
+<script>
+    $(document).ready(function(){
+    // 削除ボタンがクリックされたときの処理
+    $(document).on('click', '.remove-instruction', function(){
+    // クリックされた.削除ボタンに最も近い.instruction-fieldsを削除する
+      $(this).closest('.instruction-field').remove();
+    });
+  });
+</script>

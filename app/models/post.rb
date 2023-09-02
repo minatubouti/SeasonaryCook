@@ -13,7 +13,7 @@ class Post < ApplicationRecord
   # accepts_nested_attributes_forで子かラムを一緒に保存できるようになる。
   accepts_nested_attributes_for :recipe_steps, reject_if: :all_blank, allow_destroy: true
   has_many :ingredients, dependent: :destroy
-  accepts_nested_attributes_for :ingredients
+  accepts_nested_attributes_for :ingredients, reject_if: :all_blank, allow_destroy: true
   has_many :notifications, dependent: :destroy
  
   
