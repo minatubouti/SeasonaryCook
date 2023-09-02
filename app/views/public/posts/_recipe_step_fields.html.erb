@@ -1,13 +1,16 @@
-<div class="instruction-field form-group d-flex align-items-center">
-  <!--編集の際データベースからも削除できるように-->
+<div class="instruction-field form-group">
   <%= f.hidden_field :_destroy %>
-  <div class="flex-grow-1">
+  <div class="form-group">
     <%= f.label :instructions, raw("ステップ" + content_tag(:span, "（必須）", class: "required-label")) %>
-    <%= f.text_area :instructions, class: "form-control" %>
+    <div class="input-group">
+      <%= f.text_area :instructions, class: "form-control", rows: "2" %>
+      <div class="input-group-append">
+        <button type="button" class="btn btn-danger remove-instruction">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </div>
+    </div>
   </div>
-  <button type="button" class="btn btn-danger remove-instruction ml-2 mt-5">
-    <i class="fas fa-trash-alt"></i> <!-- FontAwesomeのゴミ箱アイコン -->
-  </button>
 </div>
 
 <script>
@@ -16,8 +19,8 @@
     $(document).on('click', '.remove-instruction', function(){
       // クリックされた削除ボタンに最も近い.instruction-fieldにある_destroyフィールドをtrueに設定
       $(this).closest('.instruction-field').find("input[name$='[_destroy]']").val('true');
-      // そして、そのフィールドを隠す（もしくは削除する）
-      $(this).closest('.instruction-field').hide();
+      // そして、そのフィールドを隠す（removeでは削除、hideでは要素を隠す）
+      $(this).closest('.instruction-field').hide(); 
     });
   });
 </script>

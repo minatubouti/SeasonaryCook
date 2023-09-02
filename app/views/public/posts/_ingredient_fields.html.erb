@@ -20,9 +20,9 @@
 
 <script>
   $(document).ready(function(){
-    // 削除ボタンがクリックされたときの処理
+      // 削除ボタンがクリックされたときの処理
     $(document).on('click', '.remove-ingredient', function(){
-      // クリックされた.削除ボタンに最も近い.ingredient-fieldsを削除する
+        // クリックされた.削除ボタンに最も近い.ingredient-fieldsを削除する
       $(this).closest('.ingredient-fields').find("input[name$='[_destroy]']").val('true');
       $(this).closest('.ingredient-fields').hide();
     });
