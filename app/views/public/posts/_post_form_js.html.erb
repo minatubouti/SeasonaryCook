@@ -1,55 +1,39 @@
-<!--材料、分量フォームの隠し要素テンプレート-->
-<% ingredient_form_builder = ActionView::Helpers::FormBuilder.new(:post, @post, self, {}) %>
-<%= content_tag :div, id: 'ingredient-fields-template', style: 'display: none;', data: {id: Time.now.to_i, ingredient: {}} do %>
-  <%= ingredient_form_builder.fields_for :ingredients, Ingredient.new, child_index: Time.now.to_i do |ingredient_field| %>
-    <%= render 'ingredient_fields', f: ingredient_field %>
-  <% end %>
-<% end %>
-
-<!--作り方フォームの隠し要素テンプレート-->
-<% recipe_step_form_builder = ActionView::Helpers::FormBuilder.new(:post, @post, self, {}) %>
-<%= content_tag :div, id: 'recipe-step-fields-template', style: 'display: none;', data: {id: Time.now.to_i, recipe_step: {}} do %>
-  <%= recipe_step_form_builder.fields_for :recipe_steps, RecipeStep.new, child_index: Time.now.to_i do |recipe_step_field| %>
-    <%= render 'recipe_step_fields', f: recipe_step_field %>
-  <% end %>
-<% end %>
-
 
 <!--javascript使用-->
 <script>
   // 材料、数量フォーム追加
-document.addEventListener("DOMContentLoaded", function() {
-  document.getElementById("add-ingredient").addEventListener("click", function() {
-    var content = document.getElementById("ingredient-fields-template").innerHTML;
-    var uniqueId = new Date().getTime();
-    content = content.replace(/_ingredients_attributes_Time.now.to_i_/g, "_ingredients_attributes_" + uniqueId + "_")
-                     .replace(/ingredients_attributes_Time.now.to_i_/g, "ingredients_attributes_" + uniqueId + "_");
-    document.getElementById("ingredients").insertAdjacentHTML('beforeend', content);
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("add-ingredient").addEventListener("click", function() {
+      var content = document.getElementById("ingredient-fields-template").innerHTML;
+      var uniqueId = new Date().getTime();
+      content = content.replace(/_ingredients_attributes_Time.now.to_i_/g, "_ingredients_attributes_" + uniqueId + "_")
+                       .replace(/ingredients_attributes_Time.now.to_i_/g, "ingredients_attributes_" + uniqueId + "_");
+      document.getElementById("ingredients").insertAdjacentHTML('beforeend', content);
+    });
   });
-});
-
-// 作り方フォーム追加
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelector('#add-recipe_step').addEventListener('click', () => {
-    let content = document.getElementById('recipe_step-fields-template').innerHTML;
-    let uniqueId = new Date().getTime();
-    content = content.replace(/new_recipe_step/g, uniqueId);
-    document.getElementById('recipe_steps').insertAdjacentHTML('beforeend', content);
+  
+  // 作り方フォーム追加
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#add-recipe_step').addEventListener('click', () => {
+      let content = document.getElementById('recipe_step-fields-template').innerHTML;
+      let uniqueId = new Date().getTime();
+      content = content.replace(/new_recipe_step/g, uniqueId);
+      document.getElementById('recipe_steps').insertAdjacentHTML('beforeend', content);
+    });
   });
-});
-
-
-// 画像リアルタイム表示
-$(document).ready( function() {
-  $('#imageField').on('change', function(e) {
-    var file = e.target.files[0];
-    var reader = new FileReader();
-
-    reader.onload = function(e) {
-      $('#imagePreviewImg').attr('src', e.target.result).show();
-    };
-
-    reader.readAsDataURL(file);
+  
+  
+  // 画像リアルタイム表示
+  $(document).ready( function() {
+    $('#imageField').on('change', function(e) {
+      var file = e.target.files[0];
+      var reader = new FileReader();
+  
+      reader.onload = function(e) {
+        $('#imagePreviewImg').attr('src', e.target.result).show();
+      };
+  
+      reader.readAsDataURL(file);
+    });
   });
-});
 </script>

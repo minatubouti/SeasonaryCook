@@ -40,8 +40,8 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
     resources :bookmarks, only: [:create, :destroy]
   end
-     resources :notifications, only: [:index]
-     resources :inquiries, only: [:new, :create, :show]
+    resources :notifications, only: [:index]
+    resources :inquiries, only: [:new, :create, :show]
   end
   
   devise_scope :user do

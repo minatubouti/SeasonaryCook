@@ -1,4 +1,6 @@
-<div class="instruction-field form-group d-flex align-items-center" id="instruction-field">
+<div class="instruction-field form-group d-flex align-items-center">
+  <!--編集の際データベースからも削除できるように-->
+  <%= f.hidden_field :_destroy %>
   <div class="flex-grow-1">
     <%= f.label :instructions, raw("ステップ" + content_tag(:span, "（必須）", class: "required-label")) %>
     <%= f.text_area :instructions, class: "form-control" %>
@@ -9,11 +11,13 @@
 </div>
 
 <script>
-    $(document).ready(function(){
+  $(document).ready(function(){
     // 削除ボタンがクリックされたときの処理
     $(document).on('click', '.remove-instruction', function(){
-    // クリックされた.削除ボタンに最も近い.instruction-fieldsを削除する
-      $(this).closest('.instruction-field').remove();
+      // クリックされた削除ボタンに最も近い.instruction-fieldにある_destroyフィールドをtrueに設定
+      $(this).closest('.instruction-field').find("input[name$='[_destroy]']").val('true');
+      // そして、そのフィールドを隠す（もしくは削除する）
+      $(this).closest('.instruction-field').hide();
     });
   });
 </script>

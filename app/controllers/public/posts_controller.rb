@@ -93,8 +93,8 @@ class Public::PostsController < ApplicationController
   def post_params
     params.require(:post).permit(
       :title, :description, :main_vegetable, :season, :is_public, :image, :tag_list, :serving_size,
-      ingredients_attributes: [:id, :name, :amount],
-      recipe_steps_attributes: [:id, :instructions] 
+      ingredients_attributes: [:id, :name, :amount, :_destroy],
+      recipe_steps_attributes: [:id, :instructions, :_destroy] 
     )
   end
    
