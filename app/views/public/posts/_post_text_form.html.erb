@@ -39,34 +39,37 @@
     
     <!--材料、分量フォームの隠し要素テンプレート、desplay: noneを指定しているため表示はされない-->
     <%= content_tag :div, id: 'ingredient-fields-template', style: 'display: none;', data: {id: Time.now.to_i, ingredient: {}} do %>
+    <!--新しいIngredientオブジェクトを作成,新たに追加されるフォームに一意なインデックスを付与-->
       <%= f.fields_for :ingredients, Ingredient.new, child_index: Time.now.to_i do |ingredient_field| %>
         <%= render 'ingredient_fields', f: ingredient_field %>
       <% end %>
     <% end %>
           
-    <!--材料、分量フォーム追加できる-->
+    <!--すでにデータベースに保存されているか、または新しくユーザーが追加した「材料」に関する情報を表示するためのフォーム-->
     <%= f.fields_for :ingredients do |ingredient_field| %>
       <%= render 'ingredient_fields', f: ingredient_field %>
     <% end %>
     <div id="ingredients"></div>
     <div>
-      <!--「材料を追加」ボタン-->
+      <!--材料、分量フォームを追加できる-->
       <button type="button" id="add-ingredient" class="btn mb-4"  style="background-color: #FFD5EC;">材料を追加</button>
     </div>
     
-  <%# 作り方フォームの隠し要素テンプレート %>
+    <!--作り方フォームの隠し要素テンプレート-->
     <div id="recipe_step-fields-template" style="display: none;">
+      <!--新しいRecipeStepオブジェクトを作成-->
       <%= f.fields_for :recipe_steps, RecipeStep.new, child_index: "new_recipe_step" do |recipe_step_field| %>
         <%= render 'recipe_step_fields', f: recipe_step_field %>
       <% end %>
     </div>
     
-    <%# 実際の作り方フォーム %>
+    <!--すでにデータベースに存在するか、または新しく追加された「作り方」ステップを表示するフォーム-->
     <%= f.fields_for :recipe_steps do |recipe_step_field| %>
       <%= render 'recipe_step_fields', f: recipe_step_field %>
     <% end %>
     <div id="recipe_steps"></div>
     <div>
+      <!--作り方フォームを追加できる-->
       <button type="button" id="add-recipe_step" class="btn"  style="background-color: #FFD5EC;">作り方を追加</button>
     </div>
 
