@@ -18,7 +18,7 @@ class Post < ApplicationRecord
  
   
   validates :title, :main_vegetable, :season, presence: true
-  # 後悔するか判定
+  #公開するか判定
   validates :is_public, inclusion: { in: [true, false] }
   
   # 季節の選択肢

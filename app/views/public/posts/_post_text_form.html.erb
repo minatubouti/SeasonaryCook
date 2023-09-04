@@ -37,13 +37,13 @@
       <%= f.number_field :serving_size, placeholder: "2", in: 1..100, class: 'form-control light-placeholder' %>
     </div>
     
-    <!--材料、分量フォームの隠し要素テンプレート、desplay: noneを指定しているため表示はされない-->
-    <%= content_tag :div, id: 'ingredient-fields-template', style: 'display: none;', data: {id: Time.now.to_i, ingredient: {}} do %>
-    <!--新しいIngredientオブジェクトを作成,新たに追加されるフォームに一意なインデックスを付与-->
-      <%= f.fields_for :ingredients, Ingredient.new, child_index: Time.now.to_i do |ingredient_field| %>
+   <!-- 材料、分量フォームの隠し要素テンプレート、display: noneを指定しているため表示はされない -->
+    <div id="ingredient-fields-template" style="display: none;">
+      <!-- 新しいIngredientオブジェクトを作成, 新たに追加されるフォームに一意なインデックスを付与 -->
+      <%= f.fields_for :ingredients, Ingredient.new, child_index: "new_ingredient" do |ingredient_field| %>
         <%= render 'ingredient_fields', f: ingredient_field %>
       <% end %>
-    <% end %>
+    </div>
           
     <!--すでにデータベースに保存されているか、または新しくユーザーが追加した「材料」に関する情報を表示するためのフォーム-->
     <%= f.fields_for :ingredients do |ingredient_field| %>

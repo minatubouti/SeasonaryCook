@@ -1,16 +1,15 @@
 
 <script>
 // 材料、数量フォーム追加
-  // DOMContentLoaded文書のロード、DOMが完全に読み込まれた後に以下のコードが実行される
-  document.addEventListener("DOMContentLoaded", function() {
+  // DOMContentLoaded文書のロード、DOMが完全に読み込まれた後に以下のコードが実行される(アロー関数使用)
+  document.addEventListener("DOMContentLoaded", () => {
     // "add-ingredient" IDを持つHTML要素（ボタン）を取得、「材料を追加」ボタンにクリックイベントを追加
-    document.getElementById("add-ingredient").addEventListener("click", function() {
+    document.getElementById("add-ingredient").addEventListener("click", () => {
       // "ingredient-fields-template"というIDを持つdiv要素の内部HTML（隠しテンプレート）を取得
       var content = document.getElementById("ingredient-fields-template").innerHTML;
       var uniqueId = new Date().getTime();
       // replace: テンプレート内のプレースホルダーを一意なIDで置き換え
-      content = content.replace(/_ingredients_attributes_Time.now.to_i_/g, "_ingredients_attributes_" + uniqueId + "_")
-                       .replace(/ingredients_attributes_Time.now.to_i_/g, "ingredients_attributes_" + uniqueId + "_");
+      content = content.replace(/new_ingredient/g, uniqueId);
       // 新しい材料フォームをDOMに追加
       document.getElementById("ingredients").insertAdjacentHTML('beforeend', content);
     });
