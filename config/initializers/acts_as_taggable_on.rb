@@ -1,1 +1,1 @@
-ActsAsTaggableOn.delimiter = "#" # タグのデリミタを#に設定
+# ActsAsTaggableOn.delimiter = "#" # タグのデリミタを#に設定

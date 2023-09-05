@@ -18,8 +18,15 @@
     </div>
     
     <div class="form-group">
-      <%= f.label :tag_list, "タグ（＃で区切って複数入力可）" %>
-      <%= f.text_field :tag_list, placeholder: "#揚げ物 #中華", class: 'form-control light-placeholder'  %>
+      <%= f.label :tag_list, "タグを入力してボタンで追加", class: 'form-control-label' %>
+      <div class="input-group">
+        <%= f.text_field :tag_list, id: 'tag-input', placeholder: "揚げ物", class: 'form-control' %>
+        <div class="input-group-append">
+          <button id="add-tag-btn" class="btn btn-info" type="button">タグ追加</button>
+        </div>
+      </div>
+      <div id="tags-display"></div>
+      <input type="hidden" id="actual-tag-list" name="post[tag_list]" value="">
     </div>
 
     <div class="form-group">
@@ -85,3 +92,59 @@
       </div>
     </div>
   </div>
+  
+  
+<!--タグを動的に追加する-->
+<script>
+ // ページが読み込まれた後の処理を記述
+  document.addEventListener('DOMContentLoaded', function() {
+    // 各要素の参照を取得
+    const tagInput = document.getElementById('tag-input');
+    const addTagBtn = document.getElementById('add-tag-btn');
+    const tagsDisplay = document.getElementById('tags-display');
+    const actualTagList = document.getElementById('actual-tag-list');
+    
+    // タグ追加ボタンがクリックされた際の処理
+    addTagBtn.addEventListener('click', function() {
+       // 入力されたタグの値を取得し、前後の空白を削除
+        const tagValue = tagInput.value.trim();
+       
+        // タグが入力されていた場合のみ以下の処理を実行
+        if (tagValue !== "") {
+            // 新しいタグ要素を作成し、テキストとして入力値を設定
+            const tagSpan = document.createElement('span');
+            tagSpan.className = 'badge badge-primary mr-2';
+            tagSpan.textContent = tagValue;
+  
+            // タグの右側に表示する削除アイコンを作成
+            const closeIcon = document.createElement('i');
+            closeIcon.className = 'fas fa-times close-tag-icon';
+            tagSpan.appendChild(closeIcon);
+            tagsDisplay.appendChild(tagSpan);
+
+            // 実際の送信用タグリストに追加
+            const currentTags = actualTagList.value.split(',').filter(tag => tag !== "");
+            currentTags.push(tagValue);
+            actualTagList.value = currentTags.join(',');
+  
+            // 入力フィールドをクリア
+            tagInput.value = "";
+        }
+    });
+  
+    tagsDisplay.addEventListener('click', function(e) {
+        if (e.target.classList.contains('close-tag-icon')) {
+            const tagToRemove = e.target.parentNode.childNodes[0].nodeValue.trim();
+            e.target.parentNode.remove();
+  
+            // 実際の送信用タグリストから削除
+            const currentTags = actualTagList.value.split(',');
+            const index = currentTags.indexOf(tagToRemove);
+            if (index > -1) {
+                currentTags.splice(index, 1);
+                actualTagList.value = currentTags.join(',');
+            }
+        }
+    });
+  });
+</script>

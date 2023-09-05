@@ -16,6 +16,13 @@
   color: #ccc; /* この色を調整して希望の薄さに */
 }
 
+// タグ削除マーク
+.close-tag-icon {
+    font-size: 0.75em;  /*アイコンを小さく */
+    margin-left: 5px;
+    cursor: pointer; /*ポインター設定（指差しマーク）*/
+}
+
 // ラジオボタン
 .custom-radio .form-check-input {
   width: 25px;
