@@ -7,7 +7,7 @@
           <!--投稿内容詳細_yieldを使用して、特定のパスを動的に変更-->
           <%= provide(:user_path, user_path(@post.user)) %>
           <%= render partial: 'post_details', locals: { post: @post } %>
-          
+          <!--タグの表示部分-->
           <% @post.tag_list.each do |tag| %>
             <%= link_to tag, posts_path(tag: tag), class: 'tag' %>
           <% end %>
