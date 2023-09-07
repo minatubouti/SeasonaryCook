@@ -1,6 +1,7 @@
 ja:
   devise:
     failure:
+      account_inactive: "あなたのアカウントは利用を停止しました。"
       user:
         unauthenticated: "ログインしてください。"
       unauthenticated: "ログインまたはアカウント登録してください。"

@@ -29,6 +29,17 @@ class User < ApplicationRecord
   # name空でない15字以下
   validates :name, presence: true, length: { maximum: 15 }
   
+  # 管理者が退会させた場合ログアウトを待たずに利用不可にする
+  def active_for_authentication?
+     # is_deletedがtrue（つまり退会済み）の場合にユーザーを非アクティブにしたいので、条件を!self.is_deletedとする
+    super && !self.is_deleted
+  end
+  
+  # active_for_authentication? メソッドがtrueを返すとinactive_message を呼び出しエラーメッセージを表示する
+  def inactive_message
+    is_deleted ? super: :account_inactive 
+  end
+  
   # current_userが「いいね」や「ブックマーク」した投稿の総数をカウントする場合に非公開の投稿や退会済みのユーザーの投稿を除外する
   def active_liked_posts_count
     likes.joins(post: :user).where(posts: { is_public: true }, users: { is_deleted: false }).count

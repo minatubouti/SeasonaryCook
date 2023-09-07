@@ -83,7 +83,7 @@ class Public::PostsController < ApplicationController
   private
   
   def find_post
-    @post = Post.find_by(id: params[:id])
+    # @post = Post.find_by(id: params[:id])
     unless @post
       # 投稿が削除されている場合urlでアクセス時にエラーにならないように
       redirect_to posts_path, alert: '指定された投稿は存在しないか、削除されました。'
