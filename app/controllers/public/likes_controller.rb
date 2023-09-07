@@ -1,4 +1,5 @@
 class Public::LikesController < ApplicationController
+  before_action :ensure_correct_user, only: [:destroy] #他のユーザーがいいねを削除できないように
  
   def create
     @like = current_user.likes.create(post_id: params[:post_id])
@@ -11,11 +12,20 @@ class Public::LikesController < ApplicationController
   end
 
   def destroy
-    @like = Like.find(params[:id])
+    # @likeの取得をensure_correct_user内で行い、destroyアクションでその@likeを利用する
     @post = @like.post
     @like.destroy
     respond_to do |format|
      format.js
+    end
+  end
+  
+  private
+ # @likeが現在のユーザーのものでなければ、リダイレクトして操作を中断させる
+  def ensure_correct_user
+    @like = current_user.likes.find_by(id: params[:id])
+    unless @like
+      redirect_to root_path, alert: '権限がありません。'
     end
   end
 end
