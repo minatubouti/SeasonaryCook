@@ -1,1 +1,4 @@
-$('#comments').append('<%= j render("public/comments/comment", comments: [@comment]) %>');
+<!--コメントを表示するボタンによって制御できるようにcommentboxesの中に追加する-->
+<!--.prepend()メソッドを使用して一番上に追加されるようにする-->
+$('.commentboxes').prepend('<%= j render("public/comments/comment", comments: [@comment]) %>');
+

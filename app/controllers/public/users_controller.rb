@@ -55,39 +55,38 @@ class Public::UsersController < ApplicationController
   end
    
   def withdraw
-     Rails.logger.debug "Current User: #{current_user.inspect}"
-     current_user.update(is_deleted: true)
-     reset_session
-     redirect_to root_path, notice: '退会しました。'
+    Rails.logger.debug "Current User: #{current_user.inspect}"
+    current_user.update(is_deleted: true)
+    reset_session
+    redirect_to root_path, notice: '退会しました。'
   end
 
   
   private
   
-    def find_user
-      @user = User.find_by(id: params[:id])
-      unless @user
-        flash[:alert] = "指定されたユーザーは存在しないか、削除されました。"
-        redirect_to root_path
-      end
+  def find_user
+    @user = User.find_by(id: params[:id])
+    unless @user
+      flash[:alert] = "指定されたユーザーは存在しないか、削除されました。"
+      redirect_to root_path
     end
+  end
 
+  def user_params
+    params.require(:user).permit(:icon_image, :name, :profile)
+  end
   
-    def user_params
-     params.require(:user).permit(:icon_image, :name, :profile)
+  # ログインしているユーザーかチェック
+  def correct_user
+    unless @user == current_user
+      flash[:alert] = "権限がありません。"
+      redirect_to(root_url)
     end
-    
-    # ログインしているユーザーかチェック
-    def correct_user
-      unless @user == current_user
-        flash[:alert] = "権限がありません。"
-        redirect_to(root_url)
-      end
+  end
+  
+  def reject_guest
+    if current_user&.guest?
+      redirect_to root_path, alert: "ゲストユーザーはプロフィールの編集はできません。"
     end
-    
-    def reject_guest
-      if current_user&.guest?
-        redirect_to root_path, alert: "ゲストユーザーはプロフィールの編集はできません。"
-      end
-    end
+  end
 end

@@ -51,7 +51,8 @@
        <% end %>
          <button class="commentbox-toggle btn btn-info btn-block">コメントを表示する</button>
           <div class="commentboxes">
-           <%= render 'public/comments/comment', comments: @post.comments %>
+           <!--# @postに関連するコメントを取得し、作成日時の降順に並び替える-->
+           <%= render 'public/comments/comment', comments: @comments %>
           </div>
         </div>
          <%= link_to '投稿一覧に戻る', posts_path, class: 'btn btn-secondary mb-4' %>
@@ -61,9 +62,9 @@
 
 
 <script>
-   jQuery(function(){
+  jQuery(function(){
     // 初期状態でコメントボックスを非表示にする
-   jQuery('.commentboxes').hide();
+    jQuery('.commentboxes').hide();
     // 表示切替ボタンのクリックイベントを検知
     jQuery('.commentbox-toggle').on('click', function(){
     // 表示をslideToggleで切り替える

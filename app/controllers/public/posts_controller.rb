@@ -3,9 +3,9 @@ class Public::PostsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
   
   def new
-   @post = Post.new
-   @post.ingredients.build # 画面で使うための空の食材オブジェクト
-   @post.recipe_steps.build # 画面で使うための空のレシピステップオブジェクト
+    @post = Post.new
+    @post.ingredients.build # 画面で使うための空の食材オブジェクト
+    @post.recipe_steps.build # 画面で使うための空のレシピステップオブジェクト
   end
   
   def create
@@ -59,6 +59,7 @@ class Public::PostsController < ApplicationController
       redirect_to root_path, alert: "この投稿のオーナーは退会済みです。"
       return
     end
+      @comments = @post.comments.order(created_at: :desc)
   end
 
   def edit
