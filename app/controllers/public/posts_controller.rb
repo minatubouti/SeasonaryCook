@@ -1,6 +1,6 @@
 class Public::PostsController < ApplicationController
+  before_action :find_post, only: [:show, :edit, :update, :destroy] #find_postが先に読み込まれるようにする
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
-  before_action :find_post, only: [:show, :edit, :update, :destroy]
   
   def new
    @post = Post.new
@@ -83,7 +83,7 @@ class Public::PostsController < ApplicationController
   private
   
   def find_post
-    # @post = Post.find_by(id: params[:id])
+    @post = Post.find_by(id: params[:id])
     unless @post
       # 投稿が削除されている場合urlでアクセス時にエラーにならないように
       redirect_to posts_path, alert: '指定された投稿は存在しないか、削除されました。'
@@ -100,7 +100,6 @@ class Public::PostsController < ApplicationController
    
   # 自身の投稿かチェック
   def ensure_correct_user
-     @post = Post.find(params[:id])
     unless @post.user == current_user
       flash[:alert] = '権限がありません。'
       redirect_to posts_path

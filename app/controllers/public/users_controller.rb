@@ -1,8 +1,9 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user! # ログインチェック
+  before_action :find_user, only: [:show, :edit, :update, :likes, :bookmarks]  # find_userを使用するアクション
   before_action :correct_user, only: [:edit, :update, :withdraw, :check_out]
   before_action :reject_guest, only: [:edit, :update, :withdraw, :check_out] #ゲストユーザか確認
-  before_action :find_user, only: [:show, :edit, :update, :likes, :bookmarks]  # find_userを使用するアクション
+ 
   
   def show
      # 退会済みのユーザーの場合(urlでのアクセスを防ぐ)
@@ -78,7 +79,6 @@ class Public::UsersController < ApplicationController
     
     # ログインしているユーザーかチェック
     def correct_user
-      @user = User.find(params[:id])
       unless @user == current_user
         flash[:alert] = "権限がありません。"
         redirect_to(root_url)
