@@ -203,6 +203,11 @@ footer {
   outline : none;
 }
 
+// 検索ボタンホバー時
+.search_container input[type="submit"]:hover {
+    background-color: #285a8e; /* ホバー時の背景色 */
+}
+
 
 
 // ここからページネーション

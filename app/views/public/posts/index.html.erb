@@ -1,13 +1,18 @@
 <!--検索、並び替え部分テンプレート-->
 <%= render partial: 'search_and_sort', locals: { posts_path_variable: posts_path } %> 
 
+<div class="mb-4 text-center">
+  <%= link_to "タグで絞り込む", tags_path, class: "btn btn-info" %>
+</div>
+
 <h1 class="ml-4 mb-5">投稿一覧</h1>
   <div class="row justify-content-center">
     <% @posts.each do |post| %>
     <!--退会しているユーザーの投稿は表示されない-->
       <% unless post.user.is_deleted %> 
      <!--投稿アイテム-->
-      <%= render partial: 'public/posts/post_item', locals: {post: post} %>
+      <!--partialの役割は再利用可能なビューの断片を作成・表示すること-->
+      <%= render partial: 'post_item', locals: {post: post} %>
       <% end %>
     <% end %>
   </div>

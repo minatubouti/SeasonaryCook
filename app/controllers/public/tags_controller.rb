@@ -3,7 +3,8 @@ class Public::TagsController < ApplicationController
     if params[:search].present?
       @tags = ActsAsTaggableOn::Tag.where('name LIKE ?', "%#{params[:search]}%")
     else
-      @tags = ActsAsTaggableOn::Tag.all
+      # 使用されている上位25個のタグを取得
+      @tags = ActsAsTaggableOn::Tag.most_used(30)
     end
   end
   

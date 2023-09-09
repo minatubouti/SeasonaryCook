@@ -1,8 +1,11 @@
-<h1><%= @tag.name %> タグの投稿一覧</h1>
-
-<% @posts.each do |post| %>
-  <!-- 投稿の表示内容 -->
-  <%= link_to post.title, post_path(post) %>
- 
-  <!-- その他、投稿に関連する情報を追加する -->
-<% end %>
+<h1 class="ml-5 mb-5">#<%= @tag.name %></h1>
+  <div class="row justify-content-center">
+    <% if @posts.any? %>
+      <% @posts.each do |post| %>
+        <!-- 投稿アイテム -->
+        <%= render partial: 'public/posts/post_item', locals: {post: post} %>
+      <% end %>
+    <% else %>
+      <h4>該当する投稿がありません</h4>
+    <% end %>
+  </div>
