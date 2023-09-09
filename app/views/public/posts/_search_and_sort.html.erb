@@ -9,9 +9,10 @@
       並び替え
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <%= link_to "新しい順", posts_path_variable, class: 'dropdown-item' %>
-      <%= link_to "いいねの多い順", "#{posts_path_variable}?popular=true", class: 'dropdown-item' %>
-      <%= link_to "古い順", "#{posts_path_variable}?oldest=true", class: 'dropdown-item' %>
+      <!--params[:search]とparams[:tag]の値を維持しながら、新しい並べ替えのパラメータを追加-->
+      <%= link_to "人気順", { search: params[:search], tag: params[:tag], popular: true }, class: "dropdown-item" %>
+      <%= link_to "古い順", { search: params[:search], tag: params[:tag], oldest: true }, class: "dropdown-item" %>
+      <%= link_to "新しい順", { search: params[:search], tag: params[:tag] }, class: "dropdown-item" %>
     </div>
   </div>
 </div>

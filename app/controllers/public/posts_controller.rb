@@ -5,7 +5,7 @@ class Public::PostsController < ApplicationController
   def new
     @post = Post.new
     @post.ingredients.build # 画面で使うための空の食材オブジェクト
-    @post.recipe_steps.build # 画面で使うための空のレシピステップオブジェクト
+     @post.recipe_steps.build # 画面で使うための空のレシピステップオブジェクト
   end
   
   def create
