@@ -1,0 +1,8 @@
+<h1><%= @tag.name %> タグの投稿一覧</h1>
+
+<% @posts.each do |post| %>
+  <!-- 投稿の表示内容 -->
+  <%= link_to post.title, post_path(post) %>
+ 
+  <!-- その他、投稿に関連する情報を追加する -->
+<% end %>

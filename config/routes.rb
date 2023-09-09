@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   end
     resources :notifications, only: [:index]
     resources :inquiries, only: [:new, :create, :show]
+    resources :tags, only: [:index, :show]
   end
   
   devise_scope :user do
