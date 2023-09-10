@@ -7,6 +7,9 @@ class Public::TagsController < ApplicationController
      # タグの検索が行われなかった場合、最も多く使用された上位30のタグを表示
       @tags = ActsAsTaggableOn::Tag.most_used(30)
     end
+    if request.xhr?
+      render partial: 'tags', locals: { tags: @tags }, layout: false
+    end
   end
   
   # 特定のタグに関連する投稿一覧を表示

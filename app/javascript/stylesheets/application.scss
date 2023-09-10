@@ -163,6 +163,11 @@ footer {
   }
 }
 
+// タグコンテナの透明度の変化を0.3秒でスムーズに表示させる
+.row.justify-content-center {
+  transition: opacity 0.3s;  // 0.3秒かけて透明度を変更
+}
+
 
 // 検索フォーム
 .search_container{

@@ -1,0 +1,7 @@
+  <% if @tags.any? %>
+    <% @tags.each do |tag| %>
+      <%= link_to tag.name, tag_path(tag), class: 'tag mx-2 mb-2' %>
+    <% end %>
+  <% else %>
+    <h4 class="mt-4">該当するタグはありません。</h4>
+  <% end %>

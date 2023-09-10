@@ -5,12 +5,45 @@
   <% end %>
   <h4 class="mt-4">人気タグ</h4>
   <div class="row justify-content-center mt-4">
-    <% if @tags.any? %>
-      <% @tags.each do |tag| %>
-        <%= link_to tag.name, tag_path(tag), class: 'tag mx-2 mb-2' %>
-      <% end %>
-    <% else %>
-      <h4 class="mt-4">該当するタグはありません。</h4>
-    <% end %>
+    <!--タグ表示部分-->
+    <%= render partial: 'tags', locals: { tags: @tags } %>
   </div>
 </div>
+
+<!--検索フォームのキーワードに連動して絞り込む-->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  // 検索ボックスの要素を取得
+  const searchInput = document.querySelector("[name='search']");
+  let timeout; // タイムアウトの変数を定義
+
+  searchInput.addEventListener("input", function() {
+    const value = this.value;
+    clearTimeout(timeout);  // 以前の遅延検索のタイマーをクリア
+   
+   // 検索ワードが入力された場合
+    if (value.length > 0) {
+      // 300ms待ってから検索を開始する（遅延検索）
+      timeout = setTimeout(function() {  
+        // タグ検索APIを非同期で呼び出し
+        fetch(`/tags?search=${value}`, {
+          headers: {
+            "X-Requested-With": "XMLHttpRequest"
+          }
+        })
+        .then(response => response.text())
+        .then(data => {
+          const tagContainer = document.querySelector(".row.justify-content-center");
+          tagContainer.style.opacity = 0;  // 透明にする
+         
+         // 300ms後に新しいタグをフェードイン表示
+          setTimeout(function() {
+            tagContainer.innerHTML = data;
+            tagContainer.style.opacity = 1;  // フェードイン
+          }, 300);  // 300ms後に新しいタグを表示
+        });
+      }, 300);  // ユーザーの入力が止まってから300ms後に検索を開始
+    }
+  });
+});
+</script>
