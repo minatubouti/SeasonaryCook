@@ -1,5 +1,10 @@
 <!--検索、並び替え部分テンプレート-->
-<%= render partial: 'public/posts/search_and_sort', locals: { posts_path_variable: admin_posts_path } %>
+<div class="container mt-2 mb-4 d-flex align-items-center">
+  <!--キーワード検索フォーム-->
+  <%= render partial: 'public/posts/search', locals: { posts_path_variable: admin_posts_path } %>
+  <!--並び替え-->
+  <%= render partial: 'public/posts/sort' %>
+</div>
    
   <h1 class="ml-5 mb-4">投稿一覧</h1>
     <div class="row justify-content-center">
@@ -39,9 +44,3 @@
         </div>
       <% end %>
     </div>
-    
-    <div style="width: 30%; margin: 0 auto;">
-      <%= paginate @posts %>
-    </div>
-    
-   

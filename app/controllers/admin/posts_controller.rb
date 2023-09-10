@@ -4,19 +4,30 @@ class Admin::PostsController < ApplicationController
   
   
   def index
-    @posts = Post.includes(:user, :likes).recent
+    # 初期状態で全ての投稿を取得します
+    @posts = Post.all.includes(:user, :likes)
   
+    # タイトル、主要な野菜、または季節に基づいて絞り込む検索機能
     if params[:search].present?
       posts_based_on_columns = @posts.where('title LIKE ? OR main_vegetable LIKE ? OR season LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
       posts_based_on_tags = @posts.tagged_with(params[:search])
-      combined_post_ids = (posts_based_on_columns.pluck(:id) + posts_based_on_tags.pluck(:id)).uniq
-      @posts = Post.where(id: combined_post_ids)
+      combined_post_ids = posts_based_on_columns.pluck(:id) + posts_based_on_tags.pluck(:id)
+      @posts = @posts.where(id: combined_post_ids)
     end
   
+    # タグ検索のクエリがある場合はその条件でさらに絞り込む
     if params[:tag].present?
       @posts = @posts.tagged_with(params[:tag])
     end
-      @posts = @posts.page(params[:page])
+  
+    # 並べ替え機能
+    if params[:popular]
+      @posts = @posts.popular
+    elsif params[:oldest]
+      @posts = @posts.oldest
+    else
+      @posts = @posts.recent # デフォルトは新しい順にする
+    end
   end
 
   def show

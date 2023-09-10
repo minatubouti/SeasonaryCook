@@ -1,8 +1,14 @@
-<!--検索、並び替え部分テンプレート-->
-<%= render partial: 'search_and_sort', locals: { posts_path_variable: posts_path } %> 
-
-<div class="d-flex align-items-center mb-4">
-  <%= link_to "タグで探す", tags_path, class: "btn btn-info ml-5" %>
+<div class="container mt-2 mb-4 d-flex align-items-center">
+  <!--キーワード検索フォーム-->
+  <%= render partial: 'search', locals: { posts_path_variable: posts_path } %> 
+  <div class="d-flex mb-4">
+    <%= link_to tags_path do %>
+    <!--alt 属性には画像の説明として「タグで探す」というテキストを追加-->
+      <%= image_tag "tag.png", alt: "タグで探す", width: "65", height: "65" %>
+    <% end %>
+  </div>
+  <!--並び替え-->
+  <%= render partial: 'sort' %>
 </div>
 
   <div class="row justify-content-center">
@@ -15,8 +21,8 @@
       <% end %>
     <% end %>
   </div>
-  <!--# ページネーション自体の幅を小さくして中央寄せ-->
-   <div style="width: 30%; margin: 0 auto;"> 
+  <!--ページネーション自体の幅を小さくして中央寄せ-->
+  <div style="width: 30%; margin: 0 auto;"> 
     <%= paginate @posts %>
-   </div>
+  </div>
 

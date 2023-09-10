@@ -1,0 +1,11 @@
+<div class="dropdown ml-auto">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    並び替え
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <!--params[:search]とparams[:tag]の値を維持しながら、新しい並べ替えのパラメータを追加-->
+    <%= link_to "人気順", { search: params[:search], tag: params[:tag], popular: true }, class: "dropdown-item" %>
+    <%= link_to "古い順", { search: params[:search], tag: params[:tag], oldest: true }, class: "dropdown-item" %>
+    <%= link_to "新しい順", { search: params[:search], tag: params[:tag] }, class: "dropdown-item" %>
+  </div>
+</div>
