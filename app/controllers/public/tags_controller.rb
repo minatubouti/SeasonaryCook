@@ -4,9 +4,10 @@ class Public::TagsController < ApplicationController
     if params[:search].present?
       @tags = ActsAsTaggableOn::Tag.where('name LIKE ?', "%#{params[:search]}%")
     else
-     # タグの検索が行われなかった場合、最も多く使用された上位30のタグを表示
+    # タグの検索が行われなかった場合、最も多く使用された上位30のタグを表示
       @tags = ActsAsTaggableOn::Tag.most_used(30)
     end
+    # AJAXリクエストの場合、部分的なHTMLを返す
     if request.xhr?
       render partial: 'tags', locals: { tags: @tags }, layout: false
     end

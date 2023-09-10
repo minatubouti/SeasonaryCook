@@ -1,11 +1,10 @@
 <!--検索、並び替え部分テンプレート-->
 <%= render partial: 'search_and_sort', locals: { posts_path_variable: posts_path } %> 
 
-<div class="mb-4 text-center">
-  <%= link_to "タグで絞り込む", tags_path, class: "btn btn-info" %>
+<div class="d-flex align-items-center mb-4">
+  <%= link_to "タグで探す", tags_path, class: "btn btn-info ml-5" %>
 </div>
 
-<h1 class="ml-4 mb-5">投稿一覧</h1>
   <div class="row justify-content-center">
     <% @posts.each do |post| %>
     <!--退会しているユーザーの投稿は表示されない-->
