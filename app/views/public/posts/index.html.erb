@@ -1,14 +1,20 @@
-<div class="container mt-2 mb-4 d-flex align-items-center">
-  <!--キーワード検索フォーム-->
-  <%= render partial: 'search', locals: { posts_path_variable: posts_path } %> 
-  <div class="d-flex mb-4">
-    <%= link_to tags_path do %>
-    <!--alt 属性には画像の説明として「タグで探す」というテキストを追加-->
-      <%= image_tag "tag.png", alt: "タグで探す", width: "65", height: "65" %>
-    <% end %>
+<div class="container mt-2 mb-4 d-flex flex-column flex-md-row align-items-md-center justify-content-md-between">
+  <div class="d-flex align-items-center mb-2 mb-md-0">
+    <!--キーワード検索フォーム-->
+    <%= render partial: 'search', locals: { posts_path_variable: posts_path } %> 
+    
+    <div class="ml-3">
+      <%= link_to tags_path do %>
+        <!--alt 属性には画像の説明として「タグで探す」というテキストを追加-->
+        <%= image_tag "tag.png", alt: "タグで探す", width: "65", height: "65" %>
+      <% end %>
+    </div>
   </div>
-  <!--並び替え-->
-  <%= render partial: 'sort' %>
+  
+  <div class="mb-2 mb-md-0">
+    <!--並び替え-->
+    <%= render partial: 'sort' %>
+  </div>
 </div>
 
   <div class="row justify-content-center">

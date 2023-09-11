@@ -1,46 +1,44 @@
-<!--検索、並び替え部分テンプレート-->
-<div class="container mt-2 mb-4 d-flex align-items-center">
+<div class="container mt-2 mb-5 d-flex align-items-center">
   <!--キーワード検索フォーム-->
   <%= render partial: 'public/posts/search', locals: { posts_path_variable: admin_posts_path } %>
   <!--並び替え-->
   <%= render partial: 'public/posts/sort' %>
 </div>
    
-  <h1 class="ml-5 mb-4">投稿一覧</h1>
-    <div class="row justify-content-center">
-      <% @posts.each do |post| %>
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-          <div class="card-wrapper px-3"> 
-            <div class="card h-100">
-             <!-- 料理画像のリンク -->
-               <%= link_to admin_post_path(post) do %>
-                  <%= image_tag post.get_image, alt: post.title, class: "card-img-top", style: "height: 120px; object-fit: cover;" if post.get_image.attached? %>
-               <% end %>
-                <div class="card-body">
-                  <h5 class="card-title"><%= link_to post.title, admin_post_path(post), class: 'item-link' %></h5>
-                  <p class="card-text"><%= truncate(post.description, length: 25) %></p>
-                    <!-- プロフィール画像のリンク -->
-                    <% if post.user&.icon_image&.attached? %>
-                      <%= link_to admin_user_path(post.user), class: 'black-link' do %>
-                        <%= image_tag post.user.icon_image, class: 'img-fluid profile-icon' %> 
-                        <%= post.user.name %>
-                      <% end %>
-                    <% else %>
-                      <%= link_to post.user.name, admin_user_path(post.user), class: 'black-link' %>
+  <div class="row justify-content-center">
+    <% @posts.each do |post| %>
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card-wrapper px-3"> 
+          <div class="card h-100">
+           <!-- 料理画像のリンク -->
+             <%= link_to admin_post_path(post) do %>
+                <%= image_tag post.get_image, alt: post.title, class: "card-img-top", style: "height: 120px; object-fit: cover;" if post.get_image.attached? %>
+             <% end %>
+              <div class="card-body">
+                <h5 class="card-title"><%= link_to post.title, admin_post_path(post), class: 'item-link' %></h5>
+                <p class="card-text"><%= truncate(post.description, length: 25) %></p>
+                  <!-- プロフィール画像のリンク -->
+                  <% if post.user&.icon_image&.attached? %>
+                    <%= link_to admin_user_path(post.user), class: 'black-link' do %>
+                      <%= image_tag post.user.icon_image, class: 'img-fluid profile-icon' %> 
+                      <%= post.user.name %>
                     <% end %>
-                            
-                  <p>  <!--有効数のみカウント-->
-                    <span><%= active_likes_count(post) %> <i class="fas fa-heart" style="color: red; margin-left: 5px;"></i></span>
-                    <span style="margin-left: 15px;"><%= active_bookmarks_count(post) %><i class="fa-solid fa-bookmark" style="color: #6495ED; margin-left: 5px;"></i></span>
-                    <span style="margin-left: 15px;"><%= active_comments_count(post) %><i class="fa-solid fa-comment" style="color: #FFA500; margin-left: 5px;"></i></span>
-                     <!--投稿が公開中かつユーザーが退会していないかつゲストの投稿でない場合にのみ公開中となる-->
-                    <span class="badge <%= (post.is_public && !post.user.is_deleted && !post.user.guest?) ? 'badge-success' : 'badge-danger' %> ml-3">
-                      <%= (post.is_public && !post.user.is_deleted && !post.user.guest?) ? '公開中' : '非公開' %>
-                    </span>
-                  </p>
-              </div>
+                  <% else %>
+                    <%= link_to post.user.name, admin_user_path(post.user), class: 'black-link' %>
+                  <% end %>
+                          
+                <p>  <!--有効数のみカウント-->
+                  <span><%= active_likes_count(post) %> <i class="fas fa-heart" style="color: red; margin-left: 5px;"></i></span>
+                  <span style="margin-left: 15px;"><%= active_bookmarks_count(post) %><i class="fa-solid fa-bookmark" style="color: #6495ED; margin-left: 5px;"></i></span>
+                  <span style="margin-left: 15px;"><%= active_comments_count(post) %><i class="fa-solid fa-comment" style="color: #FFA500; margin-left: 5px;"></i></span>
+                   <!--投稿が公開中かつユーザーが退会していないかつゲストの投稿でない場合にのみ公開中となる-->
+                  <span class="badge <%= (post.is_public && !post.user.is_deleted && !post.user.guest?) ? 'badge-success' : 'badge-danger' %> ml-3">
+                    <%= (post.is_public && !post.user.is_deleted && !post.user.guest?) ? '公開中' : '非公開' %>
+                  </span>
+                </p>
             </div>
           </div>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
+  </div>
