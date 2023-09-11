@@ -5,15 +5,15 @@ RSpec.describe Post, type: :model do
  
 # アソシエーションのテスト
  describe "アソシエーション" do
-    it { should belong_to(:user) }
-    it { should have_many(:likes).dependent(:destroy) }
-    it { should have_many(:liked_users).through(:likes).source(:user) }
-    it { should have_many(:comments).dependent(:destroy) }
-    it { should have_many(:bookmarks).dependent(:destroy) }
-    it { should have_many(:bookmarked_users).through(:bookmarks).source(:user) }
-    it { should have_many(:recipe_steps).dependent(:destroy) }
-    it { should have_many(:ingredients).dependent(:destroy) }
-    it { should have_many(:notifications).dependent(:destroy) }
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to have_many(:likes).dependent(:destroy) }
+    it { is_expected.to have_many(:liked_users).through(:likes).source(:user) }
+    it { is_expected.to have_many(:comments).dependent(:destroy) }
+    it { is_expected.to have_many(:bookmarks).dependent(:destroy) }
+    it { is_expected.to have_many(:bookmarked_users).through(:bookmarks).source(:user) }
+    it { is_expected.to have_many(:recipe_steps).dependent(:destroy) }
+    it { is_expected.to have_many(:ingredients).dependent(:destroy) }
+    it { is_expected.to have_many(:notifications).dependent(:destroy) }
   end
 
   # バリデーションのテスト
@@ -75,7 +75,7 @@ RSpec.describe Post, type: :model do
       let!(:new_post) { create(:post, created_at: 1.day.ago) }
     
       it 'oldestスコープで正しい順序で投稿を返す' do
-        expect(Post.oldest).to eq([old_post, new_post])
+        expect(described_class.oldest).to eq([old_post, new_post])
       end
     end
 
@@ -86,7 +86,7 @@ RSpec.describe Post, type: :model do
       unpopular_post = create(:post)
       create_list(:like, 5, post: popular_post)
     
-      expect(Post.popular).to eq([popular_post, unpopular_post])
+      expect(described_class.popular).to eq([popular_post, unpopular_post])
     end
     
   # oldestスコープのテスト(最も古い投稿を取得するもの)
@@ -95,7 +95,7 @@ RSpec.describe Post, type: :model do
       let(:new_post) { create(:post, created_at: 1.day.ago) }
     
       it 'oldest（古い順に並び替え）スコープで正しい順序で投稿を返す' do
-        expect(Post.oldest).to eq([old_post, new_post])
+        expect(described_class.oldest).to eq([old_post, new_post])
       end
     end
       
@@ -129,13 +129,14 @@ RSpec.describe Post, type: :model do
     
       it 'ユーザーが投稿をいいねしていればtrueを返す' do
         create(:like, user: user, post: post)
-        expect(post.likes_by?(user)).to be_truthy
+        expect(post).to be_likes_by(user)
       end
     
       it 'ユーザーが投稿をいいねしていなければfalseを返す' do
-        expect(post.likes_by?(user)).to be_falsey
+        expect(post).not_to be_likes_by(user)
       end
     end
+
     # bookmarked_by? メソッド
     describe 'bookmarked_by?' do
       let(:user) { create(:user) }
@@ -143,11 +144,11 @@ RSpec.describe Post, type: :model do
       
       it 'ユーザーが投稿をブックマークしていればtrueを返す' do
         create(:bookmark, user: user, post: post)
-        expect(post.bookmarked_by?(user)).to be_truthy
+        expect(post).to be_bookmarked_by(user)
       end
     
       it 'ユーザーが投稿をブックマークしていなければfalseを返す' do
-        expect(post.bookmarked_by?(user)).to be_falsey
+        expect(post).not_to be_bookmarked_by(user)
       end
     end
     

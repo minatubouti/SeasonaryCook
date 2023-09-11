@@ -6,7 +6,7 @@ class Public::NotificationsController < ApplicationController
     @notifications = current_user.passive_notifications.order(created_at: "DESC")
 
     # 未読の通知を「既読」に更新
-    @notifications.where(checked: false).each do |notification|
+    @notifications.where(checked: false).find_each do |notification|
       notification.update(checked: true)
     end
   end
