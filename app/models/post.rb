@@ -34,7 +34,15 @@ class Post < ApplicationRecord
   scope :popular, -> { left_joins(:likes).group(:id).order('COUNT(likes.id) DESC') }
   # 投稿を古いものから順に取得するスコープ
   scope :oldest, -> { order(created_at: :asc) }
-
+  
+  # キーワード検索のスコープ
+  scope :search_by_keyword, ->(keyword) {
+    where('title LIKE ? OR main_vegetable LIKE ? OR season LIKE ?', "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
+  }
+  # タグ検索のスコープ
+  scope :search_by_tag, ->(tag_name) {
+    tagged_with(tag_name)
+  }
   
   # 画像がない場合no-image
   def get_image

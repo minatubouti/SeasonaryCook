@@ -22,19 +22,18 @@ class Public::PostsController < ApplicationController
   def index
     @posts = Post.where(is_public: true, is_guest: false).includes(:user, :likes) #ゲスト、退会済みのユーザーの投稿を表示しないようにする
     if params[:search].present?
-      # タイトル、主要な野菜、または季節に基づいて絞り込む
-      posts_based_on_columns = @posts.where('title LIKE ? OR main_vegetable LIKE ? OR season LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
-      # タグに基づいて絞り込む
-      posts_based_on_tags = @posts.tagged_with(params[:search])
-      # 両方のクエリの結果のIDを取得
-      combined_post_ids = posts_based_on_columns.pluck(:id) + posts_based_on_tags.pluck(:id)
+      # キーワードに基づいて投稿を検索
+      keyword_posts_ids = @posts.search_by_keyword(params[:search]).pluck(:id)
+      # キーワードに基づいてタグから投稿を検索
+      tag_posts_ids = Post.search_by_tag(params[:search]).pluck(:id)
+    　# 上記2つの検索結果を統合し、重複を除去
+      combined_post_ids = keyword_posts_ids + tag_posts_ids
       # IDに基づいて最終的なクエリを構築
-      @posts = @posts.where(id: combined_post_ids)
+       @posts = @posts.where(id: combined_post_ids.uniq) # 重複するIDを除去するためにuniqを使用
     end
     # タグ検索のクエリがある場合はその条件でさらに絞り込む
-    if params[:tag].present?
-      @posts = @posts.tagged_with(params[:tag])
-    end
+    @posts = @posts.search_by_tag(params[:tag]) if params[:tag].present?
+    
     # 並べ替え機能
     if params[:popular]
       @posts = @posts.popular
@@ -43,7 +42,6 @@ class Public::PostsController < ApplicationController
     else
       @posts = @posts.recent # デフォルトは新しい順にする
     end
-   
     @posts = @posts.page(params[:page])
   end
 

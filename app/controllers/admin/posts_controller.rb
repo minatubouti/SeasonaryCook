@@ -4,21 +4,22 @@ class Admin::PostsController < ApplicationController
   
   
   def index
-    # 初期状態で全ての投稿を取得します
+    # 初期状態で全ての投稿を取得（N+1問題を防ぐため、関連するユーザーやいいねを先読み）
     @posts = Post.all.includes(:user, :likes)
   
-    # タイトル、主要な野菜、または季節に基づいて絞り込む検索機能
+     # キーワード検索がある場合
     if params[:search].present?
-      posts_based_on_columns = @posts.where('title LIKE ? OR main_vegetable LIKE ? OR season LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
-      posts_based_on_tags = @posts.tagged_with(params[:search])
-      combined_post_ids = posts_based_on_columns.pluck(:id) + posts_based_on_tags.pluck(:id)
-      @posts = @posts.where(id: combined_post_ids)
+      # キーワードに基づいて投稿を検索
+      keyword_posts_ids = @posts.search_by_keyword(params[:search]).pluck(:id)
+      # キーワードに基づいてタグから投稿を検索
+      tag_posts_ids = Post.search_by_tag(params[:search]).pluck(:id)
+    　# 上記2つの検索結果を統合し、重複を除去
+      combined_post_ids = keyword_posts_ids + tag_posts_ids
+      @posts = @posts.where(id: combined_post_ids.uniq) # 重複するIDを除去するためにuniqを使用
     end
-  
-    # タグ検索のクエリがある場合はその条件でさらに絞り込む
-    if params[:tag].present?
-      @posts = @posts.tagged_with(params[:tag])
-    end
+
+   # タグ検索
+    @posts = @posts.search_by_tag(params[:tag]) if params[:tag].present?
   
     # 並べ替え機能
     if params[:popular]
@@ -26,7 +27,8 @@ class Admin::PostsController < ApplicationController
     elsif params[:oldest]
       @posts = @posts.oldest
     else
-      @posts = @posts.recent # デフォルトは新しい順にする
+      # デフォルトは新しい順にする
+      @posts = @posts.recent 
     end
   end
 
