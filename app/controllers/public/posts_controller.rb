@@ -78,7 +78,6 @@ class Public::PostsController < ApplicationController
   end
   
 
-
   private
   
   def find_post
