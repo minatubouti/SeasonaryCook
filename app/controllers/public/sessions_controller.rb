@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
+  # 退会済のアカウントがログインできないようにする
+  before_action :withdraw, only: [:create]
   
   def guest_sign_in
     user = User.guest
@@ -18,14 +20,11 @@ class Public::SessionsController < Devise::SessionsController
     root_path
   end
   
-  # 退会済のアカウントがログインできないようにする
-   before_action :withdraw, only: [:create]
-
 
   def withdraw
      @user = User.find_by(email: params[:user][:email])
     if @user&.valid_password?(params[:user][:password]) && @user.is_deleted
-      redirect_to new_user_session_path, aler: 'アカウントは退会済みです。'
+      redirect_to new_user_session_path, alert: 'アカウントは退会済みです。'
     end
   end
   

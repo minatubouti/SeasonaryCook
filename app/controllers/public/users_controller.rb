@@ -64,6 +64,10 @@ class Public::UsersController < ApplicationController
   
   private
   
+  def user_params
+    params.require(:user).permit(:icon_image, :name, :profile)
+  end
+  
   def find_user
     @user = User.find_by(id: params[:id])
     unless @user
@@ -71,16 +75,12 @@ class Public::UsersController < ApplicationController
       redirect_to root_path
     end
   end
-
-  def user_params
-    params.require(:user).permit(:icon_image, :name, :profile)
-  end
   
   # ログインしているユーザーかチェック
   def correct_user
+    @user = User.find(params[:id])
     unless @user == current_user
-      flash[:alert] = "権限がありません。"
-      redirect_to(root_url)
+      redirect_to root_path, alert: "不正なアクセスです。"
     end
   end
   
