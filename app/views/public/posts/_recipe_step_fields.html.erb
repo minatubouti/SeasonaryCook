@@ -15,12 +15,17 @@
 
 <script>
   $(document).ready(function(){
-    // 削除ボタンがクリックされたときの処理
-    $(document).on('click', '.remove-instruction', function(){
-      // クリックされた削除ボタンに最も近い.instruction-fieldにある_destroyフィールドをtrueに設定
-      $(this).closest('.instruction-field').find("input[name$='[_destroy]']").val('true');
-      // そして、そのフィールドを隠す（removeでは削除、hideでは要素を隠す）
-      $(this).closest('.instruction-field').hide(); 
-    });
+      // 削除ボタンがクリックされたときの処理
+      $(document).on('click', '.remove-instruction', function(){
+          // クリックされた.remove-instructionボタンに最も近い.instruction-fieldを取得
+          let $instructionField = $(this).closest('.instruction-field');
+          
+          // その.instruction-field内のinput要素のrequired属性を削除
+          $instructionField.find('input, textarea').removeAttr('required');
+          
+          // _destroyにtrueをセットして、そのフィールドを隠す
+          $instructionField.find("input[name$='[_destroy]']").val('true');
+          $instructionField.hide();
+      });
   });
 </script>

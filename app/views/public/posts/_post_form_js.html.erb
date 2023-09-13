@@ -6,30 +6,35 @@
     // "add-ingredient" IDを持つHTML要素（ボタン）を取得、「材料を追加」ボタンにクリックイベントを追加
     document.getElementById("add-ingredient").addEventListener("click", () => {
       // "ingredient-fields-template"というIDを持つdiv要素の内部HTML（隠しテンプレート）を取得
-      var content = document.getElementById("ingredient-fields-template").innerHTML;
-      var uniqueId = new Date().getTime();
+      let content = document.getElementById("ingredient-fields-template").innerHTML;
+      let uniqueId = new Date().getTime();
       // replace: テンプレート内のプレースホルダーを一意なIDで置き換え
       content = content.replace(/new_ingredient/g, uniqueId);
       // 新しい材料フォームをDOMに追加
       document.getElementById("ingredients").insertAdjacentHTML('beforeend', content);
+      // 新しく追加された<textarea>を選択して、required属性を追加
+        let addedNameInput = document.querySelector(`#post_ingredients_attributes_${uniqueId}_name`).required = true;
+        let addedAmountInput = document.querySelector(`#post_ingredients_attributes_${uniqueId}_amount`).required = true;
     });
   });
   
 // 作り方フォーム追加
   // DOMが完全に読み込まれた後に実行される
   document.addEventListener('DOMContentLoaded', () => {
-     // 「作り方を追加」ボタンにクリックイベントを追加
+    // 「作り方を追加」ボタンにクリックイベントを追加
     document.querySelector('#add-recipe_step').addEventListener('click', () => {
-      // 隠れている作り方テンプレートを取得
-      let content = document.getElementById('recipe_step-fields-template').innerHTML;
-      // 一意なIDを生成（現在時刻をミリ秒で取得）
-      let uniqueId = new Date().getTime();
-       // プレースホルダーを一意なIDで置き換え
-      content = content.replace(/new_recipe_step/g, uniqueId);
-      // 新しい作り方フォームをDOMに追加
-      document.getElementById('recipe_steps').insertAdjacentHTML('beforeend', content);
+        // 隠れている作り方テンプレートを取得
+        let content = document.getElementById('recipe_step-fields-template').innerHTML;
+        // 一意なIDを生成（現在時刻をミリ秒で取得）
+        let uniqueId = new Date().getTime();
+        // プレースホルダーを一意なIDで置き換え
+        content = content.replace(/new_recipe_step/g, uniqueId);
+        // 新しい作り方フォームをDOMに追加
+        document.getElementById('recipe_steps').insertAdjacentHTML('beforeend', content);
+        let addedTextarea = document.querySelector(`#post_recipe_steps_attributes_${uniqueId}_instructions`).required = true;
     });
   });
+
   
   
   // 画像リアルタイム表示

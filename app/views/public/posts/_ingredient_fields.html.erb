@@ -21,11 +21,16 @@
 <script>
   $(document).ready(function(){
       // 削除ボタンがクリックされたときの処理
-    $(document).on('click', '.remove-ingredient', function(){
-        // クリックされた.削除ボタンに最も近い.ingredient-fieldsを削除する
-      $(this).closest('.ingredient-fields').find("input[name$='[_destroy]']").val('true');
-       // そして、そのフィールドを隠す
-      $(this).closest('.ingredient-fields').hide();
-    });
+      $(document).on('click', '.remove-ingredient', function(){
+          // クリックされた.削除ボタンに最も近い.ingredient-fieldsを取得
+          let $ingredientFields = $(this).closest('.ingredient-fields');
+          
+          // その.ingredient-fields内のinput要素のrequired属性を削除
+          $ingredientFields.find('input').removeAttr('required');
+          
+          // _destroyにtrueをセットして、そのフィールドを隠す
+          $ingredientFields.find("input[name$='[_destroy]']").val('true');
+          $ingredientFields.hide();
+      });
   });
 </script>
