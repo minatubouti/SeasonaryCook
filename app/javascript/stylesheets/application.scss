@@ -99,6 +99,14 @@ body {
 }
 
 
+//インプットにフォーカスされたらプレースホルダを非表示
+input:focus::placeholder {
+  color: transparent;
+  transition: .2s; /*少しふわっと消えるように*/
+}
+
+
+
 // ヘッダー、フッター
 .content {
   flex: 1 0 auto; /* メインコンテンツがページを埋めるように */

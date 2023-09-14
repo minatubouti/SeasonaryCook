@@ -13,14 +13,14 @@
             <div class="input-group-prepend">
               <span class="input-group-text" aria-hidden="true"><i class="fas fa-user"></i></span>
             </div>
-            <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "メールアドレス" %>
+            <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "メールアドレス", required: true %>
           </div>
 
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" aria-hidden="true"><i class="fas fa-lock"></i></span>
             </div>
-            <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "パスワード" %>
+            <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "パスワード", required: true %>
           </div>
 
           <%= f.submit "ログイン", class: "btn btn-lg btn-block btn-info mt-5" %>

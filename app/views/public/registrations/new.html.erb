@@ -11,14 +11,14 @@
             <div class="input-group-prepend">
               <span class="input-group-text" aria-hidden="true"><i class="fas fa-user"></i></span>
             </div>
-            <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control', placeholder: '名前（ニックネーム）' %>
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control', placeholder: '名前（ニックネーム）', required: true %>
           </div>
 
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" aria-hidden="true"><i class="fas fa-envelope"></i></span>
             </div>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'メールアドレス' %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'メールアドレス', required: true %>
           </div>
 
           <div class="input-group mb-3">
@@ -26,14 +26,14 @@
               <span class="input-group-text" aria-hidden="true"><i class="fas fa-lock"></i></span>
             </div>
             <!--@minimum_password_length が存在する場合には最小文字数をプレースホルダーに含め、存在しない場合には単に "パスワード" と表示します。-->
-            <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', placeholder: @minimum_password_length ? "パスワード（#{@minimum_password_length}文字以上）" : "パスワード" %>
+            <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', placeholder: @minimum_password_length ? "パスワード（#{@minimum_password_length}文字以上）" : "パスワード", required: true %>
           </div>
 
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" aria-hidden="true"><i class="fas fa-lock"></i></span>
             </div>
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control', placeholder: 'パスワード（確認）' %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control', placeholder: 'パスワード（確認）', required: true %>
           </div>
 
           <div class="form-group">
