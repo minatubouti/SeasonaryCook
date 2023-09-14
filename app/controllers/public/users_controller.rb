@@ -60,6 +60,9 @@ class Public::UsersController < ApplicationController
     reset_session
     redirect_to root_path, notice: '退会しました。'
   end
+  
+  def check_out
+  end
 
   
   private

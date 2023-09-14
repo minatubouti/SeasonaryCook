@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
-  # 退会済のアカウントがログインできないようにする
+  # 退会済みのユーザーがログインできないようにし、適切なメッセージを表示する
   before_action :withdraw, only: [:create]
   
   def guest_sign_in
@@ -20,7 +20,6 @@ class Public::SessionsController < Devise::SessionsController
     root_path
   end
   
-
   def withdraw
      @user = User.find_by(email: params[:user][:email])
     if @user&.valid_password?(params[:user][:password]) && @user.is_deleted
