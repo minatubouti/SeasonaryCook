@@ -3,11 +3,13 @@
     <h1>お問い合わせ</h1>
     <div class="form-group">
       <%= form.label :name, 'お名前' %>
-      <%= form.text_field :name, class: 'form-control', required: true %>
+      <!--ログインしているユーザーのnameを自動的にnameフィールドに設定-->
+      <%= form.text_field :name, value: current_user&.name, class: 'form-control', required: true %>
     </div>
     <div class="form-group">
       <%= form.label :email, 'メールアドレス' %>
-      <%= form.email_field :email, class: 'form-control', required: true %>
+      <!--ログインしているユーザーのemailを自動的にemailフィールドに設定-->
+      <%= form.email_field :email, value: current_user&.email, class: 'form-control', required: true %>
     </div>
     <div class="form-group">
       <%= form.label :message, 'お問い合わせ内容' %>
