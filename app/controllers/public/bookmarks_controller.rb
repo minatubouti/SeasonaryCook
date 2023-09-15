@@ -19,6 +19,7 @@ class Public::BookmarksController < ApplicationController
   end
   
   private
+
    # @bookmarkが現在のユーザーのものでなければ、リダイレクトして操作を中断させる
   def ensure_correct_user
     @bookmark = current_user.bookmarks.find_by(id: params[:id])

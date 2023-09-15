@@ -1,6 +1,6 @@
 class Public::PostsController < ApplicationController
-  before_action :find_post, only: [:show, :edit, :update, :destroy] #find_postが先に読み込まれるようにする
-  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  before_action :find_post, only: %i[show edit update destroy] #find_postが先に読み込まれるようにする
+  before_action :ensure_correct_user, only: %i[edit update destroy]
   
   def new
     @post = Post.new
@@ -91,8 +91,8 @@ class Public::PostsController < ApplicationController
   def post_params
     params.require(:post).permit(
       :title, :description, :main_vegetable, :season, :is_public, :image, :tag_list, :serving_size,
-      ingredients_attributes: [:id, :name, :amount, :_destroy],
-      recipe_steps_attributes: [:id, :instructions, :_destroy] 
+      ingredients_attributes: %i[id name amount _destroy],
+      recipe_steps_attributes: %i[id instructions _destroy] 
     )
   end
    

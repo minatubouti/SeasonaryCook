@@ -3,12 +3,15 @@ ja:
     failure:
       account_inactive: "あなたのアカウントは利用を停止しました。"
       user:
+        inactive: "あなたのアカウントは管理者によって退会させられました。"
         unauthenticated: "ログインしてください。"
+        not_found_in_database: "ログイン情報が見つかりませんでした。"
+      inactive: "あなたのアカウントは退会されています。"
       unauthenticated: "ログインまたはアカウント登録してください。"
       not_found_in_database: "ログイン情報が見つかりませんでした。"
+      invalid: メールアドレスまたはパスワードが正しくありません。
       admin:
         not_found_in_database: "管理者のログイン情報が見つかりませんでした。"
-      invalid: メールアドレスまたはパスワードが正しくありません。
     sessions:
       signed_in: ログインに成功しました。
       signed_out: ログアウトしました。

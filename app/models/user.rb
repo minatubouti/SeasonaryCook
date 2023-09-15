@@ -32,8 +32,8 @@ class User < ApplicationRecord
   
   # 管理者が退会させた場合ログアウトを待たずに利用不可にする
   def active_for_authentication?
-     # is_deletedがtrue（つまり退会済み）の場合にユーザーを非アクティブにしたいので、条件を!self.is_deletedとする
-    super && !self.is_deleted
+     # is_deletedがtrue（つまり退会済み）の場合にユーザーを非アクティブにしたいので、条件を!is_deletedとする
+    super && !is_deleted
   end
   
   # active_for_authentication? メソッドがtrueを返すとinactive_message を呼び出しエラーメッセージを表示する
@@ -93,6 +93,6 @@ class User < ApplicationRecord
     
   # ゲストユーザーかどうかを判断するメソッド
     def guest?
-     email == GUEST_USER_EMAIL
+      email == GUEST_USER_EMAIL
     end
 end

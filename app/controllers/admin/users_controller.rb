@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
    before_action :authenticate_admin! #管理者であることを確認
-   before_action :find_user, only: [:show, :edit, :update, :destroy] # find_userを使うアクション
+   before_action :find_user, only: %i[show edit update destroy] # find_userを使うアクション
    include ApplicationHelper #ApplicationHelperに定義されたメソッドをAdmin::UsersControllerでも使えるようにする
    
   def index

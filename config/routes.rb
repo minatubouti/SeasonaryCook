@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
 
     # 管理者側
-    devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+    devise_for :admin, skip: %i[registrations passwords] ,controllers: {
     sessions: "admin/sessions"
    }
   namespace :admin do
     get '/' => 'homes#top'
-    resources :users, only: [:index, :show, :edit, :update, :destroy]
-    resources :posts, only: [:index, :show, :edit, :update, :destroy]
-    resources :comments, only: [:index, :destroy]
-    resources :inquiries, only: [:index, :show, :update] 
+    resources :users, only: %i[index show edit update destroy]
+    resources :posts, only: %i[index show edit update destroy]
+    resources :comments, only: %i[index destroy]
+    resources :inquiries, only: %i[index show update] 
   end
   
   
@@ -22,8 +22,8 @@ Rails.application.routes.draw do
   scope module: :public do
     root :to => "homes#top"
     get '/about' => 'homes#about'
-    resources :users, only: [:show, :edit, :update] do
-    resource :relationships, only:[:create, :destroy]
+    resources :users, only: %i[show edit update] do
+    resource :relationships, only:%i[create destroy]
       get 'follows' => 'relationships#follower'
       get 'followers' => 'relationships#followed'
       get 'bookmarks', on: :member
@@ -37,12 +37,12 @@ Rails.application.routes.draw do
   end
   resources :posts do
     resources :comments, only: [:create]
-    resources :likes, only: [:create, :destroy]
-    resources :bookmarks, only: [:create, :destroy]
+    resources :likes, only: %i[create destroy]
+    resources :bookmarks, only: %i[create destroy]
   end
     resources :notifications, only: [:index]
-    resources :inquiries, only: [:new, :create, :show]
-    resources :tags, only: [:index, :show]
+    resources :inquiries, only: %i[new create show]
+    resources :tags, only: %i[index show]
   end
   
   devise_scope :user do

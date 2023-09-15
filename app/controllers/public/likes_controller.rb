@@ -21,6 +21,7 @@ class Public::LikesController < ApplicationController
   end
   
   private
+
  # @likeが現在のユーザーのものでなければ、リダイレクトして操作を中断させる
   def ensure_correct_user
     @like = current_user.likes.find_by(id: params[:id])
