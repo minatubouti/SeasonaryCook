@@ -20,5 +20,7 @@ AllCops:
     - 'node_modules/**/*'
     - 'lib/tasks/auto_annotate_models.rake'
     - 'app/controllers/public/sessions_controller.rb'
+    - 'spec/models/post_spec.rb'
+    - 'spec/models/user_spec.rb'
 
 

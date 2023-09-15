@@ -158,15 +158,13 @@ RSpec.describe Post, type: :model do
       let(:post) { create(:post) }
       let(:comment) { create(:comment, post: post, user: user) } # コメントのインスタンスを作成
     
-      describe 'いいねに関する通知' do
-        it 'いいねの通知を作成する' do
-          expect { post.create_notification_like!(user) }.to change(Notification, :count).by(1)
-        end
-      
-        it '通知のアクションが"like"であること' do
-          post.create_notification_like!(user)
-          expect(Notification.last.action).to eq 'like'
-        end
+      it 'いいねの通知を作成する' do
+        expect { post.create_notification_like!(user) }.to change(Notification, :count).by(1)
+      end
+    
+      it '通知のアクションが"like"であること' do
+        post.create_notification_like!(user)
+        expect(Notification.last.action).to eq 'like'
       end
     end
     

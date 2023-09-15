@@ -20,10 +20,6 @@ Bundler/OrderedGems:
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, IndentationWidth.
 # SupportedStyles: outdent, indent
-Layout/AccessModifierIndentation:
-  Exclude:
-    - 'app/controllers/admin/sessions_controller.rb'
-    - 'app/controllers/public/comments_controller.rb'
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
@@ -497,10 +493,7 @@ Style/Lambda:
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: literals, strict
-Style/MutableConstant:
-  Exclude:
-    - 'app/models/post.rb'
-    - 'app/models/user.rb'
+
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
@@ -569,10 +562,7 @@ Style/SymbolArray:
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: AllowMethodsWithArguments, AllowedMethods, AllowedPatterns, AllowComments.
 # AllowedMethods: define_method
-Style/SymbolProc:
-  Exclude:
-    - 'app/controllers/public/bookmarks_controller.rb'
-    - 'app/controllers/public/likes_controller.rb'
+
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).

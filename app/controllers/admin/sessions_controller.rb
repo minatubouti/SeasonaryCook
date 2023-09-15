@@ -2,8 +2,8 @@
 
 class Admin::SessionsController < Devise::SessionsController
   
-   protected
-   
+  protected
+  
   def after_sign_in_path_for(resource)
     admin_path # 管理者ログイン後のリダイレクト先
   end

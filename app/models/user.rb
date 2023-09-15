@@ -81,7 +81,8 @@ class User < ApplicationRecord
 
     
      # ゲストメールアドレスを定数として定義
-   GUEST_USER_EMAIL = "guest@example.com"
+  # .freezeを追加することで、そのオブジェクトは不変になり、後から内容を変更することができなくなる
+  GUEST_USER_EMAIL = "guest@example.com".freeze
 
     def self.guest
       find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
@@ -94,5 +95,4 @@ class User < ApplicationRecord
     def guest?
      email == GUEST_USER_EMAIL
     end
-    
 end
