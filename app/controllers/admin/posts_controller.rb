@@ -22,12 +22,12 @@ class Admin::PostsController < ApplicationController
     @posts = @posts.search_by_tag(params[:tag]) if params[:tag].present?
   
     # 並べ替え機能
+    # 並べ替え機能
     if params[:popular]
       @posts = @posts.popular
     elsif params[:oldest]
       @posts = @posts.oldest
     else
-      # デフォルトは新しい順にする
       @posts = @posts.recent 
     end
   end

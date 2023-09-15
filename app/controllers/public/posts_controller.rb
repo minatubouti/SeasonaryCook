@@ -5,7 +5,7 @@ class Public::PostsController < ApplicationController
   def new
     @post = Post.new
     @post.ingredients.build # 画面で使うための空の食材オブジェクト
-     @post.recipe_steps.build # 画面で使うための空のレシピステップオブジェクト
+    @post.recipe_steps.build # 画面で使うための空のレシピステップオブジェクト
   end
   
   def create
@@ -29,7 +29,7 @@ class Public::PostsController < ApplicationController
       # 上記2つの検索結果を統合し、重複を除去
       combined_post_ids = keyword_posts_ids + tag_posts_ids
       # IDに基づいて最終的なクエリを構築
-       @posts = @posts.where(id: combined_post_ids.uniq) # 重複するIDを除去するためにuniqを使用
+      @posts = @posts.where(id: combined_post_ids.uniq) # 重複するIDを除去するためにuniqを使用
     end
     # タグ検索のクエリがある場合はその条件でさらに絞り込む
     @posts = @posts.search_by_tag(params[:tag]) if params[:tag].present?
@@ -46,20 +46,14 @@ class Public::PostsController < ApplicationController
   end
 
   def show
-    # 投稿が非公開で、現在のユーザーが投稿のオーナーでない場合（URLでのアクセスを防ぐ)
-    if !@post.is_public && current_user != @post.user
+    # 投稿が非公開で、現在のユーザーが投稿のオーナーでない場合かつ投稿のオーナーが退会済みの場合（URLでのアクセスを防ぐ)
+    if (!@post.is_public && current_user != @post.user) || @post.user.is_deleted
       redirect_to root_path, alert: "閲覧権限がありません。"
       return
     end
+    @comments = @post.comments.order(created_at: :desc)
+  end  
     
-    # 投稿のオーナーが退会済みの場合
-    if @post.user.is_deleted
-      redirect_to root_path, alert: "この投稿のオーナーは退会済みです。"
-      return
-    end
-      @comments = @post.comments.order(created_at: :desc)
-  end
-
   def edit
   end
   

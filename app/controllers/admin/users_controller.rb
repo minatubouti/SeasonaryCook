@@ -4,11 +4,11 @@ class Admin::UsersController < ApplicationController
    include ApplicationHelper #ApplicationHelperに定義されたメソッドをAdmin::UsersControllerでも使えるようにする
    
   def index
-    if params[:search].present?
-      @users = User.where('name LIKE ?', "%#{params[:search]}%").page(params[:page])
-    else
-      @users = User.order(created_at: :desc).page(params[:page])
-    end
+    @users = if params[:search].present?
+      User.where('name LIKE ?', "%#{params[:search]}%").page(params[:page])
+             else
+      User.order(created_at: :desc).page(params[:page])
+             end
   end
 
   def show

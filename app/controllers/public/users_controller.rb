@@ -19,11 +19,11 @@ class Public::UsersController < ApplicationController
       return
     end
     
-    if current_user == @user
-      @posts = @user.posts.order(created_at: :desc) # 自分のマイページなら全投稿
-    else
-      @posts = @user.posts.where(is_public: true).order(created_at: :desc) # 他人のマイページなら公開投稿のみ
-    end
+    @posts = if current_user == @user
+               @user.posts.order(created_at: :desc) # 自分のマイページなら全投稿
+             else
+               @user.posts.where(is_public: true).order(created_at: :desc) # 他人のマイページなら公開投稿のみ
+             end
   end
 
   def edit
@@ -39,19 +39,12 @@ class Public::UsersController < ApplicationController
   end
   
   def likes
-    if current_user == @user
-      @liked_posts = @user.likes.includes(post: :user).map(&:post)
-    else
-      @liked_posts = @user.likes.includes(post: :user).where(posts: { is_public: true }).map(&:post)
-    end
+    # 関連する投稿の情報を効率的に取得するために、joinsメソッドを使用
+    @liked_posts = @user.likes.joins(:post).where(posts: { is_public: true }).map(&:post)
   end
   
   def bookmarks
-    if current_user == @user
-      @bookmarks = @user.bookmarks.includes(post: :user).map(&:post)
-    else
-      @bookmarks = @user.bookmarks.includes(post: :user).where(posts: { is_public: true }).map(&:post)
-    end
+    @bookmarks = @user.bookmarks.joins(:post).where(posts: { is_public: true }).map(&:post)
   end
    
   def withdraw

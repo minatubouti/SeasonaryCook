@@ -363,13 +363,6 @@ Style/ClassAndModuleChildren:
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, SingleLineConditionsOnly, IncludeTernaryExpressions.
 # SupportedStyles: assign_to_condition, assign_inside_condition
-Style/ConditionalAssignment:
-  Exclude:
-    - 'app/controllers/admin/posts_controller.rb'
-    - 'app/controllers/admin/users_controller.rb'
-    - 'app/controllers/public/posts_controller.rb'
-    - 'app/controllers/public/tags_controller.rb'
-    - 'app/controllers/public/users_controller.rb'
 
 # Offense count: 69
 # Configuration parameters: AllowedConstants.
