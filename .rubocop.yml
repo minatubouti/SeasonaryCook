@@ -10,8 +10,8 @@ require:
   
   ## 全体に適応する項目を定義します。ここで Exclude に設定したファイルは、チェック対象外になります。
 AllCops:
-  TargetRubyVersion: 2.6
-  TargetRailsVersion: 5.2
+  TargetRubyVersion: 3.1
+  TargetRailsVersion: 6.1
   Exclude:
     - 'vendor/**/*'
     - 'bin/**/*'
