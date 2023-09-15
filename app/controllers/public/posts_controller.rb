@@ -26,7 +26,7 @@ class Public::PostsController < ApplicationController
       keyword_posts_ids = @posts.search_by_keyword(params[:search]).pluck(:id)
       # キーワードに基づいてタグから投稿を検索
       tag_posts_ids = Post.search_by_tag(params[:search]).pluck(:id)
-    　# 上記2つの検索結果を統合し、重複を除去
+      # 上記2つの検索結果を統合し、重複を除去
       combined_post_ids = keyword_posts_ids + tag_posts_ids
       # IDに基づいて最終的なクエリを構築
        @posts = @posts.where(id: combined_post_ids.uniq) # 重複するIDを除去するためにuniqを使用

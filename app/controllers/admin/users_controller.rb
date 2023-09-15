@@ -53,7 +53,6 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-
   def user_params
     params.require(:user).permit(:name, :profile, :icon_image, :is_deleted)
   end

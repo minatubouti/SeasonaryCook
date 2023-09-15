@@ -36,11 +36,11 @@ class Post < ApplicationRecord
   scope :oldest, -> { order(created_at: :asc) }
   
   # キーワード検索のスコープ
-  scope :search_by_keyword, ->(keyword) {
+  scope :search_by_keyword, lambda { |keyword|
     where('title LIKE ? OR main_vegetable LIKE ? OR season LIKE ?', "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
   }
   # タグ検索のスコープ
-  scope :search_by_tag, ->(tag_name) {
+  scope :search_by_tag, lambda { |tag_name|
     tagged_with(tag_name)
   }
   
