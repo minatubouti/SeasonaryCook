@@ -72,13 +72,7 @@ Layout/EmptyLineAfterGuardClause:
 # Offense count: 12
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EmptyLineBetweenMethodDefs, EmptyLineBetweenClassDefs, EmptyLineBetweenModuleDefs, DefLikeMacros, AllowAdjacentOneLineDefs, NumberOfEmptyLines.
-Layout/EmptyLineBetweenDefs:
-  Exclude:
-    - 'app/controllers/admin/posts_controller.rb'
-    - 'app/controllers/admin/users_controller.rb'
-    - 'app/helpers/application_helper.rb'
-    - 'app/models/post.rb'
-    - 'app/models/user.rb'
+
 
 # Offense count: 7
 # This cop supports safe autocorrection (--autocorrect).
@@ -128,9 +122,6 @@ Layout/FirstArgumentIndentation:
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, IndentationWidth.
 # SupportedStyles: special_inside_parentheses, consistent, align_braces
-Layout/FirstHashElementIndentation:
-  Exclude:
-    - 'config/routes.rb'
 
 # Offense count: 24
 # This cop supports safe autocorrection (--autocorrect).
@@ -165,8 +156,6 @@ Layout/LeadingCommentSpace:
     - 'app/controllers/admin/users_controller.rb'
     - 'app/controllers/public/bookmarks_controller.rb'
     - 'app/controllers/public/likes_controller.rb'
-    - 'app/controllers/public/posts_controller.rb'
-    - 'app/controllers/public/users_controller.rb'
     - 'app/models/post.rb'
     - 'config/environments/test.rb'
 
@@ -234,7 +223,6 @@ Layout/SpaceBeforeComma:
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
 
-
 # Offense count: 7
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBrackets.
@@ -260,16 +248,6 @@ Layout/SpaceInsidePercentLiteralDelimiters:
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: final_newline, final_blank_line
-Layout/TrailingEmptyLines:
-  Exclude:
-    - 'app/controllers/admin/inquiries_controller.rb'
-    - 'app/controllers/public/homes_controller.rb'
-    - 'app/controllers/public/inquiries_controller.rb'
-    - 'app/controllers/public/likes_controller.rb'
-    - 'app/controllers/public/posts_controller.rb'
-    - 'config/puma.rb'
-    - 'db/seeds.rb'
-    - 'spec/factories/users.rb'
 
 # Offense count: 205
 # This cop supports safe autocorrection (--autocorrect).
@@ -338,10 +316,6 @@ Naming/AccessorMethodName:
 
 # Offense count: 2
 # Configuration parameters: AsciiConstants.
-Naming/AsciiIdentifiers:
-  Exclude:
-    - 'app/controllers/admin/posts_controller.rb'
-    - 'app/controllers/public/posts_controller.rb'
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
@@ -425,8 +399,6 @@ Style/HashSyntax:
 # This cop supports safe autocorrection (--autocorrect).
 Style/IfUnlessModifier:
   Exclude:
-    - 'app/controllers/public/bookmarks_controller.rb'
-    - 'app/controllers/public/likes_controller.rb'
     - 'app/controllers/public/sessions_controller.rb'
     - 'app/controllers/public/tags_controller.rb'
     - 'app/controllers/public/users_controller.rb'

@@ -57,15 +57,16 @@ class User < ApplicationRecord
   def follow(other_user)
     following << other_user
   end
+
   # 指定された他のユーザーのフォローを外す
   def unfollow(other_user)
     active_relationships.find_by(followed_id: other_user.id).destroy
   end
+
   # 指定された他のユーザーをフォローしているかどうかをチェック
   def following?(other_user)
     following.include?(other_user)
-  end
-    
+  end    
     
     # フォロー通知の作成メソッド
   def create_notification_follow!(current_user)

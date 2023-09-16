@@ -1,5 +1,5 @@
 class Public::PostsController < ApplicationController
-  before_action :find_post, only: %i[show edit update destroy] #find_postが先に読み込まれるようにする
+  before_action :find_post, only: %i[show edit update destroy] # find_postが先に読み込まれるようにする
   before_action :ensure_correct_user, only: %i[edit update destroy]
   
   def new
@@ -20,7 +20,7 @@ class Public::PostsController < ApplicationController
   end
   
   def index
-    @posts = Post.where(is_public: true, is_guest: false).includes(:user, :likes) #ゲスト、退会済みのユーザーの投稿を表示しないようにする
+    @posts = Post.where(is_public: true, is_guest: false).includes(:user, :likes) # ゲスト、退会済みのユーザーの投稿を表示しないようにする
     if params[:search].present?
       # キーワードに基づいて投稿を検索
       keyword_posts_ids = @posts.search_by_keyword(params[:search]).pluck(:id)

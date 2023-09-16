@@ -23,8 +23,7 @@ class Public::BookmarksController < ApplicationController
    # @bookmarkが現在のユーザーのものでなければ、リダイレクトして操作を中断させる
   def ensure_correct_user
     @bookmark = current_user.bookmarks.find_by(id: params[:id])
-    unless @bookmark
-      redirect_to root_path, alert: '権限がありません'
-    end
+    # @bookmark が nil の場合にリダイレクトする、unless を使用する代わりに if 修飾子を使用
+    redirect_to root_path, alert: '権限がありません' if @bookmark.nil?
   end
 end

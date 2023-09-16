@@ -2,7 +2,7 @@ class Public::UsersController < ApplicationController
   before_action :authenticate_user! # ログインチェック
   before_action :find_user, only: %i[show edit update likes bookmarks]  # find_userを使用するアクション
   before_action :correct_user, only: %i[edit update withdraw check_out]
-  before_action :reject_guest, only: %i[edit update withdraw check_out] #ゲストユーザか確認
+  before_action :reject_guest, only: %i[edit update withdraw check_out] # ゲストユーザか確認
  
   
   def show

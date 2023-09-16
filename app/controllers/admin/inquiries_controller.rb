@@ -20,7 +20,6 @@ class Admin::InquiriesController < ApplicationController
     end
   end
   
-  
   private
   
   def set_inquiry

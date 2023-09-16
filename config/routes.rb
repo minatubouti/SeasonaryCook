@@ -2,8 +2,8 @@ Rails.application.routes.draw do
 
     # 管理者側
     devise_for :admin, skip: %i[registrations passwords] ,controllers: {
-    sessions: "admin/sessions"
-   }
+      sessions: "admin/sessions"
+    }
   namespace :admin do
     get '/' => 'homes#top'
     resources :users, only: %i[index show edit update destroy]

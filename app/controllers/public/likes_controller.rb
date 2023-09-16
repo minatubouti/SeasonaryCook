@@ -25,8 +25,6 @@ class Public::LikesController < ApplicationController
  # @likeが現在のユーザーのものでなければ、リダイレクトして操作を中断させる
   def ensure_correct_user
     @like = current_user.likes.find_by(id: params[:id])
-    unless @like
-      redirect_to root_path, alert: '権限がありません。'
-    end
+      redirect_to root_path, alert: '権限がありません。' if @like.nil?
   end
 end

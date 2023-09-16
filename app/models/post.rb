@@ -51,18 +51,17 @@ class Post < ApplicationRecord
       image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpg')
     end
     image
-  end
-  
+  end  
   
   # 特定のユーザーが投稿に「いいね」をしているかどうかをチェック
   def likes_by?(user)
     likes.exists?(user_id: user.id)
   end
+
   #同じくブックマークしているかをチェック
   def bookmarked_by?(user)
     bookmarks.exists?(user_id: user.id)
-  end
-  
+  end  
   
   # いいねを行った際に通知（Notification）を作成するメソッド、引数としてcurrent_user（いいねを行ったユーザー）を受け取ります。
   def create_notification_like!(current_user)
@@ -86,7 +85,6 @@ class Post < ApplicationRecord
       notification.save if notification.valid?
     end
   end
-
   
 # コメント通知の作成メソッド
   def create_notification_comment!(current_user, comment_id)
