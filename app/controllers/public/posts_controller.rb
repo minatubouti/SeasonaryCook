@@ -35,13 +35,13 @@ class Public::PostsController < ApplicationController
     @posts = @posts.search_by_tag(params[:tag]) if params[:tag].present?
     
     # 並べ替え機能
-    if params[:popular]
-      @posts = @posts.popular
-    elsif params[:oldest]
-      @posts = @posts.oldest
-    else
-      @posts = @posts.recent # デフォルトは新しい順にする
-    end
+    @posts = if params[:popular]
+               @posts.popular
+             elsif params[:oldest]
+               @posts.oldest
+             else
+               @posts.recent # デフォルトは新しい順にする
+             end
     @posts = @posts.page(params[:page])
   end
 

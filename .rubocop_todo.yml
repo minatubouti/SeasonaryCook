@@ -233,10 +233,7 @@ Layout/SpaceBeforeComma:
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
-Layout/SpaceBeforeComment:
-  Exclude:
-    - 'app/controllers/admin/posts_controller.rb'
-    - 'app/controllers/public/posts_controller.rb'
+
 
 # Offense count: 7
 # This cop supports safe autocorrection (--autocorrect).
@@ -459,9 +456,6 @@ Style/InverseMethods:
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: MinDigits, Strict, AllowedNumbers, AllowedPatterns.
-Style/NumericLiterals:
-  Exclude:
-    - 'db/schema.rb'
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
