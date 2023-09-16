@@ -31,11 +31,9 @@ class Admin::PostsController < ApplicationController
              end
   end
 
-  def show
-  end
+  def show; end
   
-  def edit
-  end
+  def edit; end
   
   def update
     if @post.update(post_params)
@@ -53,13 +51,13 @@ class Admin::PostsController < ApplicationController
   
   private
 
-  #@user = User.find(params[:id])が共同で使えるようにする
+  # @user = User.find(params[:id])が共同で使えるようにする
   def find_post
     @post = Post.find_by(id: params[:id])
-    unless @post
+    return if @post
+
       # 投稿が削除されている場合urlでアクセス時にエラーにならないように
       redirect_to admin_posts_path, alert: '指定された投稿は存在しないか、削除されました。'
-    end
   end
 
   def post_params

@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-
     # 管理者側
-    devise_for :admin, skip: %i[registrations passwords] ,controllers: {
+    devise_for :admin, skip: %i[registrations passwords], controllers: {
       sessions: "admin/sessions"
     }
   namespace :admin do
@@ -14,27 +13,27 @@ Rails.application.routes.draw do
   
   
 # ユーザ側ルーティング
-    devise_for :users,skip: [:passwords], controllers: {
+    devise_for :users, skip: [:passwords], controllers: {
       registrations: 'public/registrations',
       sessions: 'public/sessions'
     }
  
   scope module: :public do
-    root :to => "homes#top"
+    root to: "homes#top"
     get '/about' => 'homes#about'
     resources :users, only: %i[show edit update] do
     resource :relationships, only:%i[create destroy]
       get 'follows' => 'relationships#follower'
       get 'followers' => 'relationships#followed'
       get 'bookmarks', on: :member
-    member do
-      get 'likes'
+      member do
+        get 'likes'
+      end
+      member do
+        get :check_out
+        patch :withdraw
+      end
     end
-    member do
-      get :check_out
-      patch :withdraw
-    end
-  end
   resources :posts do
     resources :comments, only: [:create]
     resources :likes, only: %i[create destroy]

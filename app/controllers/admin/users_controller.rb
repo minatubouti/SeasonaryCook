@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
-   before_action :authenticate_admin! #管理者であることを確認
+   before_action :authenticate_admin! # 管理者であることを確認
    before_action :find_user, only: %i[show edit update destroy] # find_userを使うアクション
-   include ApplicationHelper #ApplicationHelperに定義されたメソッドをAdmin::UsersControllerでも使えるようにする
+   include ApplicationHelper # ApplicationHelperに定義されたメソッドをAdmin::UsersControllerでも使えるようにする
    
   def index
     @users = if params[:search].present?
@@ -19,8 +19,7 @@ class Admin::UsersController < ApplicationController
     @comments_count = @posts.sum { |post| active_comments_count(post) }   # ユーザーのコメントの合計の計算
   end
 
-  def edit
-  end
+  def edit; end
   
   def update
     if @user.update(user_params)
@@ -47,10 +46,10 @@ class Admin::UsersController < ApplicationController
  # find_userが共同で使えるようにする
   def find_user
     @user = User.find_by(id: params[:id])
-    unless @user
+    return if @user
+
       flash[:alert] = "指定されたユーザーは存在しないか、削除されました。"
       redirect_to admin_users_path
-    end
   end
 
   def user_params

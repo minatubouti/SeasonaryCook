@@ -25,26 +25,14 @@ Bundler/OrderedGems:
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, IndentationWidth.
 # SupportedStyles: with_first_argument, with_fixed_indentation
-Layout/ArgumentAlignment:
-  Exclude:
-    - 'bin/webpack'
-    - 'bin/webpack-dev-server'
 
 # Offense count: 4
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyleAlignWith.
 # SupportedStylesAlignWith: either, start_of_block, start_of_line
-Layout/BlockAlignment:
-  Exclude:
-    - 'config/routes.rb'
-    - 'spec/models/post_spec.rb'
-    - 'spec/rails_helper.rb'
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
-Layout/ClosingParenthesisIndentation:
-  Exclude:
-    - 'db/seeds.rb'
 
 # Offense count: 43
 # This cop supports safe autocorrection (--autocorrect).
@@ -56,15 +44,9 @@ Layout/CommentIndentation:
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: leading, trailing
-Layout/DotPosition:
-  Exclude:
-    - 'bin/yarn'
 
 # Offense count: 6
 # This cop supports safe autocorrection (--autocorrect).
-Layout/EmptyLineAfterGuardClause:
-  Exclude:
-    - 'bin/bundle'
 
 # Offense count: 7
 # This cop supports safe autocorrection (--autocorrect).
@@ -86,26 +68,17 @@ Layout/EmptyLineAfterGuardClause:
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: empty_lines, no_empty_lines
-Layout/EmptyLinesAroundBlockBody:
-  Exclude:
-    - 'config/routes.rb'
-    - 'db/schema.rb'
-    - 'spec/requests/public/tags_spec.rb'
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: empty_lines, empty_lines_except_namespace, empty_lines_special, no_empty_lines
-Layout/EmptyLinesAroundModuleBody:
-  Exclude:
-    - 'app/helpers/application_helper.rb'
 
 # Offense count: 4
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowForAlignment, AllowBeforeTrailingComments, ForceEqualSignAlignment.
 Layout/ExtraSpacing:
   Exclude:
-    - 'app/controllers/public/users_controller.rb'
     - 'app/models/post.rb'
     - 'db/seeds.rb'
     - 'spec/rails_helper.rb'
@@ -114,9 +87,6 @@ Layout/ExtraSpacing:
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, IndentationWidth.
 # SupportedStyles: consistent, consistent_relative_to_receiver, special_for_inner_method_call, special_for_inner_method_call_in_parentheses
-Layout/FirstArgumentIndentation:
-  Exclude:
-    - 'db/seeds.rb'
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
@@ -129,9 +99,6 @@ Layout/FirstArgumentIndentation:
 # SupportedHashRocketStyles: key, separator, table
 # SupportedColonStyles: key, separator, table
 # SupportedLastArgumentHashStyles: always_inspect, always_ignore, ignore_implicit, ignore_explicit
-Layout/HashAlignment:
-  Exclude:
-    - 'db/seeds.rb'
 
 # Offense count: 53
 # This cop supports safe autocorrection (--autocorrect).
@@ -151,13 +118,8 @@ Layout/IndentationWidth:
 # Configuration parameters: AllowDoxygenCommentStyle, AllowGemfileRubyComment.
 Layout/LeadingCommentSpace:
   Exclude:
-    - 'app/controllers/admin/comments_controller.rb'
-    - 'app/controllers/admin/posts_controller.rb'
-    - 'app/controllers/admin/users_controller.rb'
-    - 'app/controllers/public/bookmarks_controller.rb'
-    - 'app/controllers/public/likes_controller.rb'
     - 'app/models/post.rb'
-    - 'config/environments/test.rb'
+    
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
@@ -197,8 +159,7 @@ Layout/SpaceAfterComma:
   Exclude:
     - 'Gemfile'
     - 'app/models/user.rb'
-    - 'config/routes.rb'
-    - 'db/seeds.rb'
+    
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
@@ -210,15 +171,9 @@ Layout/SpaceAroundKeyword:
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowForAlignment, EnforcedStyleForExponentOperator.
 # SupportedStylesForExponentOperator: space, no_space
-Layout/SpaceAroundOperators:
-  Exclude:
-    - 'app/models/user.rb'
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
-Layout/SpaceBeforeComma:
-  Exclude:
-    - 'config/routes.rb'
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
@@ -240,9 +195,6 @@ Layout/SpaceInsideHashLiteralBraces:
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
-Layout/SpaceInsidePercentLiteralDelimiters:
-  Exclude:
-    - 'db/migrate/20230807111650_create_active_storage_tables.active_storage.rb'
 
 # Offense count: 8
 # This cop supports safe autocorrection (--autocorrect).
@@ -259,14 +211,8 @@ Layout/TrailingWhitespace:
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowedMethods.
 # AllowedMethods: present?, blank?, presence, try, try!
-Lint/SafeNavigationConsistency:
-  Exclude:
-    - 'app/controllers/public/sessions_controller.rb'
 
 # Offense count: 1
-Lint/ShadowingOuterLocalVariable:
-  Exclude:
-    - 'spec/rails_helper.rb'
 
 # Offense count: 5
 # This cop supports safe autocorrection (--autocorrect).
@@ -275,7 +221,7 @@ Lint/UnusedMethodArgument:
   Exclude:
     - 'app/controllers/admin/sessions_controller.rb'
     - 'app/controllers/public/registrations_controller.rb'
-    - 'app/controllers/public/sessions_controller.rb'
+   
 
 # Offense count: 1
 # This cop supports unsafe autocorrection (--autocorrect-all).
@@ -344,14 +290,6 @@ Style/Documentation:
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: compact, expanded
-Style/EmptyMethod:
-  Exclude:
-    - 'app/controllers/admin/inquiries_controller.rb'
-    - 'app/controllers/admin/posts_controller.rb'
-    - 'app/controllers/admin/users_controller.rb'
-    - 'app/controllers/public/homes_controller.rb'
-    - 'app/controllers/public/posts_controller.rb'
-    - 'app/controllers/public/users_controller.rb'
 
 # Offense count: 136
 # This cop supports unsafe autocorrection (--autocorrect-all).
@@ -371,17 +309,9 @@ Style/GlobalStdStream:
 # Configuration parameters: MinBodyLength, AllowConsecutiveConditionals.
 Style/GuardClause:
   Exclude:
-    - 'app/controllers/admin/posts_controller.rb'
-    - 'app/controllers/admin/users_controller.rb'
-    - 'app/controllers/public/bookmarks_controller.rb'
-    - 'app/controllers/public/likes_controller.rb'
-    - 'app/controllers/public/posts_controller.rb'
-    - 'app/controllers/public/sessions_controller.rb'
-    - 'app/controllers/public/tags_controller.rb'
-    - 'app/controllers/public/users_controller.rb'
     - 'app/models/post.rb'
     - 'app/models/user.rb'
-    - 'db/migrate/20230816084510_change_collation_for_tag_names.acts_as_taggable_on_engine.rb'
+    
 
 # Offense count: 23
 # This cop supports safe autocorrection (--autocorrect).
@@ -391,28 +321,18 @@ Style/GuardClause:
 Style/HashSyntax:
   Exclude:
     - 'app/models/post.rb'
-    - 'config/routes.rb'
-    - 'spec/models/post_spec.rb'
-    - 'spec/models/user_spec.rb'
+    
 
 # Offense count: 11
 # This cop supports safe autocorrection (--autocorrect).
 Style/IfUnlessModifier:
   Exclude:
-    - 'app/controllers/public/sessions_controller.rb'
-    - 'app/controllers/public/tags_controller.rb'
-    - 'app/controllers/public/users_controller.rb'
     - 'app/models/post.rb'
-    - 'bin/bundle'
-    - 'db/migrate/20230816084510_change_collation_for_tag_names.acts_as_taggable_on_engine.rb'
-    - 'db/migrate/20230816084511_add_missing_indexes_on_taggings.acts_as_taggable_on_engine.rb'
+
 
 # Offense count: 1
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: InverseMethods, InverseBlocks.
-Style/InverseMethods:
-  Exclude:
-    - 'bin/yarn'
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
@@ -431,9 +351,7 @@ Style/InverseMethods:
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
-Style/PerlBackrefs:
-  Exclude:
-    - 'bin/bundle'
+
 
 # Offense count: 2
 # This cop supports unsafe autocorrection (--autocorrect-all).
@@ -449,14 +367,10 @@ Style/RedundantFetchBlock:
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: RequireEnglish.
 # SupportedStyles: use_perl_names, use_english_names, use_builtin_english_names
-Style/SpecialGlobalVars:
-  EnforcedStyle: use_perl_names
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
-Style/StderrPuts:
-  Exclude:
-    - 'bin/yarn'
+
 
 # Offense count: 460
 # This cop supports safe autocorrection (--autocorrect).
@@ -480,16 +394,12 @@ Style/StringLiterals:
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyleForMultiline.
 # SupportedStylesForMultiline: comma, consistent_comma, no_comma
-Style/TrailingCommaInArrayLiteral:
-  Exclude:
-    - 'db/seeds.rb'
 
 # Offense count: 8
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: MinSize, WordRegex.
 # SupportedStyles: percent, brackets
-Style/WordArray:
-  EnforcedStyle: brackets
+
 
 # Offense count: 19
 # This cop supports safe autocorrection (--autocorrect).

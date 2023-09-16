@@ -22,7 +22,7 @@ class Post < ApplicationRecord
   validates :is_public, inclusion: { in: [true, false] }
   
   # 季節の選択肢
-  SEASONS = ['春', '夏', '秋', '冬'].freeze
+  SEASONS = %w[春 夏 秋 冬].freeze
 
   # 季節のバリデーション
   validates :season, inclusion: { in: SEASONS }

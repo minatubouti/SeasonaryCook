@@ -1,5 +1,5 @@
 class Public::BookmarksController < ApplicationController
-  before_action :ensure_correct_user, only: [:destroy] #他のユーザーがブックマークを削除できないように
+  before_action :ensure_correct_user, only: [:destroy] # 他のユーザーがブックマークを削除できないように
   
   def create
     @bookmark = current_user.bookmarks.create(post_id: params[:post_id])

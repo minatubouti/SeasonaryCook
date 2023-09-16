@@ -6,8 +6,7 @@ class Admin::InquiriesController < ApplicationController
     @inquiries = Inquiry.all
   end
 
-  def show
-  end
+  def show; end
 
   def update
     # 返信を更新する際にrepliedフィールドも同時に更新

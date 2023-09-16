@@ -26,8 +26,7 @@ class Public::UsersController < ApplicationController
              end
   end
 
-  def edit
-  end
+  def edit; end
   
   def update
     if @user.update(user_params)
@@ -54,8 +53,7 @@ class Public::UsersController < ApplicationController
     redirect_to root_path, notice: '退会しました。'
   end
   
-  def check_out
-  end
+  def check_out; end
 
   
   private
@@ -66,23 +64,23 @@ class Public::UsersController < ApplicationController
   
   def find_user
     @user = User.find_by(id: params[:id])
-    unless @user
+    return if @user
+
       flash[:alert] = "指定されたユーザーは存在しないか、削除されました。"
       redirect_to root_path
-    end
   end
   
   # ログインしているユーザーかチェック
   def correct_user
     @user = User.find(params[:id])
-    unless @user == current_user
+    return if @user == current_user
+
       redirect_to root_path, alert: "不正なアクセスです。"
-    end
   end
   
   def reject_guest
-    if current_user&.guest?
+    return unless current_user&.guest?
+
       redirect_to root_path, alert: "ゲストユーザーはプロフィールの編集はできません。"
-    end
   end
 end

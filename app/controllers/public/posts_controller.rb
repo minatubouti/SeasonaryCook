@@ -54,8 +54,7 @@ class Public::PostsController < ApplicationController
     @comments = @post.comments.order(created_at: :desc)
   end  
     
-  def edit
-  end
+  def edit; end
   
   def update
     if @post.update(post_params)
@@ -76,10 +75,8 @@ class Public::PostsController < ApplicationController
   
   def find_post
     @post = Post.find_by(id: params[:id])
-    unless @post
       # 投稿が削除されている場合urlでアクセス時にエラーにならないように
-      redirect_to posts_path, alert: '指定された投稿は存在しないか、削除されました。'
-    end
+    redirect_to posts_path, alert: '指定された投稿は存在しないか、削除されました。' if @post.nil?
   end
    
   def post_params
@@ -92,9 +89,9 @@ class Public::PostsController < ApplicationController
    
   # 自身の投稿かチェック
   def ensure_correct_user
-    unless @post.user == current_user
+    return if @post.user == current_user
+
       flash[:alert] = '権限がありません。'
       redirect_to posts_path
-    end
   end
 end

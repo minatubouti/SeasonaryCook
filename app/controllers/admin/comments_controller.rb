@@ -8,7 +8,7 @@ class Admin::CommentsController < ApplicationController
   def destroy
     comment = Comment.find(params[:id])
     comment.destroy
-    post_id = comment.post_id #post_idを定義
+    post_id = comment.post_id # post_idを定義
     
     # リファラーURLからリダイレクト先を判定
     if request.referer&.include?("admin/posts/#{post_id}")

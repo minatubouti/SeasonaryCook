@@ -8,9 +8,7 @@ class Public::TagsController < ApplicationController
               ActsAsTaggableOn::Tag.most_used(30)
             end
     # AJAXリクエストの場合、部分的なHTMLを返す
-    if request.xhr?
-      render partial: 'tags', locals: { tags: @tags }, layout: false
-    end
+    render partial: 'tags', locals: { tags: @tags }, layout: false if request.xhr?
   end
   
   # 特定のタグに関連する投稿一覧を表示

@@ -38,7 +38,7 @@ class User < ApplicationRecord
   
   # active_for_authentication? メソッドがtrueを返すとinactive_message を呼び出しエラーメッセージを表示する
   def inactive_message
-    is_deleted ? super: :account_inactive 
+    is_deleted ? super : :account_inactive 
   end
   
   # current_userが「いいね」や「ブックマーク」した投稿の総数をカウントする場合に非公開の投稿や退会済みのユーザーの投稿を除外する

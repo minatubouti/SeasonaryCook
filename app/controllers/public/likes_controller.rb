@@ -1,5 +1,5 @@
 class Public::LikesController < ApplicationController
-  before_action :ensure_correct_user, only: [:destroy] #他のユーザーがいいねを削除できないように
+  before_action :ensure_correct_user, only: [:destroy] # 他のユーザーがいいねを削除できないように
  
   def create
     @like = current_user.likes.create(post_id: params[:post_id])
