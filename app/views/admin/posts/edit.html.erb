@@ -9,8 +9,18 @@
           </div>
   
           <div class="form-group">
-            <%= f.label :tag_list, "タグ（＃で区切って複数入力可）" %>
-            <%= f.text_field :tag_list, placeholder: "#揚げ物 #圧力鍋", class: 'form-control' %>
+            <%= f.label :tag_list, "タグを入力してボタンで追加", class: 'form-control-label' %>
+            <div class="input-group">
+              <!--valueを設定してタグの読み込み時にフォームをクリアにする-->
+              <%= f.text_field :tag_list, id: 'tag-input', placeholder: "揚げ物", class: 'form-control', value: '' %>
+              <div class="input-group-append">
+                <button id="add-tag-btn" class="btn btn-info" type="button">タグ追加</button>
+              </div>
+            </div>
+            <!--JSON形式の文字列に変換し、カスタムデータに保存して、表示エリアに表示させる-->
+            <div id="tags-display" data-tags='<%= @post.tag_list.to_json %>'></div>
+            <!-- 実際にフォームとして送信されるタグのリスト（隠れている） -->
+            <input type="hidden" id="actual-tag-list" name="post[tag_list]" value="">
           </div>
   
           <div class="form-group">
@@ -39,3 +49,6 @@
     </div> 
   </div> 
 <% end %>
+
+<!--タグを動的に追加、削除するjavascript-->
+<%= render partial: 'public/posts/dynamic_tags' %>
