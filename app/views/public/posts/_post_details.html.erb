@@ -1,5 +1,5 @@
-<% if post.get_image.attached? %>
-  <%= image_tag post.get_image, alt: post.title, class: "img-fluid mb-3", style: "width: 100%; max-height: 400px;" %>
+<% if post.post_image.attached? %>
+  <%= image_tag post.post_image, alt: post.title, class: "img-fluid mb-3", style: "width: 100%; max-height: 400px;" %>
 <% end %>
 <p><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
 <!--yieldを使用して、特定のパスを動的に変更する-->

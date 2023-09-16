@@ -18,7 +18,7 @@ class Post < ApplicationRecord
  
   
   validates :title, :main_vegetable, :season, presence: true
-  #公開するか判定
+  # 公開するか判定
   validates :is_public, inclusion: { in: [true, false] }
   
   # 季節の選択肢
@@ -45,7 +45,7 @@ class Post < ApplicationRecord
   }
   
   # 画像がない場合no-image
-  def get_image
+  def post_image
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no-image.jpg')
       image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpg')
@@ -58,14 +58,14 @@ class Post < ApplicationRecord
     likes.exists?(user_id: user.id)
   end
 
-  #同じくブックマークしているかをチェック
+  # 同じくブックマークしているかをチェック
   def bookmarked_by?(user)
     bookmarks.exists?(user_id: user.id)
   end  
   
   # いいねを行った際に通知（Notification）を作成するメソッド、引数としてcurrent_user（いいねを行ったユーザー）を受け取ります。
   def create_notification_like!(current_user)
-    user_id = self.user_id  # self はこの場合 Post オブジェクトを指す(self.user_idは投稿の作成者のID)
+    user_id = self.user_id # self はこの場合 Post オブジェクトを指す(self.user_idは投稿の作成者のID)
     
     # すでに「いいね」されているか検索
     temp = Notification.where(["visitor_id = ? and visited_id = ? and post_id = ? and action = ?", current_user.id, user_id, id, 'like'])
@@ -78,9 +78,7 @@ class Post < ApplicationRecord
         action: 'like'
       )
       # 自分の投稿に対するいいねの場合は、通知済みとする
-      if notification.visitor_id == notification.visited_id
-        notification.checked = true
-      end
+      notification.checked = true if notification.visitor_id == notification.visited_id
       # notificationオブジェクトが有効（valid?メソッドがtrueを返す）であれば、この通知を保存
       notification.save if notification.valid?
     end
@@ -102,14 +100,12 @@ class Post < ApplicationRecord
     # コメントは複数回することが考えられるため、１つの投稿に複数回通知する
     notification = current_user.active_notifications.new(
       post_id: id,
-      comment_id: comment_id,
-      visited_id: visited_id,
+      comment_id:,
+      visited_id:,
       action: 'comment'
     )
     # 自分の投稿に対するコメントの場合は、通知済みとする
-    if notification.visitor_id == notification.visited_id
-      notification.checked = true
-    end
+    notification.checked = true if notification.visitor_id == notification.visited_id
     notification.save if notification.valid?
   end
 end

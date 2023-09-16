@@ -112,13 +112,13 @@ RSpec.describe Post, type: :model do
       end
   
       it '投稿画像が表示される' do
-        expect(post.get_image).to eq(post.image)
+        expect(post.post_image).to eq(post.image)
       end
     end
   
     context '投稿画像がない場合' do
       it 'デフォルト画像が表示される' do
-        expect(post.get_image.filename.to_s).to eq('default-image.jpg')
+        expect(post.post_image.filename.to_s).to eq('default-image.jpg')
       end
     end
     

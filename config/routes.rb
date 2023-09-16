@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     root to: "homes#top"
     get '/about' => 'homes#about'
     resources :users, only: %i[show edit update] do
-    resource :relationships, only:%i[create destroy]
+    resource :relationships, only: %i[create destroy]
       get 'follows' => 'relationships#follower'
       get 'followers' => 'relationships#followed'
       get 'bookmarks', on: :member
