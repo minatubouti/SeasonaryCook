@@ -70,7 +70,9 @@ class User < ApplicationRecord
     
     # フォロー通知の作成メソッド
   def create_notification_follow!(current_user)
+     # すでに「フォロー」されたことがあるか検索
      temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
+     # temp.blank?がtrue（すでに同じ通知がない場合通知を作成
     if temp.blank?
       notification = current_user.active_notifications.new(
         visited_id: id,

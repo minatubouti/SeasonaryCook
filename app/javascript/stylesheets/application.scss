@@ -157,6 +157,12 @@ footer {
   color: red;
 }
 
+// 通知投稿タイトル
+.title-text {
+  color: #66CC33;
+  font-weight: bold;
+}
+
 @media (max-width: 768px) { 
 .notification-mark {
   top: 252px; /* 未読マークの上方向の位置 */

@@ -43,7 +43,7 @@
         <div class="form-group text-center">
           <%= f.submit "更新", class: "btn btn-success mr-4" %>
           <%= link_to "変更をキャンセル", admin_post_path(@post), class: "btn btn-warning mr-4" %>
-          <%= link_to '投稿削除', post_path(@post),method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+          <%= link_to '投稿削除', admin_post_path(@post),method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
         </div>
       </div> 
     </div> 
