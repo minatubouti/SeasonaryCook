@@ -37,6 +37,8 @@ class Admin::PostsController < ApplicationController
   
   def update
     if @post.update(post_params)
+      # 更新通知作成
+      @post.create_update_notification(current_admin.id)
       redirect_to admin_post_path(@post), notice: '投稿が更新されました。'
     else
       flash[:alert] = "更新に失敗しました"
@@ -45,6 +47,8 @@ class Admin::PostsController < ApplicationController
   end
   
   def destroy
+    # 削除通知作成
+    @post.create_destroy_notification(current_admin.id)
     @post.destroy
     redirect_to admin_posts_path, notice: '投稿が削除されました'
   end

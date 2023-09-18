@@ -48,7 +48,7 @@ class Public::PostsController < ApplicationController
   def show
     # 投稿が非公開で、現在のユーザーが投稿のオーナーでない場合かつ投稿のオーナーが退会済みの場合（URLでのアクセスを防ぐ)
     if (!@post.is_public && current_user != @post.user) || @post.user.is_deleted
-      redirect_to root_path, alert: "閲覧権限がありません。"
+      redirect_to root_path, alert: "投稿が非公開になっています"
       return
     end
     @comments = @post.comments.order(created_at: :desc)

@@ -152,6 +152,11 @@ footer {
   border-radius: 50%; /* 未読マークを円形に */
 }
 
+// 投稿削除メッセージ
+.text-red {
+  color: red;
+}
+
 @media (max-width: 768px) { 
 .notification-mark {
   top: 252px; /* 未読マークの上方向の位置 */

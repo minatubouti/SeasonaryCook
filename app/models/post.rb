@@ -14,7 +14,8 @@ class Post < ApplicationRecord
   accepts_nested_attributes_for :recipe_steps, reject_if: :all_blank, allow_destroy: true
   has_many :ingredients, dependent: :destroy
   accepts_nested_attributes_for :ingredients, reject_if: :all_blank, allow_destroy: true
-  has_many :notifications, dependent: :destroy
+  # 通知に投稿IDがnilであることを許容する
+  has_many :notifications, dependent: :nullify
  
   
   validates :title, :main_vegetable, :season, presence: true
@@ -107,5 +108,25 @@ class Post < ApplicationRecord
     # 自分の投稿に対するコメントの場合は、通知済みとする
     notification.checked = true if notification.visitor_id == notification.visited_id
     notification.save if notification.valid?
+  end
+
+  # 管理者による投稿更通知
+  def create_update_notification(admin_id)
+    Notification.create(
+      visitor_id: admin_id, 
+      visited_id: user_id,
+      post_id: id,
+      action: 'post_updated'
+    )
+  end
+
+  # 管理者による投稿削除通知
+  def create_destroy_notification(admin_id)
+    Notification.create(
+      visitor_id: admin_id,
+      visited_id: user_id,
+      post_id: id,
+      action: 'post_destroyed'
+    )
   end
 end
