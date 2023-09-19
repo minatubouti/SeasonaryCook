@@ -72,7 +72,8 @@ class Post < ApplicationRecord
     temp = Notification.where(["visitor_id = ? and visited_id = ? and post_id = ? and action = ?", current_user.id, user_id, id, 'like'])
   
     # temp.blank?がtrue（すでに同じ通知がない）であり、かつcurrent_user.id != user_id（自分自身の投稿にいいねしていない）場合、新しい通知レコードを作成
-    if temp.blank? && current_user.id != user_id
+    return unless temp.blank? && current_user.id != user_id
+
       notification = current_user.active_notifications.new(
         post_id: id,
         visited_id: user_id,
@@ -82,7 +83,7 @@ class Post < ApplicationRecord
       notification.checked = true if notification.visitor_id == notification.visited_id
       # notificationオブジェクトが有効（valid?メソッドがtrueを返す）であれば、この通知を保存
       notification.save if notification.valid?
-    end
+    
   end
   
 # コメント通知の作成メソッド

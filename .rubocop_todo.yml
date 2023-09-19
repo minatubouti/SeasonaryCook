@@ -126,27 +126,15 @@ Layout/IndentationWidth:
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, IndentationWidth.
 # SupportedStyles: aligned, indented, indented_relative_to_receiver
-Layout/MultilineMethodCallIndentation:
-  Exclude:
-    - 'app/controllers/public/tags_controller.rb'
-    
 
 # Offense count: 4
 # This cop supports safe autocorrection (--autocorrect).
 
 # Offense count: 9
 # This cop supports safe autocorrection (--autocorrect).
-Layout/SpaceAfterComma:
-  Exclude:
-    - 'Gemfile'
-    - 'app/models/user.rb'
     
-
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
-Layout/SpaceAroundKeyword:
-  Exclude:
-    - 'app/models/user.rb'
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
@@ -170,9 +158,6 @@ Layout/SpaceAroundKeyword:
 # Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBraces.
 # SupportedStyles: space, no_space, compact
 # SupportedStylesForEmptyBraces: space, no_space
-Layout/SpaceInsideHashLiteralBraces:
-  Exclude:
-    - 'db/seeds.rb'
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
@@ -198,12 +183,7 @@ Layout/TrailingWhitespace:
 # Offense count: 5
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowUnusedKeywordArguments, IgnoreEmptyMethods, IgnoreNotImplementedMethods.
-Lint/UnusedMethodArgument:
-  Exclude:
-    - 'app/controllers/admin/sessions_controller.rb'
-    - 'app/controllers/public/registrations_controller.rb'
-   
-
+    
 # Offense count: 1
 # This cop supports unsafe autocorrection (--autocorrect-all).
 
@@ -235,7 +215,6 @@ Metrics/PerceivedComplexity:
   Max: 9
 
 # Offense count: 1
-
 
 # Offense count: 2
 # Configuration parameters: AsciiConstants.
@@ -275,18 +254,11 @@ Style/FrozenStringLiteralComment:
 
 # Offense count: 1
 # This cop supports unsafe autocorrection (--autocorrect-all).
-Style/GlobalStdStream:
-  Exclude:
-    - 'config/environments/production.rb'
+
 
 # Offense count: 14
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: MinBodyLength, AllowConsecutiveConditionals.
-Style/GuardClause:
-  Exclude:
-    - 'app/models/post.rb'
-    - 'app/models/user.rb'
-    
 
 # Offense count: 23
 # This cop supports safe autocorrection (--autocorrect).
@@ -356,7 +328,6 @@ Style/StringLiterals:
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: AllowMethodsWithArguments, AllowedMethods, AllowedPatterns, AllowComments.
 # AllowedMethods: define_method
-
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).

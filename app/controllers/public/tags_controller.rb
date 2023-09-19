@@ -17,6 +17,6 @@ class Public::TagsController < ApplicationController
     @tag = ActsAsTaggableOn::Tag.find(params[:id])
     # 該当するタグが付与された投稿を取得し、特定の条件（非公開、ゲスト、退会済みのユーザーの投稿を除外）で絞り込む
     @posts = Post.tagged_with(@tag.name)
-                .where(is_deleted: false, is_guest: false, is_public: true) # 退会済み、ゲストユーザーの投稿を除外,公開投稿のみを取得
+                 .where(is_deleted: false, is_guest: false, is_public: true) # 退会済み、ゲストユーザーの投稿を除外,公開投稿のみを取得
   end
 end

@@ -7,7 +7,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   
   protected
   
-  def after_sign_up_path_for(resource)
+  def after_sign_up_path_for(_resource)
    user_path(current_user) # ユーザー新規登録後のリダイレクト先
   end
   # GET /resource/sign_up
