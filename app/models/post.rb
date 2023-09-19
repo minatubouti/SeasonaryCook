@@ -126,8 +126,7 @@ class Post < ApplicationRecord
       visitor_id: admin_id,
       visited_id: user_id,
       post_id: id,
-      action: 'post_destroyed',
-      data: self.title
+      action: 'post_destroyed'
     )
   end
 end
