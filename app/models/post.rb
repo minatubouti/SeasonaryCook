@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-  has_one_attached :image
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        has_one_attached :image
   # タグ付け可能にする
   acts_as_taggable_on :tags
   
@@ -83,7 +83,6 @@ class Post < ApplicationRecord
       notification.checked = true if notification.visitor_id == notification.visited_id
       # notificationオブジェクトが有効（valid?メソッドがtrueを返す）であれば、この通知を保存
       notification.save if notification.valid?
-    
   end
   
 # コメント通知の作成メソッド
@@ -111,7 +110,7 @@ class Post < ApplicationRecord
     notification.save if notification.valid?
   end
 
-  # 管理者による投稿更通知
+  # 管理者による投稿更通知メソッド
   def create_update_notification(admin_id)
     Notification.create(
       visitor_id: admin_id, 
@@ -121,7 +120,7 @@ class Post < ApplicationRecord
     )
   end
 
-  # 管理者による投稿削除通知
+  # 管理者による投稿削除通知メソッド
   def create_destroy_notification(admin_id)
     Notification.create(
       visitor_id: admin_id,
