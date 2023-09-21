@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html>
-      <head>
-        <title>Seasonarycook</title>
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <%= csrf_meta_tags %>
-        <%= csp_meta_tag %>
-        
-        <script src="https://kit.fontawesome.com/48c5a50ddf.js" crossorigin="anonymous"></script>
-        <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-        <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-      </head>
+ <html>
+    <head>
+      <title>Seasonarycook</title>
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
       
-     <body>
+      <script src="https://kit.fontawesome.com/48c5a50ddf.js" crossorigin="anonymous"></script>
+      <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    </head>
+      
+    <body>
        <!--フラッシュメッセージ表示-->
       <% flash.each do |key, value| %>
         <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %>">
@@ -19,7 +19,7 @@
         </div>
       <% end %>
     
-     <header class="header-footer-bg fixed-top">
+      <header class="header-footer-bg fixed-top">
         <nav class="navbar navbar-expand-lg navbar-light header-footer-bg">
           
           <a class="navbar-brand" href="<%= root_path %>">
@@ -31,18 +31,18 @@
             <div class="collapse navbar-collapse text-right" id="navbarNav">
               <ul class="navbar-nav ml-auto"> 
                 <% if admin_signed_in? %>
-                  <li class="nav-item mr-4"><%= link_to 'ホーム', admin_path %></li>
-                  <li class="nav-item mr-4"><%= link_to '顧客一覧', admin_users_path %></li>
-                  <li class="nav-item mr-4"><%= link_to '投稿一覧', admin_posts_path %></li>
-                  <li class="nav-item mr-4"><%= link_to 'コメント一覧', admin_comments_path %></li>
-                  <li class="nav-item mr-4"><%= link_to 'お問い合わせ', admin_inquiries_path %></li>
-                  <li class="nav-item mr-4"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
+                  <li class="nav-item mr-4 mb-2"><%= link_to 'ホーム', admin_path %></li>
+                  <li class="nav-item mr-4 mb-2"><%= link_to '顧客一覧', admin_users_path %></li>
+                  <li class="nav-item mr-4 mb-2"><%= link_to '投稿一覧', admin_posts_path %></li>
+                  <li class="nav-item mr-4 mb-2"><%= link_to 'コメント一覧', admin_comments_path %></li>
+                  <li class="nav-item mr-4 mb-2"><%= link_to 'お問い合わせ', admin_inquiries_path %></li>
+                  <li class="nav-item mr-4 mb-2"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
                 <% elsif user_signed_in? %>
-                  <li class="nav-item mr-3"><%= link_to 'トップページ', root_path %></li>
-                  <li class="nav-item mr-3"><%= link_to 'マイページ', user_path(current_user) %></li>
-                  <li class="nav-item mr-3"><%= link_to '新規投稿', new_post_path %></li>
-                  <li class="nav-item mr-3"><%= link_to '投稿一覧', posts_path %></li>
-                  <li class="nav-item mr-4"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+                  <li class="nav-item mr-3 mb-2"><%= link_to 'トップページ', root_path %></li>
+                  <li class="nav-item mr-3 mb-2"><%= link_to 'マイページ', user_path(current_user) %></li>
+                  <li class="nav-item mr-3 mb-2"><%= link_to '新規投稿', new_post_path %></li>
+                  <li class="nav-item mr-3 mb-2"><%= link_to '投稿一覧', posts_path %></li>
+                  <li class="nav-item mr-3 mb-2"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
                   <!--通知一覧-->
                   <div class="notification-icon">
                     <%= link_to notifications_path do %>
@@ -53,11 +53,11 @@
                     <% end %>
                   </div>
                 <% else %>
-                  <li class="nav-item mr-3"><%= link_to 'トップページ', root_path %></li>
-                  <li class="nav-item mr-3"><%= link_to '新規登録', new_user_registration_path %></li>
-                  <li class="nav-item mr-3"><%= link_to 'ログイン', new_user_session_path %></li>
-                  <li class="nav-item mr-3"><%= link_to '投稿一覧', posts_path %></li>
-                  <li class="nav-item mr-3"><%= link_to 'アプリ紹介', about_path %></li>
+                  <li class="nav-item mr-3 mb-2"><%= link_to 'トップページ', root_path %></li>
+                  <li class="nav-item mr-3 mb-2"><%= link_to '新規登録', new_user_registration_path %></li>
+                  <li class="nav-item mr-3 mb-2"><%= link_to 'ログイン', new_user_session_path %></li>
+                  <li class="nav-item mr-3 mb-2"><%= link_to '投稿一覧', posts_path %></li>
+                  <li class="nav-item mr-3 mb-2"><%= link_to 'アプリ紹介', about_path %></li>
                 <% end %>
               </ul>
           </div>
@@ -77,5 +77,5 @@
           <% end %>
         </div>
       </footer>
-   </body>
-</html>
+    </body>
+ </html>

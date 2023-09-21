@@ -137,15 +137,15 @@ footer {
 
 // 通知用アイコン
 .notification-icon i {
-  font-size: 28px; /* アイコンの大きさを変更 */
+  font-size: 35px; /* アイコンの大きさを変更 */
   color: #FFD700; /* アイコンの色を変更 */
   position: relative; /* 未読マークの位置を調整するための基準 */
 }
 
 .notification-mark {
   background-color: red; /* 未読マークの色を変更 */
-  width: 10px; /* 未読マークの幅 */
-  height: 10px; /* 未読マークの高さ */
+  width: 12px; /* 未読マークの幅 */
+  height: 12px; /* 未読マークの高さ */
   position: absolute; /* 未読マークの位置を絶対位置で指定 */
   top: 40px; /* 未読マークの上方向の位置 */
   right: 38px; /* 未読マークの右方向の位置 */
@@ -186,8 +186,8 @@ footer {
 
 @media (max-width: 768px) { 
 .notification-mark {
-  top: 252px; /* 未読マークの上方向の位置 */
-  right: 46px; /* 未読マークの右方向の位置 */
+  top: 292px; /* 未読マークの上方向の位置 */
+  right: 47px; /* 未読マークの右方向の位置 */
  }
 }
 
