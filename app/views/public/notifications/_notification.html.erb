@@ -19,7 +19,7 @@
 
     <!-- 上記でユーザー情報を表示すると判断された場合のみ表示 -->
     <% if show_user_info %>
-      <%= link_to user_path(visitor) do %>
+      <%= link_to user_path(visitor), class: "user-name" do %>
           <% if visitor&.icon_image&.attached? %>
             <%= image_tag visitor.icon_image, class: 'img-fluid profile-icon' %>
           <% end %>
@@ -36,7 +36,7 @@
        <!--いいね通知の場合-->
       <% when 'like' then %>
         <% if notification.post %>
-          <%= link_to "あなたの投稿: #{notification.post.title}", notification.post, style: "font-weight: bold;" %>
+          <%= link_to "あなたの投稿: #{notification.post.title}", notification.post, class: "title-link-color" %>
           に<i class="fas fa-heart" style="color: red; margin-left: 5px;"></i><%= "いいねしました" %>
         <% end %>
         
@@ -44,22 +44,22 @@
       <% when 'comment' then %>
          <!--自分の投稿にコメントされた時の通知-->
         <% if notification.post.user_id == visited.id %>
-          <%= link_to "あなたの投稿: #{notification.post.title}", notification.post, style: "font-weight: bold;" %>
+          <%= link_to "あなたの投稿: #{notification.post.title}", notification.post, class: "title-link-color" %>
           <%= "にコメントしました" %>
           <p class="text-muted mb-0 mt-3 ml-5"><%= Comment.find_by(id: notification.comment_id)&.content %></p>
         <% else %>
           <!--コメントしたことがある投稿に自分以外のコメントがついた場合-->
           <span>
-            <%= link_to post_path(notification.post) do %>
+            <%= link_to post_path(notification.post), class: "title-link-color" do %>
               <% if notification.post.user&.icon_image&.attached? %>
                 <%= image_tag notification.post.user.icon_image, class: "img-fluid profile-icon" %>
               <% end %>
               <strong><%= notification.post.user.name + 'の投稿: ' + notification.post.title %></strong>
-         <% end %>
+            <% end %>
           </span>
           <%= "にコメントしました" %>
           <p class="text-muted mb-0"><%= Comment.find_by(id: notification.comment_id)&.content %></p>
-      <% end %>
+        <% end %>
         
         <!--お問い合わせ返信通知の場合-->
         <% when 'reply' then %>
@@ -72,8 +72,8 @@
           <!--投稿編集通知の場合-->
         <% when 'post_updated' then %>
           <span class="text-red">
-            <% if notification.post.present? %>f
-              <%= link_to "あなたの投稿: #{notification.post.title}", notification.post, style: "font-weight: bold;" %>
+            <% if notification.post.present? %>
+              <%= link_to "あなたの投稿: #{notification.post.title}", notification.post, class: "title-link-color" %>
               <%= "に不適切な部分が確認されたため管理者によって編集されました" %>
             <% else %>
               <%= "該当する投稿が削除されています" %>
@@ -94,4 +94,5 @@
   <div class="small text-muted text-right">
     <%= time_ago_in_words(notification.created_at).upcase + '前' %>
   </div>
+  <hr>
 </div>

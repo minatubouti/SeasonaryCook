@@ -154,12 +154,33 @@ footer {
 
 // 投稿削除メッセージ
 .text-red {
-  color: red;
+  color: #DC143C;
 }
 
-// 通知投稿タイトル
+// お知らせ一覧投稿タイトル
+.title-link-color {
+  color: #8FBC8F;
+  font-weight: bold;
+}
+
+.title-link-color:hover {
+  color: #2E8B57;
+  text-decoration: none;
+}
+
+// お知らせユーザーネーム
+.user-name {
+  color: #FF8C00;
+}
+
+.user-name:hover {
+  color: #FFCC66;
+  text-decoration: none;
+}
+
+// 削除された投稿タイトル
 .title-text {
-  color: #66CC33;
+  color: #8FBC8F;
   font-weight: bold;
 }
 
