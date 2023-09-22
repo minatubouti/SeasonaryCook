@@ -13,7 +13,7 @@ RSpec.describe Post, type: :model do
     it { is_expected.to have_many(:bookmarked_users).through(:bookmarks).source(:user) }
     it { is_expected.to have_many(:recipe_steps).dependent(:destroy) }
     it { is_expected.to have_many(:ingredients).dependent(:destroy) }
-    it { is_expected.to have_many(:notifications).dependent(:destroy) }
+    it { is_expected.to have_many(:notifications).dependent(:nullify) }
   end
 
   # バリデーションのテスト
@@ -103,7 +103,7 @@ RSpec.describe Post, type: :model do
 
   # get_imageメソッドのテスト
   # 画像が添付されている場合はその画像を、添付されていない場合はデフォルト画像を返すことをテストする
-    describe '画像投稿' do
+  describe '画像投稿' do
     let(:post) { create(:post) }
   
     context '投稿画像がある場合' do
