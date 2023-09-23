@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        has_one_attached :image
+  has_one_attached :image
   # タグ付け可能にする
   acts_as_taggable_on :tags
   
