@@ -1,6 +1,6 @@
 inherit_from: .rubocop_todo.yml
 
-## rubocop 関連の gem を require します。
+# rubocop 関連の gem を require します。
 require:
   - rubocop-rails
   - rubocop-rspec
@@ -8,7 +8,7 @@ require:
   - rubocop-capybara
   - rubocop-factory_bot
   
-  ## 全体に適応する項目を定義します。ここで Exclude に設定したファイルは、チェック対象外になります。
+# 全体に適応する項目を定義します。ここで Exclude に設定したファイルは、チェック対象外になります。
 AllCops:
   TargetRubyVersion: 3.1
   TargetRailsVersion: 6.1
