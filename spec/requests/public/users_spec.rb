@@ -79,4 +79,55 @@ RSpec.describe "Public::Users", type: :request do
       end
     end
   end
+  
+  describe "GET #likes" do
+      it "いいね一覧ページが表示される" do
+      user = FactoryBot.create(:user)
+      liked_post = FactoryBot.create(:post)
+      # ユーザーをサインインさせる
+      sign_in user
+      # ユーザーが投稿にいいねする
+      FactoryBot.create(:like, user: user, post: liked_post)
+  
+      get "/users/#{user.id}/likes"
+      # いいね一覧ページ」が正常に表示された場合、HTTPステータスコードとして200（OK）が返される
+      expect(response).to have_http_status(:ok)
+    end
+  end
+  
+  describe "GET #bookmarks" do
+  it "ブックマーク一覧ページが表示される" do
+    user = FactoryBot.create(:user)
+    bookmarked_post = FactoryBot.create(:post)
+    sign_in user
+    # ユーザーが投稿にブックマークする
+    FactoryBot.create(:bookmark, user: user, post: bookmarked_post)
+
+    get "/users/#{user.id}/bookmarks"
+    expect(response).to have_http_status(:ok)
+  end
+end
+
+  describe "PUT #withdraw" do
+    it "退会することができる" do
+      user = FactoryBot.create(:user)
+      sign_in user
+      
+      patch "/users/#{user.id}/withdraw"
+      
+      expect(user.reload.is_deleted).to be true
+      expect(response).to redirect_to(root_path)
+    end
+  end
+  
+   describe "GET #check_out" do
+    it "退会確認画面にリダイレクトする" do
+      user = FactoryBot.create(:user)
+      sign_in user
+  
+      get "/users/#{user.id}/check_out"
+  
+      expect(response).to have_http_status(:ok)
+    end
+  end
 end
