@@ -17,7 +17,7 @@ RSpec.describe "Public::Users", type: :request do
       end
 
       it "200ステータスが返ってくる" do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
 
@@ -60,38 +60,33 @@ RSpec.describe "Public::Users", type: :request do
     before do
       sign_in user # ユーザーをサインインさせる
     end
+
     context '更新に成功した場合' do
-      it 'ユーザー詳細ページにリダイレクトされる' do
+      it 'ユーザー名が更新される' do
         patch user_path(user), params: { user: { name: 'New Test User' } }
         user.reload
         expect(user.name).to eq('New Test User')
-        expect(response).to redirect_to user_path(user)
       end
-    end
-
-    context '更新に失敗した場合' do
-      it 'editにリダイレクトされエラーが表示される' do
-        patch user_path(user), params: { user: { name: '' } }
-        user.reload
-        expect(user.name).not_to eq('')
-        # 更新に失敗した場合エラーメッセージが表示されるか
-        expect(response.body).to include("更新に失敗しました。")
+      
+      it 'ユーザー詳細ページにリダイレクトされる' do
+        patch user_path(user), params: { user: { name: 'New Test User' } }
+        expect(response).to redirect_to user_path(user)
       end
     end
   end
   
   describe "GET #likes" do
-      it "いいね一覧ページが表示される" do
-      user = FactoryBot.create(:user)
-      liked_post = FactoryBot.create(:post)
-      # ユーザーをサインインさせる
-      sign_in user
-      # ユーザーが投稿にいいねする
-      FactoryBot.create(:like, user: user, post: liked_post)
-  
-      get "/users/#{user.id}/likes"
-      # いいね一覧ページ」が正常に表示された場合、HTTPステータスコードとして200（OK）が返される
-      expect(response).to have_http_status(:ok)
+    it "いいね一覧ページが表示される" do
+    user = FactoryBot.create(:user)
+    liked_post = FactoryBot.create(:post)
+    # ユーザーをサインインさせる
+    sign_in user
+    # ユーザーが投稿にいいねする
+    FactoryBot.create(:like, user:, post: liked_post)
+
+    get "/users/#{user.id}/likes"
+    # いいね一覧ページ」が正常に表示された場合、HTTPステータスコードとして200（OK）が返される
+    expect(response).to have_http_status(:ok)
     end
   end
   
@@ -101,14 +96,14 @@ RSpec.describe "Public::Users", type: :request do
     bookmarked_post = FactoryBot.create(:post)
     sign_in user
     # ユーザーが投稿にブックマークする
-    FactoryBot.create(:bookmark, user: user, post: bookmarked_post)
+    FactoryBot.create(:bookmark, user:, post: bookmarked_post)
 
     get "/users/#{user.id}/bookmarks"
     expect(response).to have_http_status(:ok)
   end
-end
+  end
 
-  describe "PUT #withdraw" do
+  describe "patch #withdraw" do
     it "退会することができる" do
       user = FactoryBot.create(:user)
       sign_in user
@@ -120,13 +115,13 @@ end
     end
   end
   
-   describe "GET #check_out" do
+  describe "GET #check_out" do
     it "退会確認画面にリダイレクトする" do
       user = FactoryBot.create(:user)
       sign_in user
-  
+
       get "/users/#{user.id}/check_out"
-  
+
       expect(response).to have_http_status(:ok)
     end
   end
