@@ -55,4 +55,28 @@ RSpec.describe "Public::Users", type: :request do
       end
     end
   end
+  
+  describe "POST #update" do
+    before do
+      sign_in user # ユーザーをサインインさせる
+    end
+    context '更新に成功した場合' do
+      it 'ユーザー詳細ページにリダイレクトされる' do
+        patch user_path(user), params: { user: { name: 'New Test User' } }
+        user.reload
+        expect(user.name).to eq('New Test User')
+        expect(response).to redirect_to user_path(user)
+      end
+    end
+
+    context '更新に失敗した場合' do
+      it 'editにリダイレクトされエラーが表示される' do
+        patch user_path(user), params: { user: { name: '' } }
+        user.reload
+        expect(user.name).not_to eq('')
+        # 更新に失敗した場合エラーメッセージが表示されるか
+        expect(response.body).to include("更新に失敗しました。")
+      end
+    end
+  end
 end
