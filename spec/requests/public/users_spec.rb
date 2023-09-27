@@ -91,19 +91,19 @@ RSpec.describe "Public::Users", type: :request do
   end
   
   describe "GET #bookmarks" do
-  it "ブックマーク一覧ページが表示される" do
-    user = FactoryBot.create(:user)
-    bookmarked_post = FactoryBot.create(:post)
-    sign_in user
-    # ユーザーが投稿にブックマークする
-    FactoryBot.create(:bookmark, user:, post: bookmarked_post)
-
-    get "/users/#{user.id}/bookmarks"
-    expect(response).to have_http_status(:ok)
+    it "ブックマーク一覧ページが表示される" do
+      user = FactoryBot.create(:user)
+      bookmarked_post = FactoryBot.create(:post)
+      sign_in user
+      # ユーザーが投稿にブックマークする
+      FactoryBot.create(:bookmark, user:, post: bookmarked_post)
+  
+      get "/users/#{user.id}/bookmarks"
+      expect(response).to have_http_status(:ok)
+    end
   end
-  end
 
-  describe "patch #withdraw" do
+  describe "pa #withdraw" do
     it "退会することができる" do
       user = FactoryBot.create(:user)
       sign_in user
