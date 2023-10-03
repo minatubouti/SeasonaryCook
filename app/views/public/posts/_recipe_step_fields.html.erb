@@ -1,7 +1,7 @@
 <div class="instruction-field form-group">
   <%= f.hidden_field :_destroy %>
   <div class="form-group">
-    <%= f.label :instructions, raw("ステップ" + content_tag(:span, "（必須）", class: "required-label")) %>
+    <%= f.label :instructions, raw("ステップ" + content_tag(:span, "*", class: "required-label")) %>
     <div class="input-group">
       <%= f.text_area :instructions, class: "form-control", rows: "2" %>
       <div class="input-group-append">

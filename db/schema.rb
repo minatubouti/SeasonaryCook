@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_19_025733) do
+ActiveRecord::Schema.define(version: 2023_10_03_144822) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -132,6 +132,17 @@ ActiveRecord::Schema.define(version: 2023_09_19_025733) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "products", force: :cascade do |t|
+    t.integer "shop_id", null: false
+    t.string "name", null: false
+    t.integer "price", null: false
+    t.integer "stock"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["shop_id"], name: "index_products_on_shop_id"
+  end
+
   create_table "recipe_steps", force: :cascade do |t|
     t.integer "post_id"
     t.text "instructions"
@@ -147,6 +158,16 @@ ActiveRecord::Schema.define(version: 2023_09_19_025733) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
+  create_table "shops", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "owner_id", null: false
+    t.text "description"
+    t.string "address", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["owner_id"], name: "index_shops_on_owner_id"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -204,8 +225,10 @@ ActiveRecord::Schema.define(version: 2023_09_19_025733) do
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "users"
+  add_foreign_key "products", "shops", on_delete: :cascade
   add_foreign_key "recipe_steps", "posts"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "relationships", "users", column: "follower_id"
+  add_foreign_key "shops", "users", column: "owner_id"
   add_foreign_key "taggings", "tags"
 end
