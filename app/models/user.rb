@@ -21,6 +21,7 @@ class User < ApplicationRecord
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy, inverse_of: :visitor
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy, inverse_of: :visited
   has_many :inquiries, dependent: :destroy
+  has_one :shop, dependent: :destroy
   
   # emailが空でない、同じemail使用不可、形式をチェック
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }

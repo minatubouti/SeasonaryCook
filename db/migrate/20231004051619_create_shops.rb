@@ -5,7 +5,6 @@ class CreateShops < ActiveRecord::Migration[6.1]
       t.references :owner, null: false, foreign_key: { to_table: :users }
       t.text :description
       t.string :address, null: false
-      
       t.timestamps
     end
   end
