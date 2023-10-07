@@ -27,7 +27,7 @@ class Public::ShopsController < ApplicationController
   private
   
   def shop_params
-    params.require(:shop).permit(:name, :description, :address, :post_code)
+    params.require(:shop).permit(:name, :description, :address, :post_code, :shop_icon)
   end
   
   def ensure_correct_user

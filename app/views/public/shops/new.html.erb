@@ -1,16 +1,38 @@
-<%= form_with model: @shop, url: user_shops_path(current_user), local: true do |f| %>
-  <%= f.label :name, "ショップ名"%>
-  <%= f.text_field :name,  placeholder: "ベジタブルショップ" %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-7">
+      <%= form_with model: @shop, url: user_shops_path(current_user), local: true, class: "border p-4 rounded shadow" do |f| %>
+      
+        <div class="form-group">
+          <%= f.label :shop_icon, "ショップアイコン" %>
+          <%= f.file_field :shop_icon, accept: 'image/png,image/gif,image/jpeg', class: "form-control-file" %>
+        </div>
 
-  <%= f.label :description, "ショップ紹介" %>
-  <%= f.text_area :description %>
-  
-  <%= f.label :post_code, "郵便番号(ハイフン無し)" %>
-  <%= f.text_field :post_code, placeholder: "0000000" %>
-  
-  <%= f.label :address, "住所" %>
-  <%= f.text_field :address, placeholder: "東京都渋谷区12-1"  %>
-  
+        <div class="form-group">
+          <%= f.label :name, "ショップ名" %>
+          <%= f.text_field :name, placeholder: "ベジタブルショップ", class: "form-control" %>
+        </div>
 
-  <%= f.submit "登録", class: "btn btn-success" %>
-<% end %>
+        <div class="form-group">
+          <%= f.label :description, "ショップ紹介" %>
+          <%= f.text_area :description, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :post_code, "郵便番号(ハイフン無し)" %>
+          <%= f.text_field :post_code, placeholder: "0000000", class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :address, "住所" %>
+          <%= f.text_field :address, placeholder: "東京都渋谷区12-1", class: "form-control" %>
+        </div>
+
+        <div class="form-group text-center">
+          <%= f.submit "ショップ登録", class: "btn btn-success" %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
