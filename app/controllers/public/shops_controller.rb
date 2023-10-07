@@ -1,5 +1,5 @@
 class Public::ShopsController < ApplicationController
- before_action :ensure_correct_user, only: [:new, :create]
+ before_action :ensure_correct_user, only: %i[new create edit]
   
   # すでにショップを持っている場合、再度ショップを作成することを防ぐ
   def new
@@ -9,7 +9,6 @@ class Public::ShopsController < ApplicationController
     end
     @shop = current_user.build_shop
   end
-
   
   def create
     @shop = current_user.build_shop(shop_params)
@@ -24,6 +23,10 @@ class Public::ShopsController < ApplicationController
     @shop = Shop.find(params[:id])
   end
   
+  def edit
+    @shop = Shop.find(params[:id])
+  end
+  
   private
   
   def shop_params
@@ -32,8 +35,9 @@ class Public::ShopsController < ApplicationController
   
   def ensure_correct_user
     # ここでユーザーが正しいかどうかのチェックを行う。
-    if current_user.id != params[:user_id].to_i
+    return unless current_user.id != params[:user_id].to_i
+
       redirect_to root_path, alert: '不正なアクセスです'
-    end
+    
   end
 end

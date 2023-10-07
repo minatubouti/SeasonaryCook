@@ -7,25 +7,25 @@ RSpec.describe "Public::Posts", type: :request do
       get new_post_path 
       expect(response).to render_template :new
     end
-  end
+   end
   
   describe 'POST #create' do
   context '正常なパラメータの場合' do
     it '新規投稿が成功すること' do
-      expect {
+      expect do
         post '/path/to/create', params: { post: FactoryBot.attributes_for(:post) }
-      }.to change(Post, :count).by(1)
+      end.to change(Post, :count).by(1)
     end
   end
   
   context '不正なパラメータの場合' do
     it '新規投稿が失敗すること' do
-      expect {
+      expect do
         post posts_path, params: { post: FactoryBot.attributes_for(:post, title: nil) }
-      }.to_not change(Post, :count)
+      end.not_to change(Post, :count)
     end
   end
-end
+  end
 
   describe 'GET #index' do
     it '投稿一覧ページが表示されること' do
@@ -33,5 +33,4 @@ end
       expect(response).to render_template :index
     end
   end
-
 end

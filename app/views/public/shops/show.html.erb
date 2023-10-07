@@ -1,7 +1,9 @@
 
-<h1><%= @shop.name %></h1>
+<h2>
+<% if @shop.shop_icon.attached? %>
+  <%= image_tag @shop.shop_icon, class: 'img-fluid shop_icon' %> 
+<% end %>
+<%= @shop.name %>
+</h2>
 <p><%= @shop.description %></p>
 <p><%= @shop.address %></p>
-<% if @shop.shop_icon.attached? %>
-  <%= image_tag @shop.shop_icon.variant(resize_to_limit: [100, 100]) %>
-<% end %>
