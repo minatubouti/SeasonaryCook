@@ -19,4 +19,9 @@ module ApplicationHelper
   def unread_notifications?
     current_user.passive_notifications.where(checked: false).exists?
   end
+  
+  # ショップを開設しているかのチェック
+  def shop_opened?(user)
+    user.shop.present?
+  end
 end

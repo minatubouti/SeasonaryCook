@@ -4,7 +4,7 @@ class Public::ShopsController < ApplicationController
   # すでにショップを持っている場合、再度ショップを作成することを防ぐ
   def new
     if current_user.shop.present?
-      redirect_to current_user.shop, alert: 'ショップ解説済みです'
+      redirect_to user_shop_path(current_user, current_user.shop), alert: 'ショップ開設済みです'
       return
     end
     @shop = current_user.build_shop
@@ -18,6 +18,10 @@ class Public::ShopsController < ApplicationController
     else
       render :new
     end
+  end
+  
+  def show
+    @shop = Shop.find(params[:id])
   end
   
   private

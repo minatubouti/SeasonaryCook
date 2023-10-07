@@ -21,13 +21,11 @@
         <!--user.rbのスコープを使用して退会したユーザーはフォロー・フォロワー数にカウントされないようにする-->
         <p class="profile-link"><i class="fas fa-user-friends"></i> <%= link_to "フォロー #{@user.following.active.count}", user_follows_path(@user) %></p>
         <p class="profile-link"><i class="fas fa-users"></i> <%= link_to "フォロワー #{@user.followers.active.count}", user_followers_path(@user) %></p>
-
         <p><%= @user.profile %></p>
       </div>
       <!--マイページである場合のみ表示する-->
       <% if current_user == @user && !current_user.guest? %>
         <%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-info mb-5' %>
-        <%= link_to 'ショップ開設', new_user_shop_path(@user), class: 'btn btn-info' %>
       <% end %>
       
       <!--マイページの場合には表示されない-->
@@ -38,6 +36,21 @@
           <%= link_to 'フォロー', user_relationships_path(@user), method: :post, class: 'btn btn-follow mb-4' %>
         <% end %>
       <% end %>
+      
+      <!-- ショップ詳細またはショップ開設ボタンの表示判定 -->
+      <div class="mb-5">
+        <% if current_user == @user %>
+          <% if shop_opened?(current_user) %>
+            <%= link_to 'ショップ詳細', user_shop_path(current_user, current_user.shop), class: 'btn btn-success' %>
+          <% else %>
+            <%= link_to 'ショップ開設', new_user_shop_path(current_user), class: 'btn btn-success' %>
+          <% end %>
+        <% else %>
+          <% if shop_opened?(@user) %>
+            <%= link_to @user.shop.name, user_shop_path(@user, @user.shop), class: 'btn btn-warning' %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
     
     <!--投稿アイテム-->
