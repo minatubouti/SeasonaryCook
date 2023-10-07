@@ -1,0 +1,16 @@
+<%= form_with model: @shop, url: user_shops_path(current_user), local: true do |f| %>
+  <%= f.label :name, "ショップ名"%>
+  <%= f.text_field :name,  placeholder: "ベジタブルショップ" %>
+
+  <%= f.label :description, "ショップ紹介" %>
+  <%= f.text_area :description %>
+  
+  <%= f.label :post_code, "郵便番号(ハイフン無し)" %>
+  <%= f.text_field :post_code, placeholder: "0000000" %>
+  
+  <%= f.label :address, "住所" %>
+  <%= f.text_field :address, placeholder: "東京都渋谷区12-1"  %>
+  
+
+  <%= f.submit "登録", class: "btn btn-success" %>
+<% end %>

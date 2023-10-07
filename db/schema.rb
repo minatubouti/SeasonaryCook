@@ -170,13 +170,14 @@ ActiveRecord::Schema.define(version: 2023_10_06_135451) do
   end
 
   create_table "shops", force: :cascade do |t|
+    t.integer "user_id", null: false
     t.string "name", null: false
-    t.integer "owner_id", null: false
     t.text "description"
+    t.string "post_code", null: false
     t.string "address", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["owner_id"], name: "index_shops_on_owner_id"
+    t.index ["user_id"], name: "index_shops_on_user_id"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -238,6 +239,6 @@ ActiveRecord::Schema.define(version: 2023_10_06_135451) do
   add_foreign_key "recipe_steps", "posts"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "relationships", "users", column: "follower_id"
-  add_foreign_key "shops", "users", column: "owner_id"
+  add_foreign_key "shops", "users"
   add_foreign_key "taggings", "tags"
 end

@@ -27,6 +27,7 @@
       <!--マイページである場合のみ表示する-->
       <% if current_user == @user && !current_user.guest? %>
         <%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-info mb-5' %>
+        <%= link_to 'ショップ開設', new_user_shop_path(@user), class: 'btn btn-info' %>
       <% end %>
       
       <!--マイページの場合には表示されない-->
