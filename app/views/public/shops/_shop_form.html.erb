@@ -1,0 +1,24 @@
+<div class="form-group">
+  <%= f.label :shop_icon, "ショップアイコン" %>
+  <%= f.file_field :shop_icon, accept: 'image/png,image/gif,image/jpeg', class: "form-control-file" %>
+</div>
+
+<div class="form-group">
+  <%= f.label :name, "ショップ名" %>
+  <%= f.text_field :name, placeholder: "ベジタブルショップ", class: "form-control" %>
+</div>
+
+<div class="form-group">
+  <%= f.label :description, "ショップ紹介" %>
+  <%= f.text_area :description, class: "form-control" %>
+</div>
+
+<div class="form-group">
+  <%= f.label :post_code, "郵便番号(ハイフン無し)" %>
+  <%= f.text_field :post_code, placeholder: "0000000", class: "form-control" %>
+</div>
+
+<div class="form-group">
+  <%= f.label :address, "住所" %>
+  <%= f.text_field :address, placeholder: "東京都渋谷区12-1", class: "form-control" %>
+</div>
