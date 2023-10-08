@@ -1,7 +1,7 @@
 class Public::ShopsController < ApplicationController
  before_action :authenticate_user!
  before_action :find_shop, only: %i[show edit updata]
- before_action :ensure_correct_user, only: %i[new create edit updata]
+ before_action :ensure_correct_user, only: %i[new create edit update]
   
   # すでにショップを持っている場合、再度ショップを作成することを防ぐ
   def new
@@ -21,13 +21,17 @@ class Public::ShopsController < ApplicationController
     end
   end
   
-  def show
-  end
+  def show; end
   
-  def edit
-  end
+  def edit; end
   
-  def updata
+  def update
+    if @shop.update(shop_params)
+      redirect_to user_shop_path(@shop), notice: 'ショップ情報を更新しました'
+    else
+      flash[:alert] = "更新に失敗しました"
+      render :edit
+    end
   end
   
   private
