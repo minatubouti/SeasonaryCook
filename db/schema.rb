@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_10_06_135451) do
+ActiveRecord::Schema.define(version: 2023_10_14_140222) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -91,6 +91,18 @@ ActiveRecord::Schema.define(version: 2023_10_06_135451) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_inquiries_on_user_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.integer "price", null: false
+    t.integer "stock_quantity", default: 0, null: false
+    t.boolean "is_active", default: true, null: false
+    t.integer "shop_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["shop_id"], name: "index_items_on_shop_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -232,6 +244,7 @@ ActiveRecord::Schema.define(version: 2023_10_06_135451) do
   add_foreign_key "comments", "users"
   add_foreign_key "ingredients", "posts"
   add_foreign_key "inquiries", "users"
+  add_foreign_key "items", "shops"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "users"

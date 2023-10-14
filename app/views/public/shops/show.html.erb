@@ -6,7 +6,7 @@
 <%= @shop.name %>
 </h2>
 <p><%= @shop.description %></p>
-<p><%= @shop.address %></p>
+
 <!--ショップの持ち主であるユーザーの場合のみ表示する-->
 <% if current_user == @shop.user %>
   <%= link_to 'ショップ情報編集', edit_user_shop_path(@shop), class: 'btn btn-success' %>
