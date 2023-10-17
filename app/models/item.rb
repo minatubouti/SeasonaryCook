@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+  has_one_attached :item_image
   belongs_to :shop
   validates :name, presence: true
   validates :price, presence: true, numericality: { greater_than: 0 }
