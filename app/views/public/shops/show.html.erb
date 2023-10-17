@@ -6,8 +6,9 @@
 <%= @shop.name %>
 </h2>
 <p><%= @shop.description %></p>
-
-<%= link_to '商品登録', new_user_shop_item_path(user_id: @shop.user_id, shop_id: @shop.id) %>
+<div class="mb-4">
+  <%= link_to '商品登録', new_user_shop_item_path(user_id: @shop.user_id, shop_id: @shop.id), class: "btn btn-info" %>
+</div>
 <!--ショップの持ち主であるユーザーの場合のみ表示する-->
 <% if current_user == @shop.user %>
   <%= link_to 'ショップ情報編集', edit_user_shop_path(@shop), class: 'btn btn-success' %>
