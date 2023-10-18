@@ -1,16 +1,13 @@
 <div class="container mt-5">
-  <div class="card">
+  <div class="card mb-4">
     <div class="card-header">
       <h1>商品編集</h1>
     </div>
     <div class="card-body">
       <%= form_with(model: [ @shop, @item ], url: user_shop_item_path(@shop.user_id, @shop.id, @item.id), method: :patch, local: true) do |f| %>
       
-      <%= render partial: 'item_form', locals: { f: f } %>
+        <%= render partial: 'item_form', locals: { f: f } %>
       
-        <div class="form-group text-center">
-          <%= f.submit "出品する", class: "btn btn-primary" %>
-        </div>
       <% end %>
     </div>
   </div>

@@ -21,7 +21,10 @@ class Public::ShopsController < ApplicationController
     end
   end
   
-  def show; end
+  def show
+    # ショップに関連するアイテムを取得
+    @items = @shop.items
+  end
   
   def edit; end
   
