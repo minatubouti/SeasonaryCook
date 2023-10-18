@@ -1,30 +1,41 @@
-<h1>商品登録</h1>
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h1>商品登録</h1>
+    </div>
+    <div class="card-body">
+      <%= form_with(model: [ @shop, @item ], url: user_shop_items_path(user_id: @shop.user_id, shop_id: @shop.id), local: true) do |f| %>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <%= f.label :item_image, "商品画像" %>
+            <%= f.file_field :item_image, class: 'form-control-file' %>
+          </div>
+          <div class="col-md-6 form-group">
+            <%= f.label :name, "商品名" %>
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+        </div>
 
-<%= form_with(model: [ @shop, @item ], url: user_shop_items_path(user_id: @shop.user_id, shop_id: @shop.id), local: true) do |f| %>
+        <div class="form-group">
+          <%= f.label :description, "商品説明" %>
+          <%= f.text_area :description, class: "form-control", rows: 5 %>
+        </div>
 
-  <div class="form-group">
-    <%= f.label :item_image, "商品画像" %>
-    <%= f.file_field :item_image, class: 'form-control-file' %>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <%= f.label :price, "商品価格" %>
+            <%= f.number_field :price, class: "form-control" %>
+          </div>
+          <div class="col-md-6 form-group">
+            <%= f.label :stock_quantity, "在庫数" %>
+            <%= f.number_field :stock_quantity, class: "form-control" %>
+          </div>
+        </div>
+        
+        <div class="form-group text-center">
+          <%= f.submit "出品する", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-  <div class="form-group">
-    <%= f.label :name, "商品名" %>
-    <%= f.text_field :name, class: "form-control" %>
-  </div>
-  
-  <div class="form-group">
-    <%= f.label :description, "商品説明" %>
-    <%= f.text_area :description, class: "form-control" %>
-  </div>
-  
-  <div class="form-group">
-    <%= f.label :price, "商品価格" %>
-    <%= f.number_field :price, class: "form-control" %>
-  </div>
-  
-  <div class="form-group">
-    <%= f.label :stock_quantity, "在庫数" %>
-    <%= f.number_field :stock_quantity, class: "form-control" %>
-  </div>
-  <%= f.submit "出品する", class: "btn btn-primary" %>
-<% end %>
+</div>
