@@ -1,0 +1,26 @@
+<div class="container mt-5">
+  <h1><%= @item.name %></h1>
+
+  <div class="row">
+    <div class="col-md-4">
+      <!-- 画像がある場合、表示 -->
+      <% if @item.item_image.attached? %>
+        <%= image_tag @item.item_image, class: "img-fluid" %>
+      <% else %>
+        <%= image_tag 'no-image.jpg', class: "img-fluid" %>
+      <% end %>
+    </div>
+
+    <div class="col-md-8">
+      <p><%= @item.description %></p>
+
+      <div>
+        <strong>価格:</strong> <%= @item.price %>
+      </div>
+
+      <div>
+        <strong>在庫数:</strong> <%= @item.stock_quantity %>
+      </div>
+    </div>
+  </div>
+</div>
