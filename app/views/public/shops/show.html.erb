@@ -23,20 +23,22 @@
       <h3>商品一覧</h3>
       <div class="row">
         <% @items.each do |item| %>
-          <div class="col-md-4">
-            <%= link_to user_shop_item_path(user_id: @shop.user_id, shop_id: @shop.id, id: item.id) do %>
-              <% if item.item_image.attached? %>
-                <%= image_tag item.item_image, class: "img-fluid" %>
-              <% else %>
-                <%= image_tag 'no-image.jpg', class: "img-fluid" %>
+          <div class="col-md-4 mb-3">
+            <div class="card h-100">
+              <%= link_to user_shop_item_path(user_id: @shop.user_id, shop_id: @shop.id, id: item.id) do %>
+                <% if item.item_image.attached? %>
+                  <%= image_tag item.item_image, class: "card-img-top img-fluid card-image"  %>
+                <% else %>
+                  <%= image_tag 'no-image.jpg', class: "img-fluid" %>
+                <% end %>
               <% end %>
-            <% end %>
-            <h4><%= item.name %></h4>
-             <div>
-              ¥<span class="text-primary"><%= item.price %></span>
-            </div>
-            <div>
-              <strong>在庫数:</strong> <span class="text-success"><%= item.stock_quantity %></span>
+              <h4><%= item.name %></h4>
+               <div>
+                ¥<span class="text-primary"><%= item.price %></span>
+              </div>
+              <div>
+                <strong>在庫数:</strong> <span class="text-success"><%= item.stock_quantity %></span>
+              </div>
             </div>
           </div>
         <% end %>
