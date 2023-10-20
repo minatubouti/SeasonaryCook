@@ -5,12 +5,10 @@
   object-fit: cover; /* 画像のアスペクト比を保つための設定 */
 }
 
-.card-image-wrapper {
-  height: 200px;
-  overflow: hidden;
+.custom-link-color {
+  color: #FF773E !important; 
 }
 
-.card-image {
-  height: auto;
-  width: 100%;
+.custom-link-color:hover {
+  color: #FFA07A !important;
 }

@@ -10,7 +10,6 @@ class Public::HomesController < ApplicationController
      
      # 最新の投稿から5つの画像をランダムに取得
       @images = Post.all.sample(5).map { |post| url_for(post.image) }
- 
   end
 
   def about; end

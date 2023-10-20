@@ -3,7 +3,7 @@
       <div class="card h-100">
         <!-- 料理画像のリンク -->
         <%= link_to post_path(post) do %>
-          <%= image_tag post.post_image, alt: post.title, class: "card-img-top", style: "height: 120px; object-fit: cover;" if post.get_image.attached? %>
+          <%= image_tag post.post_image, alt: post.title, class: "card-img-top", style: "height: 120px; object-fit: cover;" if post.post_image.attached? %>
         <% end %>
         <div class="card-body">
           <h5 class="card-title"><%= link_to post.title, post_path(post), class: "item-link" %></h5>

@@ -32,9 +32,10 @@
                   <%= image_tag 'no-image.jpg', class: "img-fluid" %>
                 <% end %>
               <% end %>
-              <h4><%= item.name %></h4>
+              <h5><%= item.name %></h5>
                <div>
-                ¥<span class="text-primary"><%= item.price %></span>
+                 <!--ヘルパーを使用して3桁ごとにカンマを挿入-->
+                ¥<span class="text-primary"><%= number_with_delimiter(item.price) %></span>
               </div>
               <div>
                 <strong>在庫数:</strong> <span class="text-success"><%= item.stock_quantity %></span>

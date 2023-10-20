@@ -1,11 +1,14 @@
 <div class="container mt-5">
   <h3 class="mb-4">
     <% if @shop.shop_icon.attached? %>
-      <%= image_tag @shop.shop_icon, class: 'img-fluid shop_icon' %> 
+      <%= link_to user_shop_path(user_id: @shop.user_id, id: @shop.id) do %>
+        <%= image_tag @shop.shop_icon, class: 'img-fluid shop_icon' %>
+      <% end %>
     <% end %>
-    <%= @shop.name %>
+    
+    <%= link_to @shop.name, user_shop_path(user_id: @shop.user_id, id: @shop.id), class: "custom-link-color" %>
   </h3>
-  
+
   <h1 class="mb-4"><%= @item.name %></h1>
 
   <div class="row">
@@ -29,7 +32,7 @@
 
           <div class="d-flex justify-content-between align-items-center">
             <div>
-              <strong>￥</strong> <span class="text-primary"><%= @item.price %></span>
+              <strong>￥</strong> <span class="text-primary"><%= number_with_delimiter(@item.price) %></span>
             </div>
             <div>
               <strong>在庫数:</strong> <span class="text-success"><%= @item.stock_quantity %></span>
