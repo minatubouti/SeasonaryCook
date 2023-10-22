@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_10_22_111202) do
+ActiveRecord::Schema.define(version: 2023_10_22_143414) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -60,6 +60,18 @@ ActiveRecord::Schema.define(version: 2023_10_22_111202) do
     t.index ["post_id"], name: "index_bookmarks_on_post_id"
     t.index ["user_id", "post_id"], name: "index_bookmarks_on_user_id_and_post_id", unique: true
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "cart_items", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "shop_id", null: false
+    t.integer "item_id", null: false
+    t.integer "quantity", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_cart_items_on_item_id"
+    t.index ["shop_id"], name: "index_cart_items_on_shop_id"
+    t.index ["user_id"], name: "index_cart_items_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -255,6 +267,9 @@ ActiveRecord::Schema.define(version: 2023_10_22_111202) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookmarks", "posts"
   add_foreign_key "bookmarks", "users"
+  add_foreign_key "cart_items", "items"
+  add_foreign_key "cart_items", "shops"
+  add_foreign_key "cart_items", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "ingredients", "posts"
