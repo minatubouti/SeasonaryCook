@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_10_14_140222) do
+ActiveRecord::Schema.define(version: 2023_10_22_111202) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -129,13 +129,28 @@ ActiveRecord::Schema.define(version: 2023_10_14_140222) do
     t.string "data"
   end
 
-  create_table "orders", force: :cascade do |t|
-    t.integer "customer_id"
-    t.integer "shop_id"
-    t.integer "total_price"
-    t.string "status"
+  create_table "order_items", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "item_id", null: false
+    t.integer "quantity", null: false
+    t.integer "buy_price", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_order_items_on_item_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "shop_id", null: false
+    t.integer "total_price", null: false
+    t.string "name", null: false
+    t.string "postcode", null: false
+    t.string "address", null: false
+    t.string "status", default: "0", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -247,6 +262,9 @@ ActiveRecord::Schema.define(version: 2023_10_14_140222) do
   add_foreign_key "items", "shops"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "order_items", "items"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "products", "shops", on_delete: :cascade
   add_foreign_key "recipe_steps", "posts"

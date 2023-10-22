@@ -1,7 +1,7 @@
 class Public::ShopsController < ApplicationController
  before_action :authenticate_user!
  before_action :find_shop, only: %i[show edit updata]
- before_action :ensure_correct_user, only: %i[new create edit update]
+ before_action :ensure_correct_user, only: %i[edit update]
   
   # すでにショップを持っている場合、再度ショップを作成することを防ぐ
   def new
