@@ -155,13 +155,17 @@ ActiveRecord::Schema.define(version: 2023_10_22_143414) do
   create_table "orders", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "shop_id", null: false
+    t.integer "item_id", null: false
     t.integer "total_price", null: false
     t.string "name", null: false
     t.string "postcode", null: false
     t.string "address", null: false
+    t.integer "quantity", null: false
     t.string "status", default: "0", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_orders_on_item_id"
+    t.index ["shop_id"], name: "index_orders_on_shop_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -279,6 +283,8 @@ ActiveRecord::Schema.define(version: 2023_10_22_143414) do
   add_foreign_key "likes", "users"
   add_foreign_key "order_items", "items"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "items"
+  add_foreign_key "orders", "shops"
   add_foreign_key "orders", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "products", "shops", on_delete: :cascade

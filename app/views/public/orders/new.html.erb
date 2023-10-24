@@ -1,0 +1,18 @@
+<%= form_with model: @order, url: user_orders_path do |f| %>
+  <%= f.hidden_field :item_id, value: @item.id %>
+  <%= f.hidden_field :total_price, value: @item.price %> 
+  
+  <%= f.label :name, "お名前" %>
+  <%= f.text_field :name %>
+
+  <%= f.label :postcode, "郵便番号" %>
+  <%= f.text_field :postcode %>
+  
+  <%= f.label :address, "住所" %>
+  <%= f.text_field :address %>
+
+  <%= f.label :quantity, "数量" %>
+  <%= f.number_field :quantity, min: 1, max: @item.stock_quantity %>
+  
+  <%= f.submit "購入" %>
+<% end %>
