@@ -1,4 +1,6 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_user!
+  
   def new
     @order = Order.new
     @item = Item.find(params[:item_id])
@@ -14,12 +16,12 @@ class Public::OrdersController < ApplicationController
     else
       render :new
     end
-    
-    def completed
-      @order = Order.find_by(id: params[:order_id])
-      if @order.nil?
-        redirect_to root_path, alert: '注文に失敗しました'
-      end
+  end
+  
+  def completed
+    @order = Order.find_by(id: params[:order_id])
+    if @order.nil?
+      redirect_to root_path, alert: '注文に失敗しました'
     end
   end
 
