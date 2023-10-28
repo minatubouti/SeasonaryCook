@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(version: 2023_10_22_143414) do
     t.integer "user_id", null: false
     t.integer "shop_id", null: false
     t.integer "item_id", null: false
-    t.integer "total_price", null: false
+    t.integer "payment", null: false
     t.string "name", null: false
     t.string "postcode", null: false
     t.string "address", null: false
