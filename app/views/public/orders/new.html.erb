@@ -8,11 +8,11 @@
           <h3>支払い方法</h3>
           <div class="form-check">
             <%= f.radio_button :payment, Order.payments.key(0), checked: "checked", class: "form-check-input" %>
-            <%= f.label :payment_credit_card, I18n.t("enums.order.payment.#{Order.payments.key(0)}"), class: "form-check-label" %>
+            <%= f.label :payment_credit_card, I18n.t("enum.order.payment.#{Order.payments.key(0)}"), class: "form-check-label" %>
           </div>
           <div class="form-check">
             <%= f.radio_button :payment, Order.payments.key(1), class: "form-check-input" %>
-            <%= f.label :payment_transfer, I18n.t("enums.order.payment.#{Order.payments.key(1)}"), class: "form-check-label" %>
+            <%= f.label :payment_transfer, I18n.t("enum.order.payment.#{Order.payments.key(1)}"), class: "form-check-label" %>
           </div>
         </div>
 
