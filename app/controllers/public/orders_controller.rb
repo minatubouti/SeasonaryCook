@@ -7,6 +7,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
+     puts "Debug Params: #{params.inspect}"
     @item = Item.find(params[:order][:item_id]) 
     @order = Order.new(order_params)
     @order.user_id = current_user.id
@@ -28,6 +29,6 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:name, :postcode, :address, :quantity, :shop_id, :user_id, :item_id, :total_price)
+    params.require(:order).permit(:name, :postcode, :address, :quantity, :payment, :quantity, :shop_id, :user_id, :item_id, :total_price)
   end
 end
