@@ -7,7 +7,6 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-     puts "Debug Params: #{params.inspect}"
     @item = Item.find(params[:order][:item_id]) 
     @order = Order.new(order_params)
     @order.user_id = current_user.id
@@ -22,8 +21,9 @@ class Public::OrdersController < ApplicationController
   def completed
     @order = Order.find_by(id: params[:order_id])
     if @order.nil?
-      redirect_to root_path, alert: '注文に失敗しました'
+      redirect_to order_completed_user_orders_path, alert: '注文に失敗しました'
     end
+    return
   end
 
   private
