@@ -12,7 +12,7 @@ class Public::OrdersController < ApplicationController
     @order.user_id = current_user.id
     @order.shop_id = @item.shop_id  # @itemからshop_idを設定
     if @order.save
-      redirect_to order_completed_user_orders_path(current_user)
+      redirect_to completed_orders_path(rder_id: @order.id)
     else
       render :new
     end
@@ -21,7 +21,9 @@ class Public::OrdersController < ApplicationController
   def completed
     @order = Order.find_by(id: params[:order_id])
     if @order.nil?
-      redirect_to order_completed_user_orders_path, alert: '注文に失敗しました'
+      redirect_to root_path, alert: '注文に失敗しました'
+    else
+      redirect_to completed_orders_path(order_id: @order.id)
     end
     return
   end
@@ -29,6 +31,6 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:name, :postcode, :address, :quantity, :payment, :quantity, :shop_id, :user_id, :item_id, :total_price)
+    params.require(:order).permit(:name, :postcode, :address, :quantity, :payment, :shop_id, :user_id, :item_id, :total_price)
   end
 end

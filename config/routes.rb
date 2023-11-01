@@ -22,11 +22,6 @@ Rails.application.routes.draw do
     root to: "homes#top"
     get '/about' => 'homes#about'
     resources :users, only: %i[show edit update] do
-    resources :orders, only: %i[new create] do
-      collection do
-        get :completed, as: :order_completed
-      end
-    end
     resource :relationships, only: %i[create destroy]
     resources :shops do
       resources :items
@@ -42,6 +37,11 @@ Rails.application.routes.draw do
         patch :withdraw
       end
     end
+  resources :orders, only: %i[new create] do
+    collection do
+      get :completed
+    end
+  end
   resources :posts do
     resources :comments, only: [:create]
     resources :likes, only: %i[create destroy]
