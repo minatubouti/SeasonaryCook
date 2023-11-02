@@ -23,14 +23,17 @@ class Public::OrdersController < ApplicationController
     if @order.nil?
       redirect_to root_path, alert: '注文に失敗しました'
     else
-      redirect_to completed_orders_path(order_id: @order.id)
+      redirect_to order_completed_orders_path(order_id: @order.id)
     end
-    return
   end
 
   private
 
   def order_params
     params.require(:order).permit(:name, :postcode, :address, :quantity, :payment, :shop_id, :user_id, :item_id, :total_price)
+  end
+  
+  def order_item_params
+    params.require(:order_item).permit(:order_id, :shop_id :item_id, :quantity, :buy_price, :production_status)
   end
 end
