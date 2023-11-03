@@ -22,34 +22,32 @@ Rails.application.routes.draw do
     root to: "homes#top"
     get '/about' => 'homes#about'
     resources :users, only: %i[show edit update] do
-    resource :relationships, only: %i[create destroy]
-    resources :shops do
-      resources :items
-    end
+      resource :relationships, only: %i[create destroy]
       get 'follows' => 'relationships#follower'
       get 'followers' => 'relationships#followed'
       get 'bookmarks', on: :member
       member do
         get 'likes'
-      end
-      member do
         get :check_out
         patch :withdraw
       end
+      resources :orders, only: %i[new create] do
+        collection do
+          get :completed, as: :order_completed
+        end
+      end
+      resources :shops do
+        resources :items
+      end
     end
-  resources :orders, only: %i[new create] do
-    collection do
-      get :completed
+    resources :posts do
+      resources :comments, only: [:create]
+      resources :likes, only: %i[create destroy]
+      resources :bookmarks, only: %i[create destroy]
     end
-  end
-  resources :posts do
-    resources :comments, only: [:create]
-    resources :likes, only: %i[create destroy]
-    resources :bookmarks, only: %i[create destroy]
-  end
-    resources :notifications, only: [:index]
-    resources :inquiries, only: %i[new create show]
-    resources :tags, only: %i[index show]
+      resources :notifications, only: [:index]
+      resources :inquiries, only: %i[new create show]
+      resources :tags, only: %i[index show]
   end
   
   devise_scope :user do
