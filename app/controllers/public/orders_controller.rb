@@ -7,23 +7,25 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:order][:item_id]) 
+    @item = Item.find_by(id: params[:order][:item_id])
+    
+    if @item.nil?
+      # Itemが見つからない場合の処理
+      flash[:alert] = '商品が見つかりません。'
+      redirect_to some_path
+      return
+    end
+  
     @order = Order.new(order_params)
     @order.user_id = current_user.id
-    @order.shop_id = @item.shop_id  # @itemからshop_idを設定
+    @order.shop_id = @item.shop_id  
+    @order.order_status = 0  # ステータスをセット
+  
     if @order.save
-      redirect_to completed_orders_path(rder_id: @order.id)
+      # 注文が保存された後の処理
+      redirect_to order_completed_user_orders_path(current_user)
     else
       render :new
-    end
-  end
-  
-  def completed
-    @order = Order.find_by(id: params[:order_id])
-    if @order.nil?
-      redirect_to root_path, alert: '注文に失敗しました'
-    else
-      redirect_to order_completed_orders_path(order_id: @order.id)
     end
   end
 
@@ -34,6 +36,6 @@ class Public::OrdersController < ApplicationController
   end
   
   def order_item_params
-    params.require(:order_item).permit(:order_id, :shop_id :item_id, :quantity, :buy_price, :production_status)
+    params.require(:order_datail).permit(:order_id, :item_id, :quantity, :buy_price)
   end
 end

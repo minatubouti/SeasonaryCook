@@ -161,6 +161,7 @@ ActiveRecord::Schema.define(version: 2023_10_22_143414) do
     t.string "postcode", null: false
     t.string "address", null: false
     t.integer "quantity", null: false
+    t.string "order_status", default: "0", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["item_id"], name: "index_orders_on_item_id"
