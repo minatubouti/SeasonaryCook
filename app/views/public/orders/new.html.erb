@@ -3,7 +3,7 @@
     <div class="col-lg-8">
       <h2 class="text-center mb-4">注文情報入力</h2>
 
-      <%= form_with(model: @order, local: true, url: orders_path, method: :post) do |f| %>
+      <%= form_with(model: @order, local: true, url: user_orders_path, method: :post) do |f| %>
       <%= f.hidden_field :item_id, value: @item.id %>
 
         <!-- 支払い方法セクション -->

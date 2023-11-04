@@ -23,10 +23,13 @@ class Public::OrdersController < ApplicationController
   
     if @order.save
       # 注文が保存された後の処理
-      redirect_to order_completed_user_orders_path
+      redirect_to completed_user_order_path(current_user, @order), notice: '注文が完了しました。'
     else
       render :new
     end
+  end
+  
+  def completed
   end
 
   private

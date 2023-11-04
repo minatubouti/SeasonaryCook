@@ -31,9 +31,9 @@ Rails.application.routes.draw do
         get :check_out
         patch :withdraw
       end
-      resources :orders, only: %i[new create] do
-        collection do
-          get :completed, as: :order_completed
+      resources :orders, only: %i[new create show] do
+        member do
+          get :completed
         end
       end
       resources :shops do
