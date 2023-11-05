@@ -20,6 +20,7 @@ class Public::OrdersController < ApplicationController
     @order.user_id = current_user.id
     @order.shop_id = @item.shop_id  
     @order.order_status = 0  # ステータスをセット
+    
   
     if @order.save
       # 注文が保存された後の処理

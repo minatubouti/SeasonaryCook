@@ -32,8 +32,9 @@ Rails.application.routes.draw do
         patch :withdraw
       end
       resources :orders, only: %i[new create show] do
-        member do
-          get :completed
+        collection do
+          post 'confirm'
+          get 'complete'
         end
       end
       resources :shops do
