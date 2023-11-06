@@ -40,6 +40,7 @@ Rails.application.routes.draw do
       resources :shops do
         resources :items
       end
+      resources :address, only: %i[new index edit]
     end
     resources :posts do
       resources :comments, only: [:create]
