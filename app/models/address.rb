@@ -1,12 +1,8 @@
 class Address < ApplicationRecord
   belongs_to :user
 
-   def address_display
-     '〒' + postcode + ' ' + address + ' ' + name
-   end
-
-   validates :postcode, presence:true,length: { is: 7 }
-   validates :address, presence:true
-   validates :name, presence:true
-
+  # ユーザーの住所を表示するためのメソッド
+  def address_display
+    "#{self.postcode} #{self.address} #{self.name}"
+  end
 end

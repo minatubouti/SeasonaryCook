@@ -32,23 +32,41 @@
         </div>
 
         <!-- お届け先セクション -->
-        <div class="card mb-3">
+         <div class="form-group">
+          <h3>お届け先</h3>
+         
+         <div class="card mb-3">
+          <div class="card-header">
+            <%= f.radio_button :address_number, 1, class: "form-check-input" %>
+            <%= f.label :address_number, "登録済住所から選択", class: "form-check-label" %>
+          </div>
           <div class="card-body">
-            <h3 class="card-title">お届け先</h3>
-            <div class="form-group">
-              <%= f.label :postcode, "郵便番号(ハイフンなし)", class: "form-label" %>
-              <%= f.text_field :postcode, placeholder: "123456", class: "form-control" %>
-            </div>
-            <div class="form-group">
-              <%= f.label :address, "住所", class: "form-label" %>
-              <%= f.text_field :address, placeholder: "東京都浅草00-00", class: "form-control" %>
-            </div>
-            <div class="form-group">
-              <%= f.label :name, "宛名", class: "form-label" %>
-              <%= f.text_field :name, placeholder: "山田　野菜", class: "form-control" %>
+            <div style="max-height:200px; overflow-y: scroll;">
+              <%= f.select :address_id, options_from_collection_for_select(current_user.addresses, :id, :address_display), {}, {class: "form-control"} %>
             </div>
           </div>
         </div>
+
+          <div class="card mb-3">
+        <div class="card-header">
+          <%= f.radio_button :address_number, 2, class: "form-check-input" %>
+          <%= f.label :address_number, "新しいお届け先", class: "form-check-label" %>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <%= f.label :postcode, "郵便番号(ハイフンなし)", class: "form-label" %>
+            <%= f.text_field :postcode, placeholder: "123456", class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :address, "住所", class: "form-label" %>
+            <%= f.text_field :address, placeholder: "東京都浅草00-00", class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :name, "宛名", class: "form-label" %>
+            <%= f.text_field :name, placeholder: "山田 花子", class: "form-control" %>
+          </div>
+        </div>
+      </div>
 
         <%= f.submit "確認画面へ進む", class: "btn btn-primary btn-block mb-4" %>
       <% end %>

@@ -23,7 +23,7 @@ class User < ApplicationRecord
   has_many :inquiries, dependent: :destroy
   has_one :shop, dependent: :destroy
   has_many :orders
-  
+  has_many :addresses
   # emailが空でない、同じemail使用不可、形式をチェック
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   
