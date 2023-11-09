@@ -1,6 +1,11 @@
 class Public::AddressesController < ApplicationController
   before_action :authenticate_user!
   
+    def new
+     @user = User.find(params[:user_id])  
+     @address = Address.new
+    end
+  
     def index
       @addresses = current_user.addresses
       @address = Address.new
