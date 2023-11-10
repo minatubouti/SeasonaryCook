@@ -20,10 +20,10 @@ class Public::AddressesController < ApplicationController
       @address.user_id = current_user.id
       if  @address.save
         flash[:notice] = "配送先の登録に成功しました"
-        redirect_to addresses_path
+        redirect_to user_addresses_path
       else
         @addresses = current_user.addresses
-        redirect_to addresses_path
+        redirect_to user_addresses_path
       end
     end
 
