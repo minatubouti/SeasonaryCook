@@ -1,0 +1,27 @@
+<div class="container mt-4">
+  <h1 class="mb-4">アドレス一覧</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>郵便番号</th>
+        <th>住所</th>
+        <th>名前</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @addresses.each do |address| %>
+        <tr>
+          <td><%= address.postcode %></td>
+          <td><%= address.address %></td>
+          <td><%= address.name %></td>
+          <td>
+           <%= link_to '編集', edit_user_address_path(address.user, address), class: 'btn btn-primary btn-sm' %>
+           <%= link_to '削除', user_address_path(address.user, address), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
