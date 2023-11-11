@@ -42,7 +42,7 @@ class Public::AddressesController < ApplicationController
       @address.destroy
       @address = current_user.addresses
        flash[:notice] = "登録内容は正常に削除されました"
-       redirect_to addresses_path
+       redirect_to user_addresses_path
     end
 
   private

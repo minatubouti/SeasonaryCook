@@ -1,0 +1,23 @@
+<%= form_with model: [@user, @address], local: true, html: { class: 'needs-validation' } do |form| %>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <%= form.label :postcode, "郵便番号", class: 'form-label' %>
+      <%= form.text_field :postcode, class: 'form-control', placeholder: "123-4567" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <%= form.label :address, "住所", class: 'form-label' %>
+      <%= form.text_field :address, class: 'form-control', placeholder: "市区町村、番地" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <%= form.label :name, "名前", class: 'form-label' %>
+      <%= form.text_field :name, class: 'form-control', placeholder: "氏名" %>
+    </div>
+  </div>
+   <%= form.submit "追加する", class: 'btn btn-primary' %>
+<% end %>
