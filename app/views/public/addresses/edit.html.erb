@@ -1,4 +1,9 @@
-<div class="container mt-4">
-  <h1 class="mb-4">配送先を編集</h1>
-  <%= render "address_form", user: @user, address: @address %>
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-md-8 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
+      <h5 class="text-dark py-4 mb-0" style="background-color: #E0FFFF;">住所を編集</h5>
+       <%= render "address_form", user: @user, address: @address %>
+    </div>
+  </div>
 </div>
+  
