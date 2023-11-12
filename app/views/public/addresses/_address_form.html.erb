@@ -1,4 +1,4 @@
-<%= form_with model: [@user, @address], local: true, html: { class: 'needs-validation' } do |form| %>
+<%= form_with model: [user || current_user, address], local: true, html: { class: 'needs-validation' } do |form| %>
   <div class="row">
     <div class="col-md-6 mb-3">
       <%= form.label :postcode, "郵便番号", class: 'form-label' %>

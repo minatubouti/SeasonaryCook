@@ -31,9 +31,9 @@ class Public::AddressesController < ApplicationController
       @address = Address.find(params[:id])
       if @address.update(address_params)
         flash[:notice] = "配送先の更新に成功しました"
-        redirect_to addresses_path
+        redirect_to user_addresses_path
       else
-        redirect_to edit_address_path(@address)
+        redirect_to user_edit_address_path(@address)
       end
     end
   
