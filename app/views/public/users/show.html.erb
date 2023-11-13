@@ -52,7 +52,7 @@
         <% end %>
       </div>
       <% if current_user == @user %>
-        <%= link_to '配送先住所を登録', new_user_address_path(@user), class: 'btn btn-primary mb-3' %>
+        <%= link_to '登録住所一覧', user_addresses_path(@user), class: 'btn btn-primary mb-3' %>
       <% end %>
     </div>
     

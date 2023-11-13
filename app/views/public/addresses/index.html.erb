@@ -1,6 +1,6 @@
 <div class="container mt-4">
   <h1 class="mb-4">住所一覧</h1>
-
+  <%= link_to '新しい住所を登録', new_user_address_path(current_user), class: 'btn btn-success mb-4' %>
   <table class="table">
     <thead>
       <tr>
@@ -17,7 +17,7 @@
           <td><%= address.address %></td>
           <td><%= address.name %></td>
           <td>
-           <%= link_to '編集', edit_user_address_path(address.user, address), class: 'btn btn-primary btn-sm' %>
+           <%= link_to '編集', edit_user_address_path(address.user, address), class: 'btn btn-success btn-sm' %>
            <%= link_to '削除', user_address_path(address.user, address), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
           </td>
         </tr>
