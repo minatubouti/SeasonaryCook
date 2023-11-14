@@ -34,7 +34,7 @@ Rails.application.routes.draw do
       resources :orders, only: %i[new create show] do
         collection do
           post 'confirm'
-          get 'complete'
+          get 'completed'
         end
       end
       resources :shops do
