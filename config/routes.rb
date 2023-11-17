@@ -36,9 +36,6 @@ Rails.application.routes.draw do
           post 'confirm'
           get 'complete'
         end
-        member do
-          get 'completed'
-        end
       end
       resources :shops do
         resources :items
