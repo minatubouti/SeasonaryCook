@@ -53,6 +53,10 @@
       </div>
       <% if current_user == @user %>
         <%= link_to '登録住所一覧', user_addresses_path(@user), class: 'btn btn-primary mb-3' %>
+      
+        <% @user.orders.each do |order| %>
+          <%= link_to '詳細を見る', user_order_path(@user, order) %>
+        <% end %>
       <% end %>
     </div>
     
