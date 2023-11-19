@@ -55,7 +55,7 @@
         <%= link_to '登録住所一覧', user_addresses_path(@user), class: 'btn btn-primary mb-3' %>
       
         <% @user.orders.each do |order| %>
-          <%= link_to '詳細を見る', user_order_path(@user, order) %>
+          <%= link_to '注文一覧', user_orders_path %>
         <% end %>
       <% end %>
     </div>

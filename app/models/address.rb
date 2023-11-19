@@ -2,7 +2,7 @@ class Address < ApplicationRecord
   belongs_to :user
 
   # ユーザーの住所を表示するためのメソッド
-  def address_display
-    "#{self.postcode} #{self.address} #{self.name}"
+  def full_address
+    "#{self.postcode} #{self.street} #{self.city} #{self.country}"
   end
 end

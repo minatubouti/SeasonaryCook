@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <h2>注文履歴一覧</h2>
+    <table class="table table-bordered">
+      <tr>
+        <th>注文日</th>
+        <th>配送先</th>
+        <th>注文商品</th>
+        <th>支払金額</th>
+        <th>ステータス</th>
+        <th>注文詳細</th>
+      </tr>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
+          <td>〒<%= order.postcode %>&nbsp;<%= order.address %><br><%= order.name %></td>
+          <td>
+            <% order.order_details.each do |detail| %>
+              <%= detail.item.name %><br>
+            <% end %>
+          </td>
+          <td><%= order.total_price.to_i %> 円</td>
+          <td>
+            <%= I18n.t("enums.order.order_status.#{order.order_status}") %>
+          </td>
+          <td>
+            <%= link_to "表示する", order_path(order), class: "btn btn-primary" %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

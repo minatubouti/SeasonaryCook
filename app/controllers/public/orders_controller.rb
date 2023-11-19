@@ -33,6 +33,10 @@ class Public::OrdersController < ApplicationController
   def complete
   end
   
+  def index
+    @orders = current_user.orders.order(created_at: :desc)
+  end
+  
   def show
     @order = Order.find(params[:id])
   end

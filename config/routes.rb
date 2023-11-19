@@ -31,7 +31,7 @@ Rails.application.routes.draw do
         get :check_out
         patch :withdraw
       end
-      resources :orders, only: %i[new create show] do
+      resources :orders, only: %i[new create index show] do
         collection do
           post 'confirm'
           get 'complete'
