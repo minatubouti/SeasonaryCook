@@ -16,7 +16,7 @@
           <td>〒<%= order.postcode %>&nbsp;<%= order.address %><br><%= order.name %></td>
           <td>
             <% order.order_items.each do |detail| %>
-              <%= detail.item.name %><br>
+              <%= order.item.name %><br>
             <% end %>
           </td>
           <td><%= order.total_price.to_i %> 円</td>
@@ -24,7 +24,7 @@
             <%= I18n.t("enums.order.order_status.#{order.order_status}") %>
           </td>
           <td>
-            <%= link_to "表示する", order_path(order), class: "btn btn-primary" %>
+            <%= link_to "表示する", user_order_path(current_user, order), class: "btn btn-primary" %>
           </td>
         </tr>
       <% end %>
