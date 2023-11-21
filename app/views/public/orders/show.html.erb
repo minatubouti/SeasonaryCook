@@ -3,5 +3,9 @@
   <p><strong>ショップ名:</strong> <%= @order.item.shop.name %></p>
   <p><strong>商品名:</strong> <%= @order.item.name %></p>
   <p><strong>数量:</strong> <%= @order.quantity %></p>
-  <p><strong>配送先:</strong> <%= @order.address.full_address %></p>
+  <% if @order.address %>
+    <p><strong>配送先:</strong> <%= @order.address.full_address %></p>
+  <% else %>
+    <p><strong>配送先:</strong> 情報がありません</p>
+  <% end %>
 </div>
