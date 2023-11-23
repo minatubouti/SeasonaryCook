@@ -1,11 +1,18 @@
-<div class="container">
-  <h1>注文詳細</h1>
-  <p><strong>ショップ名:</strong> <%= @order.item.shop.name %></p>
-  <p><strong>商品名:</strong> <%= @order.item.name %></p>
-  <p><strong>数量:</strong> <%= @order.quantity %></p>
-  <% if @order.address %>
-    <p><strong>配送先:</strong> <%= @order.address.full_address %></p>
-  <% else %>
-    <p><strong>配送先:</strong> 情報がありません</p>
-  <% end %>
+<div class="container mt-4">
+  <h1 class="mb-4">注文詳細</h1>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">注文情報</h5>
+      <p class="card-text"><strong>ショップ名:</strong> <%= @order.item.shop.name %></p>
+      <p class="card-text"><strong>商品名:</strong> <%= @order.item.name %></p>
+      <p class="card-text"><strong>数量:</strong> <%= @order.quantity %></p>
+      <p class="card-text">
+        <% if @order.address %>
+          <strong>配送先:</strong> <%= @order.address.full_address %>
+        <% else %>
+          <strong>配送先:</strong> 情報がありません
+        <% end %>
+      </p>
+    </div>
+  </div>
 </div>
