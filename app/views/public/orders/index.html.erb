@@ -1,30 +1,41 @@
 <div class="container">
-  <div class="row">
-    <h2>注文履歴一覧</h2>
-    <table class="table table-bordered">
-      <tr>
-        <th>注文日</th>
-        <th>配送先</th>
-        <th>注文商品</th>
-        <th>支払金額</th>
-        <th>注文詳細</th>
-      </tr>
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <h2 class="text-center mb-4">注文詳細一覧</h2>
+
       <% @orders.each do |order| %>
-        <tr>
-          <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
-          <td>〒<%= order.postcode %>&nbsp;<%= order.address %><br><%= order.name %></td>
-          <td>
-            <% order.order_items.each do |detail| %>
-              <%= order.item.name %><br>
-            <% end %>
-          </td>
-          <td><%= order.total_price.to_i %> 円</td>
-          
-          <td>
-            <%= link_to "表示する", user_order_path(current_user, order), class: "btn btn-primary" %>
-          </td>
-        </tr>
+        <div class="card mb-3">
+          <div class="card-body">
+            <p><strong>注文日:</strong> <%= order.created_at.strftime("%Y/%m/%d") %></p>
+            <p><strong>支払い方法:</strong> <%= I18n.t("enum.order.payment.#{order.payment}") %></p>
+            <p><strong>注文数:</strong> <%= order.quantity %></p>
+            <p><strong>お届け先:</strong> <%= order.address ? order.address.full_address : "情報がありません" %></p>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>商品名</th>
+                  <th>単価</th>
+                  <th>数量</th>
+                  <th>小計</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% order.order_items.each do |item| %>
+                  <tr>
+                    <td><%= item.name %></td>
+                    <td><%= item.price %></td>
+                    <td><%= item.quantity %></td>
+                    <td><%= item.quantity * item.price %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+
+            <p class="text-right"><strong>合計金額:</strong> <%= order.total_price %></p>
+          </div>
+        </div>
       <% end %>
-    </table>
+    </div>
   </div>
 </div>
