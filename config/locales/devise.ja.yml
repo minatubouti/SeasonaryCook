@@ -2,8 +2,8 @@ ja:
   enum:
     order:
       payment:
-        credit_card: "クレジットカード"
-        bank_transfer: "銀行振込"
+        '0': "クレジットカード"
+        '1': "銀行振込"
   devise:
     failure:
       account_inactive: "あなたのアカウントは利用を停止しました。"
